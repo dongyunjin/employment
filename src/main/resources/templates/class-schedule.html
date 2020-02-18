@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<link href="https://cdn.bootcss.com/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.min.css" rel="stylesheet">
+
+
+<link href='packages/core/main.css' rel='stylesheet' />
+<link href='packages/daygrid/main.css' rel='stylesheet' />
+<link href='packages/timegrid/main.css' rel='stylesheet' />
+<script src='packages/core/main.js'></script>
+<script src='packages/interaction/main.js'></script>
+<script src='packages/daygrid/main.js'></script>
+<script src='packages/timegrid/main.js'></script>
+<script src='packages/moment/main.js'></script>
+<script src='js/moment.js'></script>
+<style>
+  body {
+    margin: 40px 10px;
+    padding: 0;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+  }
+
+  #calendar {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  #loading {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+</style>
+<script>
+var calendar
+document.addEventListener('DOMContentLoaded', function() {
+	
+    var calendarEl = document.getElementById('calendar');
+
+    calendar = new FullCalendar.Calendar(calendarEl, {
+      plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      },
+      defaultDate: '2019-03-12',
+      navLinks: false, // can click day/week names to navigate views
+      selectable: true,
+      locale:'zh-cn',
+      selectMirror: true,
+      select: function(arg) {
+    	$("#adddate").val(arg.startStr);
+    	$('#addModal').modal('toggle');
+        calendar.unselect();
+      },
+      editable: true,
+      eventLimit: true, // allow "more" link when too many events
+      events: {
+    	  "url":"classScheduleList"
+      },
+      loading: function(bool) {
+          document.getElementById('loading').style.display =
+            bool ? 'block' : 'none';
+      },
+      eventClick: function(info) {
+    	$("#editid").val(info.event.id);
+    	$("#edittitle").val(info.event.title);
+    	var loaldatestart = info.event.start;
+    	var loaldateend = info.event.end;
+    	$("#editdate").val(moment(loaldatestart).format('YYYY-MM-DD'));
+    	$('#editstart').timepicker('setTime', moment(loaldatestart).format('h:mm a'));
+    	$('#editend').timepicker('setTime', moment(loaldateend).format('h:mm a'));
+    	
+/*     	console.log(moment(info.event.start).format('YYYY-MM-DD'))
+    	console.log(info.event.start.toISOString().substr(11,5))
+    	console.log(info.event.start.toISOString().substr(11,5))
+    	console.log(info.event.start.toDateString())
+    	console.log(info.event.start.toISOString())
+    	console.log(info.event.start.toJSON())
+    	console.log(info.event.start.toLocaleDateString())
+    	console.log(info.event.start.toLocaleString())
+    	console.log(info.event.start.toLocaleTimeString())
+    	console.log(info.event.start.toSource())
+    	console.log(info.event.start.toString())
+    	console.log(info.event.start.toTimeString())
+    	console.log(info.event.start.toUTCString()) */
+    	//console.log(info.event.end)
+    	
+    	$('#editModal').modal('toggle')
+  	  }
+    });
+
+    calendar.render();
+  });
+</script>
+</head>
+<body>
+  <div id='loading'>loading...</div>
+  	<div id='calendar'></div>
+  		
+  <!-- 日期事件弹出框 -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">事件信息</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <input type="hidden" id="addid">
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">内容:</label>
+            <input type="text" class="form-control" id="addtitle">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">日期:</label>
+            <input type="text" class="form-control" id="adddate" readonly>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label">开始时间:</label>
+            <div class="input-group bootstrap-timepicker timepicker">
+            <input id="addstart" type="text" class="form-control input-small">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+          </div>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label">结束时间:</label>
+            <div class="input-group bootstrap-timepicker timepicker">
+            <input id="addend" type="text" class="form-control input-small">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+          </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">关闭</button>
+        <button type="button" id="addEvent" class="btn btn-primary">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 时间信息修改 -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">事件信息</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <input type="hidden" id="editid">
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">内容:</label>
+            <input type="text" class="form-control" id="edittitle">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">日期:</label>
+            <input type="text" class="form-control" id="editdate" readonly>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label">开始时间:</label>
+            <div class="input-group bootstrap-timepicker timepicker">
+            <input id="editstart" type="text" class="form-control input-small">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+          </div>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label">结束时间:</label>
+            <div class="input-group bootstrap-timepicker timepicker">
+            <input id="editend" type="text" class="form-control input-small">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+          </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+      	<button type="button" id="delEvent" style="float:left" class="btn btn-danger" data-dismiss="modal">删除</button>
+        <button type="button" class="btn btn-light" data-dismiss="modal">关闭</button>
+        <button type="button" id="editEvent" class="btn btn-primary">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+    
+    <!-- <script src="js/bootstrap-datetimepicker.min.js"></script> -->
+    
+    <script src="https://cdn.bootcss.com/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.js"></script>
+    
+    <script src="js/demo/class-calendar.js"></script>
+    <script>
+    $('#addEvent').click(function(){
+    	var addstart = $("#adddate").val() + " " + $("#addstart").val();
+    	var addend = $("#adddate").val() + " " + $("#addend").val();
+    	$.ajax({
+    		url: "classScheduleAdd", 
+    		dataType: "json", //返回格式为json
+    		async: false, //请求是否异步，默认为异步，这也是ajax重要特性
+    		data: {
+    			"title":$("#addtitle").val(),
+    			"start":addstart,
+    			"end":addend,
+    			"type":1
+    		}, //参数值
+    		type: "GET", //请求方式
+    		success: function(result) {
+    			if(result.success){
+    				calendar.refetchEvents();
+    				$('#addModal').modal('toggle');
+    				$("#addtitle").val('');
+    				parent.showMessage('success',result.errMsg);
+    			}else{
+    				parent.showMessage('danger',result.errMsg);
+    			}
+    		}
+    	})
+    });
+    
+    $('#editEvent').click(function(){
+    	var addstart = $("#editdate").val() + " " + $("#editstart").val();
+    	var addend = $("#editdate").val() + " " + $("#editend").val();
+    	$.ajax({
+    		url: "classScheduleEdit", 
+    		dataType: "json", //返回格式为json
+    		async: false, //请求是否异步，默认为异步，这也是ajax重要特性
+    		data: {
+    			"id":$("#editid").val(),
+    			"title":$("#edittitle").val(),
+    			"start":editstart,
+    			"end":editend
+    		}, //参数值
+    		type: "GET", //请求方式
+    		success: function(result) {
+    			if(result.success){
+    				calendar.refetchEvents();
+    				$('#editModal').modal('toggle');
+    				parent.showMessage('success',result.errMsg);
+    			}else{
+    				parent.showMessage('danger',result.errMsg);
+    			}
+    		}
+    	})
+    });
+    
+    $('#delEvent').click(function(){
+    	var message = parent.confirm("确定删除吗？");
+    	if(message){
+    		$.ajax({
+        		url: "classScheduleDel", 
+        		dataType: "json", //返回格式为json
+        		async: false, //请求是否异步，默认为异步，这也是ajax重要特性
+        		data: {
+        			"id":$("#editid").val(),
+        		}, //参数值
+        		type: "GET", //请求方式
+        		success: function(result) {
+        			if(result.success){
+        				calendar.refetchEvents();
+        				$('#editModal').modal('toggle');
+        				parent.showMessage('success',result.errMsg);
+        			}else{
+        				parent.showMessage('danger',result.errMsg);
+        			}
+        		}
+        	})
+    	}else{}
+    	
+    });
+    </script>
+</body>
+</html>

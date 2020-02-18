@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.employment.mapper.TbMembershipMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.employment.entity.TbMembership" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="membername" property="membername" jdbcType="VARCHAR" />
+    <result column="membersex" property="membersex" jdbcType="VARCHAR" />
+    <result column="membercardid" property="membercardid" jdbcType="VARCHAR" />
+    <result column="memberidcard" property="memberidcard" jdbcType="VARCHAR" />
+    <result column="memberphone" property="memberphone" jdbcType="VARCHAR" />
+    <result column="memberlevel" property="memberlevel" jdbcType="VARCHAR" />
+    <result column="memberapply" property="memberapply" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_membership
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.employment.entity.TbMembership" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tb_membership (membername, membersex, membercardid, 
+      memberidcard, memberphone, memberlevel, 
+      memberapply)
+    values (#{membername,jdbcType=VARCHAR}, #{membersex,jdbcType=VARCHAR}, #{membercardid,jdbcType=VARCHAR}, 
+      #{memberidcard,jdbcType=VARCHAR}, #{memberphone,jdbcType=VARCHAR}, #{memberlevel,jdbcType=VARCHAR}, 
+      now())
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.cn.employment.entity.TbMembership" >
+    update tb_membership
+    set membername = #{membername,jdbcType=VARCHAR},
+      membersex = #{membersex,jdbcType=VARCHAR},
+      membercardid = #{membercardid,jdbcType=VARCHAR},
+      memberidcard = #{memberidcard,jdbcType=VARCHAR},
+      memberphone = #{memberphone,jdbcType=VARCHAR},
+      memberlevel = #{memberlevel,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, membername, membersex, membercardid, memberidcard, memberphone, memberlevel, 
+    memberapply
+    from tb_membership
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, membername, membersex, membercardid, memberidcard, memberphone, memberlevel, 
+    DATE_FORMAT(memberapply, '%Y-%m-%d %H:%i:%S') as memberapply
+    from tb_membership
+  </select>
+</mapper>

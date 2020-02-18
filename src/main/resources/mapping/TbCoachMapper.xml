@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.employment.mapper.TbCoachMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.employment.entity.TbCoach" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="coachname" property="coachname" jdbcType="VARCHAR" />
+    <result column="coachsex" property="coachsex" jdbcType="VARCHAR" />
+    <result column="coachcardid" property="coachcardid" jdbcType="VARCHAR" />
+    <result column="coachidcard" property="coachidcard" jdbcType="VARCHAR" />
+    <result column="coachphone" property="coachphone" jdbcType="VARCHAR" />
+    <result column="coachlevel" property="coachlevel" jdbcType="VARCHAR" />
+    <result column="coachyear" property="coachyear" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_coach
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.employment.entity.TbCoach" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tb_coach (coachname, coachsex, coachcardid, 
+      coachidcard, coachphone, coachlevel, 
+      coachyear)
+    values (#{coachname,jdbcType=VARCHAR}, #{coachsex,jdbcType=VARCHAR}, #{coachcardid,jdbcType=VARCHAR}, 
+      #{coachidcard,jdbcType=VARCHAR}, #{coachphone,jdbcType=VARCHAR}, #{coachlevel,jdbcType=VARCHAR}, 
+      concat(#{coachyear,jdbcType=VARCHAR},'年'))
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.cn.employment.entity.TbCoach" >
+    update tb_coach
+    set coachname = #{coachname,jdbcType=VARCHAR},
+      coachsex = #{coachsex,jdbcType=VARCHAR},
+      coachcardid = #{coachcardid,jdbcType=VARCHAR},
+      coachidcard = #{coachidcard,jdbcType=VARCHAR},
+      coachphone = #{coachphone,jdbcType=VARCHAR},
+      coachlevel = #{coachlevel,jdbcType=VARCHAR},
+      coachyear = #{coachyear,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, coachname, coachsex, coachcardid, coachidcard, coachphone, coachlevel, 
+    coachyear
+    from tb_coach
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, coachname, coachsex, coachcardid, coachidcard, coachphone, coachlevel, 
+    coachyear
+    from tb_coach
+  </select>
+</mapper>
