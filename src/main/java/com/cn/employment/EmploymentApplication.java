@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan
 @MapperScan(basePackages= {"com.cn.employment.mapper"})
 public class EmploymentApplication {
 
