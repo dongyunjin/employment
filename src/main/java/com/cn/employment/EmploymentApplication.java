@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan(basePackages= {"com.cn.employment.mapper"})
+@MapperScan(basePackages= {"com.cn.**.dao"})
 public class EmploymentApplication {
 
     public static void main(String[] args) {
