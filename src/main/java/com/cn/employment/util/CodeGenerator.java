@@ -106,6 +106,9 @@ public class CodeGenerator {
         strategy.setSuperEntityClass("com.cn.employment.base.entity.BaseEntity");
         strategy.setEntityLombokModel(true);
         strategy.setSuperControllerClass("com.cn.employment.base.controller.BaseController");
+        strategy.setSuperServiceClass("com.cn.employment.base.service.IBaseService");
+        strategy.setSuperServiceImplClass("com.cn.employment.base.service.impl.BaseServiceImpl");
+        strategy.setSuperMapperClass("com.cn.employment.base.dao.BaseMapper");
         strategy.setInclude(scanner("表名"));
         strategy.setSuperEntityColumns("id");
         strategy.setControllerMappingHyphenStyle(true);
