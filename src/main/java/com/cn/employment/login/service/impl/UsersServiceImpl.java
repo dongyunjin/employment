@@ -20,18 +20,12 @@ import java.util.Map;
 public class UsersServiceImpl extends BaseServiceImpl<UsersMapper, Users> implements IUsersService {
 
     @Override
-    public Long queryId(Map<String, String> map) {
+    public Long queryUserId(Map<String, String> map) {
         return this.baseMapper.queryUserId(map);
     }
 
     @Override
-    public Long queryRoleId(Map<String, String> map) {
-        Long userId = this.baseMapper.queryUserId(map);
-        Long roleId = null;
-        if (userId != null) {
-            roleId = this.baseMapper.queryRoleId(userId);
-        }
-
-        return roleId;
+    public Long queryRoleId(Long userId) {
+        return this.baseMapper.queryRoleId(userId);
     }
 }

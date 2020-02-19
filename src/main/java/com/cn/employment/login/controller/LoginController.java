@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Map;
 
@@ -26,15 +27,16 @@ public class LoginController {
     * @Description: 验证用户
     * @Date: 2020/2/19 21:14
     */
+    @ResponseBody
     @PostMapping("login")
     public Long login(Map<String, String> map) {
-        return this.usersService.queryRoleId(map);
+        return this.usersService.queryUserId(map);
     }
 
 
     @GetMapping("main")
-    public String main(Map<String, String> map) {
-        Long roleId = this.usersService.queryRoleId(map);
+    public String main(Long userId) {
+        Long roleId = this.usersService.queryRoleId(userId);
 
         if (roleId != null) {
 			return "front/main";

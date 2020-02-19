@@ -18,10 +18,10 @@ public interface IUsersService extends IBaseService<Users> {
     * @Description: 查询用户
     * @Date: 2020/2/19 21:16
     */
-    Long queryId(Map<String, String> map);
+    Long queryUserId(Map<String, String> map);
 
     /**
      * @Description: 查询用户角色
      */
-    Long queryRoleId(Map<String, String> map);
+    Long queryRoleId(Long userId);
 }
