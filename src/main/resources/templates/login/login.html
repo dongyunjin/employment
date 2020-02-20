@@ -18,6 +18,7 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.css" rel="stylesheet">
 
+    <link href="packages/toastr/css/toastr.min.css" rel="stylesheet">
 </head>
 
 <body class="bg-gradient-primary">
@@ -94,12 +95,51 @@
 
 <!-- Custom scripts for all pages-->
 <script src="js/sb-admin-2.min.js"></script>
+<script src="packages/toastr/js/toastr.min.js"></script>
 
 <script>
+    $(function(){
+    	var error = null
+        var success = null
+        var details = null
+
+
+        if (error) {
+            toastr.options = {
+                "closeButton": true,
+                "newestOnTop": true,
+                "positionClass": "toast-bottom-right",
+                "preventDuplicates": true,
+                "showDuration": "500",
+                "hideDuration": "500",
+
+                // don't close error message automaticaly
+                "extendedTimeOut": "0",
+                "timeOut": "0",
+            }
+            if (details)
+                toastr.error(details, error);
+            else
+                toastr.error(error);
+        }
+        if (success) {
+            toastr.options = {
+                "closeButton": true,
+                "newestOnTop": true,
+                "positionClass": "toast-bottom-right",
+                "preventDuplicates": true,
+                "showDuration": "500",
+                "hideDuration": "500",
+                "extendedTimeOut": "3000",
+                "timeOut": "3000",
+            }
+            toastr.success(success);
+        }
+    })
     function login() {
         var user = $("#exampleInputEmail").val();
         var pwd = $("#exampleInputPassword").val();
-        debugger;
+        var data="";
         $.ajax({
             type: "POST",
             url: "login",
@@ -107,7 +147,12 @@
             data: {userName: user, pwd: pwd},
             dataType: "json",
             success: function (data) {
-
+                data=data;
+		if(data.userId==null){
+		    toastr.error("Wrong login info.");
+		}else{
+		    toastr.success("You will get main page");
+		}
             }
         });
     }
