@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -26,8 +27,11 @@ public class LoginController {
     */
     @ResponseBody
     @PostMapping("login")
-    public Long login(@RequestParam Map<String, String> map) {
-        return this.usersService.queryUserId(map);
+    public Map<String, Object> login(@RequestParam Map<String, String> map) {
+        Map<String, Object> result = new HashMap<>();
+        Long userId = this.usersService.queryUserId(map);
+        result.put("userId", userId);
+        return result;
     }
 
 
