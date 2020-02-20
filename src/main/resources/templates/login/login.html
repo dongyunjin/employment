@@ -19,7 +19,30 @@
   <link href="css/sb-admin-2.css" rel="stylesheet">
 
 </head>
-
+<script>
+    function login(){
+	var user="";
+	var passwd="";
+	user=$("#exampleInputEmail").val();
+	passwd=$("#exampleInputPassword").val();
+        $.ajax({
+            type:'POST',
+            url:"/login",
+            contentType:"application/json;charset=utf-8",
+            data:{
+		    userName:user,
+		    pwd:passwd,
+            },
+            dataType:"json",
+            success: function(data){
+		console.log(data)
+            },
+            error: function(data){
+                console.log(data)
+            },
+        })
+    }
+</script>
 <body class="bg-gradient-primary">
 
   <div class="container">
@@ -52,7 +75,7 @@
                         <label class="custom-control-label" for="customCheck">Remember Me</label>
                       </div>
                     </div>
-                    <a href="main" class="btn btn-primary btn-user btn-block">
+                    <a href="main" id="login" class="btn btn-primary btn-user btn-block" onClick="return login();">
                       Login
                     </a>
                     <hr>
