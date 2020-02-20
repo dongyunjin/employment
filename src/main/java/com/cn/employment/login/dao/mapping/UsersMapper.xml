@@ -13,11 +13,17 @@
     <result column="last_time" property="lastTime" />
   </resultMap>
 
-  <select id="queryUserId" resultType="java.lang.Long">
+  <select id="queryUserId" resultType="java.lang.Integer">
     select id from users t where t.username = #{map.userName} and t.pwd = #{map.pwd}
   </select>
 
-  <select id="queryRoleId" resultType="java.lang.Long">
+  <select id="queryRoleId" resultType="java.lang.Integer">
     select roleId from users_role t where t.userId = #{userId}
   </select>
+
+  <select id="queryUserName" resultType="java.lang.Integer">
+    select id from users t where t.username = #{userName}
+  </select>
+
+
 </mapper>
