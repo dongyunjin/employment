@@ -153,7 +153,10 @@
 		}else{
 		    toastr.success("You will get main page");
 		}
-            }
+            },
+            error: function(){
+	        window.location.href='../404.html';
+	    }
         });
     }
 </script>
