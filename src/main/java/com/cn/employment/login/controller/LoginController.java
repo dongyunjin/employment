@@ -49,7 +49,7 @@ public class LoginController {
         Integer roleId = this.usersService.queryRoleId(userId);
 
         if (roleId != null) {
-            return "front/main";
+            return "front/solomonTest";
         } else {
             return "backend/main";
         }
