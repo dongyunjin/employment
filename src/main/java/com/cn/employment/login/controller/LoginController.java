@@ -105,20 +105,27 @@ public class LoginController {
      * @Description: 注册
      * @Date: 2020/2/20 21:17
      */
+    @ResponseBody
     @PostMapping("register")
-    public String register(Users users) {
+    public Map<String, Object> register(Users users) {
         //key :email  username   pwd    phonenum
-
+        Map<String, Object> result = new HashMap<>();
         users.insert();
 
         Integer id = this.usersService.queryUserName(users.getUsername());
 
-        UsersRole usersRole = new UsersRole();
-        usersRole.setUserId(id);
-        usersRole.setRoleId(2);
-        usersRole.insert();
+        if (id == null) {
+            UsersRole usersRole = new UsersRole();
+            usersRole.setUserId(id);
+            usersRole.setRoleId(2);
+            usersRole.insert();
+            result.put("success", 1);
+        } else {
+            result.put("success", 0);
+            result.put("msg", "此用户已存在");
+        }
 
-        return "login/login";
+        return result;
     }
 
 }
