@@ -17,7 +17,7 @@
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.css" rel="stylesheet">
-  <link href="packages/toastr/css/toastr.min.css" rel="stylesheet">
+  <link href="css/toastr.min.css" rel="stylesheet">
 </head>
 
 <body class="bg-gradient-primary">
@@ -85,6 +85,7 @@
               success: function(data){
 		      if(data.isExist=='1'){
 		          toastr.error("User already exist!!");
+		          $("#user").focus();
 		      }
               },
           })
@@ -121,15 +122,18 @@
 	       $("#email").focus();
 	       return false;
 	   }
-	  
+	   if(pwd.length!=8){
+	       toastr.error("Password must be 8 digit")
+	   }
+
 	  var reg=/^[A-Za-z0-9]+$/;
-	  if(!reg.test(pwd) || pwd.length!=8){
+	  if(!reg.test(pwd)){
 	       toastr.error("Wrong password,please check it!!");
 	       return false;
 	   }
 	  
 	  if(user.length>20){
-    	      toastr.error("Wrong User Name,Please input 8-20 digit number and letters!!");
+    	      toastr.error("Wrong User Name,Please input 1-20 digit number and letters!!");
 	      return false;
           }
           if(!reg.test(user)){
@@ -140,13 +144,13 @@
     	      toastr.error("Wrong password,please check it!!");
 	      return false;
     	   }
-    	  if (!$("#phone").val().match(/^(((13[0-9]{1})|159|153)+\d{8})$/)) {
+    	  if (!$("#phone").val().match(/^1[34578]\d{9}$/)) {
     	      toastr.error("Wrong phone number,please check it!!");
     	      return false;	    
     	   }
            reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
    	   if(!reg.test(email)){
-   	      toastr.error("Wrong email,please check it!!");
+   	      toastr.error("Wrong Email,please check it!!");
 	      return false;
    	   }
    	   
@@ -157,8 +161,11 @@
                   data: {username: user, pwd: pwd,email: email,phonenum:phone},
                   dataType: "json",
                   success: function(data){
-                      window.location.href="../login.html";
-                  },   
+                      window.location.href="..";
+                  },
+                  error: function(data){
+                	  window.location.href="../404.html";
+                  },
               })
 	  }
   </script>
@@ -171,7 +178,7 @@
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
-  <script src="packages/toastr/js/toastr.min.js"></script>
+  <script src="js/toastr.min.js"></script>
 </body>
 
 </html>
