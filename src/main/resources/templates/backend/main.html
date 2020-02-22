@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>健身俱乐部管理系统</title>
+  <title>大学生精准就业辅导管理系统</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -34,7 +34,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">健身俱乐部<sup>@</sup></div>
+        <div class="sidebar-brand-text mx-3">系统后台管理<sup>@</sup></div>
       </a>
 
       <!-- Divider -->
@@ -42,19 +42,19 @@
       <hr class="sidebar-divider">
 
 	  <div class="sidebar-heading">
-        	Class Schedule
+        	User
       </div>
       
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#schedule" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>课程表</span>
+          <i class="fas fa-fw fa-folder"></i>
+          <span>用户信息管理</span>
         </a>
         <div id="schedule" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">member Class Schedule</h6>
-            <a class="collapse-item" href="classScheduleUI" target="my_iframe">会员课程表</a>
+            <h6 class="collapse-header">User list</h6>
+            <a class="collapse-item" href="user_mgmt" target="my_iframe">用户列表</a>
           </div>
         </div>
       </li>
@@ -64,47 +64,56 @@
 
       <!-- Heading -->
       <div class="sidebar-heading">
-        	plan
+        	Job 
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>计划&记录</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseone" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-gifts"></i>
+          <span>岗位管理</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseone" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Fitness program</h6>
-            <a class="collapse-item" href="fitnessProgramUI" target="my_iframe">健身计划</a>
-            <div class="collapse-divider"></div>
-            <h6 class="collapse-header">Fitness record</h6>
-            <a class="collapse-item" href="fitnessRecordUI" target="my_iframe">健身记录</a>
+            <h6 class="collapse-header">Job</h6>
+            <a class="collapse-item" href="job" target="my_iframe">岗位列表</a>
           </div>
         </div>
       </li>
 
+      <div class="sidebar-heading">
+        	Class
+      </div>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-table"></i>
+          <span>课程管理</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Class</h6>
+            <a class="collapse-item" href="_class" target="my_iframe">课程列表</a>
+          </div>
+        </div>
+      </li>
       <!-- Divider -->
       <hr class="sidebar-divider">
 
 	  <!-- Heading -->
       <div class="sidebar-heading">
-        	profile
+        	Video IMG File
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#archives" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-table"></i>
-          <span>档案</span>
+          <i class="fas fa-fw fa-file-video"></i>
+          <span>题库管理</span>
         </a>
         <div id="archives" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Member profile</h6>
-            <a class="collapse-item" href="membersUI" target="my_iframe">会员档案</a>
-            <div class="collapse-divider"></div>
-            <h6 class="collapse-header">Coach profile</h6>
-            <a class="collapse-item" href="coachsUI" target="my_iframe">教练档案</a>
+            <h6 class="collapse-header">Video IMG File</h6>
+            <a class="collapse-item" href="video" target="my_iframe">教材列表</a>
           </div>
         </div>
       </li>
@@ -114,22 +123,22 @@
       
       <!-- Heading -->
       <div class="sidebar-heading">
-        	Service upgrade
+        	admin
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
           <i class="fas fa-fw fa-chart-area"></i>
-          <span>服务升级</span>
+          <span>Admin设置</span>
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Member privilege service</h6>
-            <a class="collapse-item" href="questionUI" target="my_iframe">会员特权服务</a>
+            <h6 class="collapse-header">Change Password</h6>
+            <a class="collapse-item" href="admin_pwd" target="my_iframe">修改密码</a>
             <div class="collapse-divider"></div>
-            <h6 class="collapse-header">keep improve</h6>
-            <a class="collapse-item" href="echartsUI" target="my_iframe">持续改进</a>
+            <h6 class="collapse-header">Operation Log</h6>
+            <a class="collapse-item" href="admin_log" target="my_iframe">操作日志</a>
           </div>
         </div>
       </li>
@@ -201,7 +210,7 @@
                     </div>
                   </div>
                   <div>
-                    <div class="small text-gray-500">December 12, 2019</div>
+                    <div class="small text-gray-500">December 12, 2020</div>
                     <span class="font-weight-bold">A new monthly report is ready to download!</span>
                   </div>
                 </a>
@@ -212,7 +221,7 @@
                     </div>
                   </div>
                   <div>
-                    <div class="small text-gray-500">December 7, 2019</div>
+                    <div class="small text-gray-500">December 7, 2020</div>
                     $290.29 has been deposited into your account!
                   </div>
                 </a>
@@ -223,7 +232,7 @@
                     </div>
                   </div>
                   <div>
-                    <div class="small text-gray-500">December 2, 2019</div>
+                    <div class="small text-gray-500">December 2, 2020</div>
                     Spending Alert: We've noticed unusually high spending for your account.
                   </div>
                 </a>
@@ -337,7 +346,7 @@
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2019</span>
+            <span>Copyright &copy; Your Website 2020</span>
           </div>
         </div>
       </footer>

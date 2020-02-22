@@ -66,6 +66,66 @@ public class LoginController {
     }
 
     /**
+     * @Description: 用户列表页
+     * @Date: 2020/2/20 21:14
+     */
+    @GetMapping("user_mgmt")
+    public String user_mgmt(Model model) {
+        model.addAttribute("e", "bbb");
+        return "/backend/user_mgmt";
+    }
+    
+    /**
+     * @Description: 岗位列表页
+     * @Date: 2020/2/20 21:14
+     */
+    @GetMapping("job")
+    public String job(Model model) {
+        model.addAttribute("f", "ccc");
+        return "/backend/job";
+    }
+    
+    /**
+     * @Description: 课程列表页
+     * @Date: 2020/2/20 21:14
+     */
+    @GetMapping("_class")
+    public String _class(Model model) {
+        model.addAttribute("g", "eee");
+        return "/backend/class";
+    }
+    
+    /**
+     * @Description: 教材列表页
+     * @Date: 2020/2/20 21:14
+     */
+    @GetMapping("video")
+    public String video(Model model) {
+        model.addAttribute("h", "fff");
+        return "/backend/video";
+    }
+    
+    /**
+     * @Description: admin修改密码页
+     * @Date: 2020/2/20 21:14
+     */
+    @GetMapping("admin_pwd")
+    public String admin_pwd(Model model) {
+        model.addAttribute("i", "ggg");
+        return "/backend/admin_pwd";
+    }
+    
+    /**
+     * @Description: admin操作记录页
+     * @Date: 2020/2/20 21:14
+     */
+    @GetMapping("admin_log")
+    public String admin_log(Model model) {
+        model.addAttribute("j", "hhh");
+        return "/backend/admin_log";
+    }
+    
+    /**
      * @Description: 忘记密码页面
      * @Date: 2020/2/20 21:17
      */
