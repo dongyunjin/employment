@@ -143,10 +143,10 @@
             dataType: "json",
             success: function (data) {
                 data=data;
-		if(data.userId==null){
-		    window.location.href='../main';
+		if(data.userId!=null){
+		    window.location.href='main';
 		}else{
-		    toastr.success("You will get main page");
+		    toastr.error("用户名或密码错误");
 		}
             },
             error: function(){

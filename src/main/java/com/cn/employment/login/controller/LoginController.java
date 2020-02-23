@@ -84,17 +84,7 @@ public class LoginController {
         model.addAttribute("f", "ccc");
         return "/backend/job";
     }
-    
-    /**
-     * @Description: 课程列表页
-     * @Date: 2020/2/20 21:14
-     */
-    @GetMapping("_class")
-    public String _class(Model model) {
-        model.addAttribute("g", "eee");
-        return "/backend/class";
-    }
-    
+
     /**
      * @Description: 教材列表页
      * @Date: 2020/2/20 21:14

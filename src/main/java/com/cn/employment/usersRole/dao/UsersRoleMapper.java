@@ -1,4 +1,4 @@
-package com.cn.employment.usersRole.mapper;
+package com.cn.employment.usersRole.dao;
 
 import com.cn.employment.usersRole.entity.UsersRole;
 import com.cn.employment.base.dao.BaseMapper;

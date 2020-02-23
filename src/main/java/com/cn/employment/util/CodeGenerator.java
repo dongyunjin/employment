@@ -61,12 +61,13 @@ public class CodeGenerator {
         gc.setBaseResultMap(true);// XML ResultMap
         gc.setBaseColumnList(true);// XML columList
         gc.setAuthor("employment");
+        gc.setEntityName("%sEntity");
         gc.setOpen(false);
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/jianshen?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai");
+        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/employment?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&AllowPublicKeyRetrieval=true");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
@@ -77,6 +78,7 @@ public class CodeGenerator {
         PackageConfig pc = new PackageConfig();
         pc.setModuleName(scanner("模块名"));
         pc.setParent("com.cn.employment");
+        pc.setMapper("dao");
         mpg.setPackageInfo(pc);
 
         // 自定义配置
@@ -92,7 +94,7 @@ public class CodeGenerator {
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输入文件名称
                 return projectPath + "/src/main/java/com/cn/employment/" + pc.getModuleName()
-                        + "/mapper/mapping/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
+                        + "/dao/mapping/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
             }
         });
         cfg.setFileOutConfigList(focList);
