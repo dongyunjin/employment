@@ -25,9 +25,10 @@ DROP TABLE IF EXISTS `course`;
 CREATE TABLE `course` (
   `id` int(11) NOT NULL,
   `name` varchar(45) DEFAULT NULL COMMENT '课程名',
-  `desc` varchar(45) DEFAULT NULL COMMENT '课程描述',
+  `description` varchar(45) DEFAULT NULL COMMENT '课程描述',
   `url` varchar(45) DEFAULT NULL COMMENT '课程资料',
   `type` varchar(45) DEFAULT NULL COMMENT '资料类型',
+  `pid` int(11) DEFAULT NULL COMMENT '父级id',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='课程';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -38,6 +39,7 @@ CREATE TABLE `course` (
 
 LOCK TABLES `course` WRITE;
 /*!40000 ALTER TABLE `course` DISABLE KEYS */;
+INSERT INTO `course` VALUES (1,'java基础视频','适用于初学者',NULL,NULL,0),(2,'java历史','java历史发展',NULL,'mp4',1),(3,'java基本数据类型',NULL,NULL,'txt',4),(4,'java中级视频','适用于有一定java经验的人',NULL,NULL,0);
 /*!40000 ALTER TABLE `course` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,7 +138,7 @@ DROP TABLE IF EXISTS `station`;
 CREATE TABLE `station` (
   `id` int(11) NOT NULL,
   `parent_id` int(11) DEFAULT NULL COMMENT '父级id',
-  `desc` varchar(45) DEFAULT NULL COMMENT '岗位描述',
+  `description` varchar(45) DEFAULT NULL COMMENT '岗位描述',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='岗位表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -244,4 +246,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-22 12:37:54
+-- Dump completed on 2020-02-23 21:16:31
