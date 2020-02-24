@@ -36,4 +36,16 @@ public interface CourseMapper extends BaseMapper<Course> {
      * @Date: 2020/2/23 18:21
      */
     List<Course> selectSonCourseByPid(@Param("id") int id);
+
+    void pAdd(@Param("map") Course course);
+
+    void sAdd(@Param("map") Course course);
+
+    void pEdit(@Param("map") Course course);
+
+    void sEdit(@Param("map") Course course);
+
+    void pDel(@Param("id") int id);
+
+    void sDel(@Param("id") int id);
 }

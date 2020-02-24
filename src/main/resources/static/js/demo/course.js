@@ -102,18 +102,38 @@ $(document).ready(function () {
     $('#pTable tbody').on('click', 'tr', function () {
             var id = pTable.row(this).data().id;
             if (params.selectedId == null) {
-                $("#memberid").val(id);
                 var url = "course/sList/" + id;
                 sTable.ajax.url(url).load();
                 params.selectedId = id;
             } else if (id != params.selectedId) {
-                $("#memberid").val(id);
                 var url = "course/sList/" + id;
                 sTable.ajax.url(url).load();
+            } else {
+                params.selectedId = null;
             }
         }
     );
-
+    // $("#pAdd").click(function () {
+    //
+    // })
+    $("#pAddSave").click(function () {
+        $.ajax({
+            url: "course/pAdd",
+            dataType: "json", //返回格式为json
+            async: false, //请求是否异步，默认为异步，这也是ajax重要特性
+            data: {
+                name: $("#pAddName").val(),
+                desc: $("#pAddDesc").val()
+            }, //参数值
+            type: "POST", //请求方式
+            success: function (result) {
+                pTable.ajax.reload(null, false);
+                $("#pAddModal").modal('hide');
+                $("#pAddName").val("");
+                $("#pAddDesc").val("");
+            }
+        })
+    })
     $("#pEdit").click(function () {
         if (pTable.row({selected: true}).any()) {
             $("#pEditName").val("");
@@ -129,19 +149,36 @@ $(document).ready(function () {
                 $("#pTableWarning").text("");
             });
         }
-    })
+    });
+    $("#pEditSave").click(function () {
+        $.ajax({
+            url: "course/pEdit",
+            dataType: "json", //返回格式为json
+            async: false, //请求是否异步，默认为异步，这也是ajax重要特性
+            data: {
+                id: $("#pEditId").val(),
+                name: $("#pAddName").val(),
+                desc: $("#pAddDesc").val()
+            }, //参数值
+            type: "GET", //请求方式
+            success: function (result) {
+                pTable.ajax.reload(null, false);
+                $("#pEditModal").modal('hide');
+            }
+        })
+    });
     $("#pDel").click(function () {
         if (pTable.row({selected: true}).any()) {
             $("#pDelModal").modal('show');
 
-            $("#pDel").click(function () {
+            $("#pDelSave").click(function () {
                 var rdata = pTable.row({selected: true}).data();
                 $.ajax({
-                    url: "membersDel",
+                    url: "course/pDel",
                     dataType: "json", //返回格式为json
                     async: false, //请求是否异步，默认为异步，这也是ajax重要特性
                     data: {
-                        "id": rdata.id,
+                        "id": rdata.id
                     }, //参数值
                     type: "GET", //请求方式
                     success: function (result) {
@@ -156,51 +193,53 @@ $(document).ready(function () {
                 $("#tableWarning").text("");
             });
         }
-    })
-    $("#pAdd").click(function () {
-        $("#pAddName").val("");
-        $("#pAddDesc").val("");
-    })
-    $("#pAddSave").click(function () {
-        $.ajax({
-            url: "membersAdd",
-            dataType: "json", //返回格式为json
-            async: false, //请求是否异步，默认为异步，这也是ajax重要特性
-            data: {
-                name : $("#pAddName").val(),
-                desc : $("#pAddDesc").val()
-            }, //参数值
-            type: "GET", //请求方式
-            success: function (result) {
-                pTable.ajax.reload(null, false);
-                $("#pAddModal").modal('hide');
-            }
-        })
-    })
-
-    $("#pEditSave").click(function () {
-        $.ajax({
-            url: "membersEdit",
-            dataType: "json", //返回格式为json
-            async: false, //请求是否异步，默认为异步，这也是ajax重要特性
-            data: {
-                id : $("#pEditId").val(),
-                name : $("#pAddName").val(),
-                desc : $("#pAddDesc").val()
-            }, //参数值
-            type: "GET", //请求方式
-            success: function (result) {
-                pTable.ajax.reload(null, false);
-                $("#pEditModal").modal('hide');
-            }
-        })
-    })
+    });
 
     ///////////////////////////////////////////////////////////////////////////////
 
-    $('#sTable tbody').on('click', 'tr', function () {
-        var id = sTable.row(this).data().id;
-        $("#memberid").val(id);
+    // $('#sTable tbody').on('click', 'tr', function () {
+    //     var id = sTable.row(this).data().id;
+    // });
+
+    $("#sAdd").click(function () {
+        $("#sAddFile").fileinput({
+            theme: 'fas',
+            showUpload: false,
+            fileType: "any",
+            maxFileCount: 1,
+            maxFilePreviewSize: 102400, //100M
+            uploadUrl: 'upload',
+            uploadAsync: false,
+            initialPreviewShowDelete: false,
+            fileActionSettings: {
+                showDrag: false
+            },
+            uploadExtraData: function () {
+                //上传额外的参数
+                var data = {
+                    name: $("#sAddName").val(),
+                    desc: $("#sAddDesc").val()
+                };
+                return data;
+            },
+            initialPreview: [],
+            initialPreviewAsData: true, // 默认标记
+            initialPreviewConfig: []
+        }).on('filebatchuploadsuccess', function (event, data) {
+            var out = '';
+            $.each(data.files, function (key, file) {
+                var fname = file.name;
+                out = out + '<li>' + '上传文件 # ' + (key + 1) + ' - ' + fname + ' 成功。' + '</li>';
+            });
+            $("#sAddModal").modal('hide');
+            $("#sAddName").val("");
+            $("#sAddDesc").val("");
+            $("#sAddFile").fileinput("clear");
+        });
+    });
+
+    $("#sAddSave").click(function () {
+        $("#sAddFile").fileinput("upload");
     });
 
     $("#sEdit").click(function () {
@@ -211,22 +250,59 @@ $(document).ready(function () {
             $("#sEditId").val(rdata.id);
             $("#sEditName").val(rdata.name);
             $("#sEditDesc").val(rdata.desc);
-            $("#pEditModal").modal('show');
+
+            $("#sEditFile").fileinput({
+                theme: 'fas',
+                showUpload: false,
+                fileType: "any",
+                maxFileCount: 1,
+                maxFilePreviewSize: 102400, //100M
+                uploadUrl: 'course/sEdit',
+                uploadAsync: false,
+                initialPreviewShowDelete: false,
+                fileActionSettings: {
+                    showDrag: false
+                },
+                uploadExtraData: function () {
+                    //上传额外的参数
+                    var data = {
+                        name: $("#sAddName").val(),
+                        desc: $("#sAddDesc").val()
+                    };
+                    return data;
+                },
+                initialPreview: ['1.mp4'],
+                initialPreviewAsData: true, // 默认标记
+                initialPreviewConfig: [{type: "video", filetype: "video/mp4"}]
+            }).on('filebatchuploadsuccess', function (event, data) {
+                var out = '';
+                $.each(data.files, function (key, file) {
+                    var fname = file.name;
+                    out = out + '<li>' + '上传文件 # ' + (key + 1) + ' - ' + fname + ' 成功。' + '</li>';
+                });
+                $("#sAddModal").modal('hide');
+            });
+            $("#sEditModal").modal('show');
         } else {
-            $("#pTableWarning").text("请先选择数据");
+            $("#sTableWarning").text("请先选择数据");
             $('body').oneTime('3s', function () {
-                $("#pTableWarning").text("");
+                $("#sTableWarning").text("");
             });
         }
-    })
+    });
+
+    $("#sEditSave").click(function () {
+        $("#sEditFile").fileinput("upload");
+        $('#sEditFile').fileinput('destroy');
+    });
     $("#sDel").click(function () {
         if (sTable.row({selected: true}).any()) {
-            $("#pDelModal").modal('show');
+            $("#sDelModal").modal('show');
 
-            $("#pDel").click(function () {
+            $("#sDelSave").click(function () {
                 var rdata = sTable.row({selected: true}).data();
                 $.ajax({
-                    url: "membersDel",
+                    url: "course/sDel",
                     dataType: "json", //返回格式为json
                     async: false, //请求是否异步，默认为异步，这也是ajax重要特性
                     data: {
@@ -240,49 +316,11 @@ $(document).ready(function () {
                 })
             })
         } else {
-            $("#tableWarning").text("请先选择数据");
+            $("#sTableWarning").text("请先选择数据");
             $('body').oneTime('3s', function () {
-                $("#tableWarning").text("");
+                $("#sTableWarning").text("");
             });
         }
-    })
-    $("#sAdd").click(function () {
-        $("#sAddName").val("");
-        $("#sAddDesc").val("");
-    })
-    $("#sAddSave").click(function () {
-        $.ajax({
-            url: "membersAdd",
-            dataType: "json", //返回格式为json
-            async: false, //请求是否异步，默认为异步，这也是ajax重要特性
-            data: {
-                name : $("#sAddName").val(),
-                desc : $("#sAddDesc").val()
-            }, //参数值
-            type: "GET", //请求方式
-            success: function (result) {
-                sTable.ajax.reload(null, false);
-                $("#pAddModal").modal('hide');
-            }
-        })
-    })
-
-    $("#sEditSave").click(function () {
-        $.ajax({
-            url: "membersEdit",
-            dataType: "json", //返回格式为json
-            async: false, //请求是否异步，默认为异步，这也是ajax重要特性
-            data: {
-                id : $("#sEditId").val(),
-                name : $("#sEditName").val(),
-                desc : $("#sEditDesc").val()
-            }, //参数值
-            type: "GET", //请求方式
-            success: function (result) {
-                sTable.ajax.reload(null, false);
-                $("#pEditModal").modal('hide');
-            }
-        })
     })
 });
 

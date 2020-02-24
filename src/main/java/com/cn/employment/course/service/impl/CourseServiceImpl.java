@@ -33,4 +33,34 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseMapper, Course> imp
     public List<Course> selectSonCourseByPid(int id) {
         return this.baseMapper.selectSonCourseByPid(id);
     }
+
+    @Override
+    public void pAdd(Course course) {
+        this.baseMapper.pAdd(course);
+    }
+
+    @Override
+    public void sAdd(Course course) {
+        this.baseMapper.sAdd(course);
+    }
+
+    @Override
+    public void pEdit(Course course) {
+        this.baseMapper.pEdit(course);
+    }
+
+    @Override
+    public void sEdit(Course course) {
+        this.baseMapper.sEdit(course);
+    }
+
+    @Override
+    public void pDel(int id) {
+        this.baseMapper.pDel(id);
+    }
+
+    @Override
+    public void sDel(int id) {
+        this.baseMapper.sDel(id);
+    }
 }

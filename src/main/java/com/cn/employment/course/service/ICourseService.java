@@ -35,4 +35,11 @@ public interface ICourseService extends IBaseService<Course> {
     */
     List<Course> selectSonCourseByPid(int id);
 
+    void pAdd(Course course);
+    void sAdd(Course course);
+    void pEdit(Course course);
+    void sEdit(Course course);
+    void pDel(int id);
+    void sDel(int id);
+
 }

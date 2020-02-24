@@ -4,10 +4,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -21,9 +24,12 @@ public class UploadController {
     @Value("${sys.upload}")
     private String upload;
 
-    @PostMapping("/upload")
-    public void uploadSingle(HttpServletRequest request, @RequestParam("file") MultipartFile file) {
-        if (!file.isEmpty()) {
+    @PostMapping("upload")
+    @ResponseBody
+    public Map<String, Object> uploadSingle(@RequestParam(value = "file", required=false) MultipartFile file,
+                                            @RequestParam("name") String name, @RequestParam("desc") String desc) {
+        Map<String, Object> result = new HashMap<>();
+        if (file != null && !file.isEmpty()) {
             try {
                 String fileName = file.getOriginalFilename();
 
@@ -42,9 +48,14 @@ public class UploadController {
                 //将内存中的数据写入磁盘
                 file.transferTo(newFile);
 
+                System.err.println(name);
+                System.err.println(desc);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+        result.put("success", 1);
+        return result;
     }
 }
