@@ -34,18 +34,13 @@ $(document).ready(function () {
 			},
 		},
 		processing: false,
-		ajax: "membersList",
+		ajax: "trade",
 		columns: [
 			{
-				data: "membername"
-			},
-			{
-				data: "membercardid"
+				data: "trade_item",
 			}
 		],
-		order: [
-			[1, 'asc']
-		]
+		
 	});
 
 	var sTable = $('#sTable').DataTable({
