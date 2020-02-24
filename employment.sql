@@ -23,14 +23,17 @@ DROP TABLE IF EXISTS `course`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `course` (
-  `id` int(11) NOT NULL,
-  `name` varchar(45) DEFAULT NULL COMMENT '课程名',
-  `description` varchar(45) DEFAULT NULL COMMENT '课程描述',
-  `url` varchar(45) DEFAULT NULL COMMENT '课程资料',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL COMMENT '课程名',
+  `description` varchar(1000) DEFAULT NULL COMMENT '课程描述',
+  `url` varchar(1000) DEFAULT NULL COMMENT '课程资料',
   `type` varchar(45) DEFAULT NULL COMMENT '资料类型',
   `pid` int(11) DEFAULT NULL COMMENT '父级id',
+  `size` varchar(1000) DEFAULT NULL,
+  `filetype` varchar(45) DEFAULT NULL,
+  `caption` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='课程';
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='课程';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +42,7 @@ CREATE TABLE `course` (
 
 LOCK TABLES `course` WRITE;
 /*!40000 ALTER TABLE `course` DISABLE KEYS */;
-INSERT INTO `course` VALUES (1,'java基础视频','适用于初学者',NULL,NULL,0),(2,'java历史','java历史发展',NULL,'mp4',1),(3,'java基本数据类型',NULL,NULL,'txt',4),(4,'java中级视频','适用于有一定java经验的人',NULL,NULL,0);
+INSERT INTO `course` VALUES (1,'java基础视频','适用于初学者',NULL,NULL,0,NULL,NULL,NULL),(2,'java历史','java历史发展',NULL,'mp4',1,NULL,NULL,NULL),(3,'java基本数据类型',NULL,NULL,'txt',4,NULL,NULL,NULL),(4,'java中级视频','适用于有一定java经验的人',NULL,NULL,0,NULL,NULL,NULL),(5,'java高级视频','适用于高级开发人员',NULL,NULL,0,NULL,NULL,NULL),(16,'11','2233','24b94b3ca3fd4287a0e49cbedf6c2d33.mp4','video',4,'10926602','video/mp4','1.mp4'),(17,'11','223',NULL,NULL,5,NULL,NULL,NULL),(18,'1','1','0005ea5a1d4f41ed841700be490bcf8a.txt','text',4,'377','text/plain','指标.txt'),(19,'2','2','7735bfd6a3454e93a164faddc45bcde1.txt','text',4,'377','text/plain','指标.txt');
 /*!40000 ALTER TABLE `course` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -51,7 +54,7 @@ DROP TABLE IF EXISTS `questioin`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `questioin` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `question` varchar(45) DEFAULT NULL COMMENT '问题',
   `option_a` varchar(45) DEFAULT NULL COMMENT '选项',
   `option_b` varchar(45) DEFAULT NULL COMMENT '选项',
@@ -79,7 +82,7 @@ DROP TABLE IF EXISTS `resume`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `resume` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL COMMENT '用户id',
   `name` varchar(45) DEFAULT NULL COMMENT '姓名',
   `age` varchar(45) DEFAULT NULL COMMENT '年龄',
@@ -136,11 +139,11 @@ DROP TABLE IF EXISTS `station`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `station` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) DEFAULT NULL COMMENT '父级id',
   `description` varchar(45) DEFAULT NULL COMMENT '岗位描述',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='岗位表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='岗位表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -161,7 +164,7 @@ DROP TABLE IF EXISTS `study_style`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `study_style` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `userid` int(11) DEFAULT NULL,
   `type1` int(11) DEFAULT NULL COMMENT '活跃型/沉思型 0:活跃 1：沉思',
   `type2` int(11) DEFAULT NULL COMMENT '感悟型/直觉型  0:活跃 1：沉思',
@@ -246,4 +249,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-24 19:41:57
+-- Dump completed on 2020-02-24 23:50:18
