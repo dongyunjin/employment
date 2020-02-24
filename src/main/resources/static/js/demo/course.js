@@ -33,7 +33,7 @@ $(document).ready(function () {
                 sLast: " 最后一页 "
             },
         },
-        processing: false,
+        processing: true,
         ajax: {
             url: "course/pList",
             type: "POST"
@@ -75,7 +75,7 @@ $(document).ready(function () {
                 sLast: " 最后一页 "
             },
         },
-        processing: false,
+        processing: true,
         ajax: {
             "url": "course/sList",
             "type": "POST"
