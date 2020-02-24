@@ -33,13 +33,13 @@ public interface ICourseService extends IBaseService<Course> {
     * @Description: 根据pid 查询子课程
     * @Date: 2020/2/23 18:21
     */
-    List<Course> selectSonCourseByPid(int id);
+    List<Course> selectSonCourseByPid(Long id);
 
     void pAdd(Course course);
     void sAdd(Course course);
     void pEdit(Course course);
     void sEdit(Course course);
-    void pDel(int id);
-    void sDel(int id);
+    void pDel(Long id);
+    void sDel(Long id);
 
 }

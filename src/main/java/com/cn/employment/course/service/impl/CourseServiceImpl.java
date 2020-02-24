@@ -30,37 +30,40 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseMapper, Course> imp
     }
 
     @Override
-    public List<Course> selectSonCourseByPid(int id) {
+    public List<Course> selectSonCourseByPid(Long id) {
         return this.baseMapper.selectSonCourseByPid(id);
     }
 
     @Override
     public void pAdd(Course course) {
-        this.baseMapper.pAdd(course);
+        course.insert();
     }
 
     @Override
     public void sAdd(Course course) {
-        this.baseMapper.sAdd(course);
+        course.insert();
     }
 
     @Override
     public void pEdit(Course course) {
-        this.baseMapper.pEdit(course);
+        this.baseMapper.updateById(course);
     }
 
     @Override
     public void sEdit(Course course) {
-        this.baseMapper.sEdit(course);
+        this.baseMapper.updateById(course);
     }
 
     @Override
-    public void pDel(int id) {
-        this.baseMapper.pDel(id);
+    public void pDel(Long id) {
+        Course course = new Course();
+        course.deleteById(id);
+        this.baseMapper.delByPId(id);
     }
 
     @Override
-    public void sDel(int id) {
-        this.baseMapper.sDel(id);
+    public void sDel(Long id) {
+        Course course = new Course();
+        course.deleteById(id);
     }
 }

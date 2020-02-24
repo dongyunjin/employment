@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -67,7 +68,7 @@ public class CourseController extends BaseController {
 
     @PostMapping("course/sList/{id}")
     @ResponseBody
-    public Map<String,Object> sList(@PathVariable int id) {
+    public Map<String,Object> sList(@PathVariable Long id) {
         Map<String,Object> map = new HashMap<>();
         map.put("data", courseService.selectSonCourseByPid(id));
         return map;
@@ -85,11 +86,20 @@ public class CourseController extends BaseController {
     @PostMapping("course/sAdd")
     @ResponseBody
     public Map<String, Object> sAdd(@RequestParam(value = "file", required=false) MultipartFile file,
-                                            @RequestParam("name") String name, @RequestParam("desc") String desc) {
+                                            @RequestParam("name") String name, @RequestParam("description") String description,
+                                    @RequestParam("pid") int pid) {
         Map<String, Object> result = new HashMap<>();
+        Course course = new Course();
+        course.setPid(pid);
+        course.setName(name);
+        course.setDescription(description);
+
         if (file != null && !file.isEmpty()) {
             try {
                 String fileName = file.getOriginalFilename();
+                Long size = file.getSize();
+                String filetype = file.getContentType();
+                String type = file.getContentType().split("/")[0];
 
                 String uuid = UUID.randomUUID().toString().replaceAll("-", "");
 
@@ -105,11 +115,16 @@ public class CourseController extends BaseController {
 
                 //将内存中的数据写入磁盘
                 file.transferTo(newFile);
+                course.setType(type);
+                course.setFiletype(filetype);
+                course.setCaption(fileName);
+                course.setSize(size + "");
+                course.setUrl(newFileName);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        Course course = new Course();
+
         courseService.sAdd(course);
         result.put("success", 1);
         return result;
@@ -127,16 +142,32 @@ public class CourseController extends BaseController {
     @PostMapping("course/sEdit")
     @ResponseBody
     public Map<String, Object> sEdit(@RequestParam(value = "file", required=false) MultipartFile file,
-                                    @RequestParam("name") String name, @RequestParam("desc") String desc) {
+                                    @RequestParam("name") String name, @RequestParam("description") String description,
+                                     @RequestParam("id") long id,@RequestParam("pid") int pid,@RequestParam("url") String url) {
         Map<String, Object> result = new HashMap<>();
+        Course course = new Course();
+        course.setId(id);
+        course.setPid(pid);
+        course.setName(name);
+        course.setDescription(description);
         if (file != null && !file.isEmpty()) {
             try {
+                String dir = upload;
+
+                File delDir = new File(dir + url);
+                //若文件夹不存在 创建文件夹
+                if (delDir.exists()) {
+                    delDir.delete();
+                }
+
                 String fileName = file.getOriginalFilename();
+                Long size = file.getSize();
+                String filetype = file.getContentType();
+                String type = file.getContentType().split("/")[0];
 
                 String uuid = UUID.randomUUID().toString().replaceAll("-", "");
 
                 String newFileName = uuid + fileName.substring(fileName.lastIndexOf("."));
-                String dir = upload;
                 File fileDir = new File(dir);
                 //若文件夹不存在 创建文件夹
                 if (!fileDir.exists()) {
@@ -147,11 +178,15 @@ public class CourseController extends BaseController {
 
                 //将内存中的数据写入磁盘
                 file.transferTo(newFile);
+                course.setType(type);
+                course.setFiletype(filetype);
+                course.setCaption(fileName);
+                course.setSize(size + "");
+                course.setUrl(newFileName);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        Course course = new Course();
         courseService.sEdit(course);
         result.put("success", 1);
         return result;
@@ -159,8 +194,16 @@ public class CourseController extends BaseController {
 
     @PostMapping("course/pDel/{id}")
     @ResponseBody
-    public Map<String,Object> pDel(@PathVariable int id) {
+    public Map<String,Object> pDel(@PathVariable Long id) {
         Map<String,Object> map = new HashMap<>();
+        List<Course> list = courseService.selectSonCourseByPid(id);
+        for (Course course : list) {
+            File delDir = new File(upload + course.getUrl());
+            //若文件夹不存在 创建文件夹
+            if (delDir.exists()) {
+                delDir.delete();
+            }
+        }
         courseService.pDel(id);
         map.put("success", 1);
         return map;
@@ -168,8 +211,14 @@ public class CourseController extends BaseController {
 
     @PostMapping("course/sDel/{id}")
     @ResponseBody
-    public Map<String,Object> sDel(@PathVariable int id) {
+    public Map<String,Object> sDel(@PathVariable Long id, @RequestParam("url") String url) {
         Map<String,Object> map = new HashMap<>();
+
+        File delDir = new File(upload + url);
+        //若文件夹不存在 创建文件夹
+        if (delDir.exists()) {
+            delDir.delete();
+        }
         courseService.sDel(id);
         map.put("success", 1);
         return map;

@@ -43,7 +43,7 @@ $(document).ready(function () {
                 data: "name", title: "课程名称"
             },
             {
-                data: "desc", title: "课程描述"
+                data: "description", title: "课程描述"
             }
         ],
         order: [
@@ -85,7 +85,7 @@ $(document).ready(function () {
                 data: "name", title: "课程名称"
             },
             {
-                data: "desc", title: "课程描述"
+                data: "description", title: "课程描述"
             },
             {
                 data: "type", title: "课程类型"
@@ -123,7 +123,7 @@ $(document).ready(function () {
             async: false, //请求是否异步，默认为异步，这也是ajax重要特性
             data: {
                 name: $("#pAddName").val(),
-                desc: $("#pAddDesc").val()
+                description: $("#pAddDesc").val()
             }, //参数值
             type: "POST", //请求方式
             success: function (result) {
@@ -141,7 +141,7 @@ $(document).ready(function () {
             var rdata = pTable.row({selected: true}).data();
             $("#pEditId").val(rdata.id);
             $("#pEditName").val(rdata.name);
-            $("#pEditDesc").val(rdata.desc);
+            $("#pEditDesc").val(rdata.description);
             $("#pEditModal").modal('show');
         } else {
             $("#pTableWarning").text("请先选择数据");
@@ -157,10 +157,10 @@ $(document).ready(function () {
             async: false, //请求是否异步，默认为异步，这也是ajax重要特性
             data: {
                 id: $("#pEditId").val(),
-                name: $("#pAddName").val(),
-                desc: $("#pAddDesc").val()
+                name: $("#pEditName").val(),
+                description: $("#pEditDesc").val()
             }, //参数值
-            type: "GET", //请求方式
+            type: "POST", //请求方式
             success: function (result) {
                 pTable.ajax.reload(null, false);
                 $("#pEditModal").modal('hide');
@@ -174,23 +174,24 @@ $(document).ready(function () {
             $("#pDelSave").click(function () {
                 var rdata = pTable.row({selected: true}).data();
                 $.ajax({
-                    url: "course/pDel",
+                    url: "course/pDel/" + rdata.id,
                     dataType: "json", //返回格式为json
                     async: false, //请求是否异步，默认为异步，这也是ajax重要特性
                     data: {
-                        "id": rdata.id
+                        //"id": rdata.id
                     }, //参数值
-                    type: "GET", //请求方式
+                    type: "POST", //请求方式
                     success: function (result) {
                         pTable.ajax.reload(null, false);
-                        $("#delModal").modal('hide');
+                        sTable.ajax.reload(null, false);
+                        $("#pDelModal").modal('hide');
                     }
                 })
             })
         } else {
             $("#tableWarning").text("请先选择数据");
             $('body').oneTime('3s', function () {
-                $("#tableWarning").text("");
+                $("#pTableWarning").text("");
             });
         }
     });
@@ -202,40 +203,52 @@ $(document).ready(function () {
     // });
 
     $("#sAdd").click(function () {
-        $("#sAddFile").fileinput({
-            theme: 'fas',
-            showUpload: false,
-            fileType: "any",
-            maxFileCount: 1,
-            maxFilePreviewSize: 102400, //100M
-            uploadUrl: 'upload',
-            uploadAsync: false,
-            initialPreviewShowDelete: false,
-            fileActionSettings: {
-                showDrag: false
-            },
-            uploadExtraData: function () {
-                //上传额外的参数
-                var data = {
-                    name: $("#sAddName").val(),
-                    desc: $("#sAddDesc").val()
-                };
-                return data;
-            },
-            initialPreview: [],
-            initialPreviewAsData: true, // 默认标记
-            initialPreviewConfig: []
-        }).on('filebatchuploadsuccess', function (event, data) {
-            var out = '';
-            $.each(data.files, function (key, file) {
-                var fname = file.name;
-                out = out + '<li>' + '上传文件 # ' + (key + 1) + ' - ' + fname + ' 成功。' + '</li>';
+        if (pTable.row({selected: true}).any()) {
+            $("#sAddModal").modal('show');
+            var pid = pTable.row({selected: true}).data().id;
+            $("#sAddFile").fileinput("destroy");
+            $("#sAddFile").fileinput({
+                theme: 'fas',
+                showUpload: false,
+                fileType: "any",
+                maxFileCount: 1,
+                maxFilePreviewSize: 102400, //100M
+                uploadUrl: 'course/sAdd',
+                uploadAsync: false,
+                initialPreviewShowDelete: false,
+                fileActionSettings: {
+                    showDrag: false
+                },
+                uploadExtraData: function () {
+                    //上传额外的参数
+                    var data = {
+                        name: $("#sAddName").val(),
+                        description: $("#sAddDesc").val(),
+                        pid: pid
+                    };
+                    return data;
+                },
+                initialPreview: [],
+                initialPreviewAsData: true, // 默认标记
+                initialPreviewConfig: []
+            }).on('filebatchuploadsuccess', function (event, data) {
+                var out = '';
+                $.each(data.files, function (key, file) {
+                    var fname = file.name;
+                    out = out + '<li>' + '上传文件 # ' + (key + 1) + ' - ' + fname + ' 成功。' + '</li>';
+                });
+                sTable.ajax.reload(null, false);
+                $("#sAddModal").modal('hide');
+                $("#sAddName").val("");
+                $("#sAddDesc").val("");
+                $("#sAddFile").fileinput("destroy");
             });
-            $("#sAddModal").modal('hide');
-            $("#sAddName").val("");
-            $("#sAddDesc").val("");
-            $("#sAddFile").fileinput("clear");
-        });
+        } else {
+            $("#sTableWarning").text("请先选择课程列表内课程");
+            $('body').oneTime('3s', function () {
+                $("#sTableWarning").text("");
+            });
+        }
     });
 
     $("#sAddSave").click(function () {
@@ -244,12 +257,13 @@ $(document).ready(function () {
 
     $("#sEdit").click(function () {
         if (sTable.row({selected: true}).any()) {
+            $("#sEditModal").modal('show');
             $("#sEditName").val("");
             $("#sEditDesc").val("");
             var rdata = sTable.row({selected: true}).data();
             $("#sEditId").val(rdata.id);
             $("#sEditName").val(rdata.name);
-            $("#sEditDesc").val(rdata.desc);
+            $("#sEditDesc").val(rdata.description);
 
             $("#sEditFile").fileinput({
                 theme: 'fas',
@@ -266,23 +280,29 @@ $(document).ready(function () {
                 uploadExtraData: function () {
                     //上传额外的参数
                     var data = {
-                        name: $("#sAddName").val(),
-                        desc: $("#sAddDesc").val()
+                        id: rdata.id,
+                        pid: rdata.pid,
+                        name: $("#sEditName").val(),
+                        description: $("#sEditDesc").val(),
+                        url: rdata.url
                     };
                     return data;
                 },
-                initialPreview: ['1.mp4'],
+                initialPreview: [rdata.url],
                 initialPreviewAsData: true, // 默认标记
-                initialPreviewConfig: [{type: "video", filetype: "video/mp4"}]
+                initialPreviewConfig: [{type: rdata.type, filetype: rdata.filetype, size: rdata.size, caption: rdata.caption, url: rdata.url}]
             }).on('filebatchuploadsuccess', function (event, data) {
                 var out = '';
                 $.each(data.files, function (key, file) {
                     var fname = file.name;
                     out = out + '<li>' + '上传文件 # ' + (key + 1) + ' - ' + fname + ' 成功。' + '</li>';
                 });
-                $("#sAddModal").modal('hide');
+                sTable.ajax.reload(null, false);
+                $("#sEditModal").modal('hide');
+                $("#sEditName").val("");
+                $("#sEditDesc").val("");
+                $("#sEditFile").fileinput("destroy");
             });
-            $("#sEditModal").modal('show');
         } else {
             $("#sTableWarning").text("请先选择数据");
             $('body').oneTime('3s', function () {
@@ -293,7 +313,7 @@ $(document).ready(function () {
 
     $("#sEditSave").click(function () {
         $("#sEditFile").fileinput("upload");
-        $('#sEditFile').fileinput('destroy');
+        //$('#sEditFile').fileinput('destroy');
     });
     $("#sDel").click(function () {
         if (sTable.row({selected: true}).any()) {
@@ -302,16 +322,16 @@ $(document).ready(function () {
             $("#sDelSave").click(function () {
                 var rdata = sTable.row({selected: true}).data();
                 $.ajax({
-                    url: "course/sDel",
+                    url: "course/sDel/" + rdata.id,
                     dataType: "json", //返回格式为json
                     async: false, //请求是否异步，默认为异步，这也是ajax重要特性
                     data: {
-                        "id": rdata.id,
+                        "url": rdata.url
                     }, //参数值
-                    type: "GET", //请求方式
+                    type: "POST", //请求方式
                     success: function (result) {
                         sTable.ajax.reload(null, false);
-                        $("#delModal").modal('hide');
+                        $("#sDelModal").modal('hide');
                     }
                 })
             })

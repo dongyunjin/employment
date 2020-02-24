@@ -6,15 +6,18 @@
     <resultMap id="BaseResultMap" type="com.cn.employment.course.entity.Course">
     <result column="id" property="id" />
         <result column="name" property="name" />
-        <result column="description" property="desc" />
+        <result column="description" property="description" />
         <result column="url" property="url" />
         <result column="type" property="type" />
         <result column="pid" property="pid" />
+        <result column="size" property="size" />
+        <result column="filetype" property="filetype" />
+        <result column="caption" property="caption" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, name, description, url, type, pid
+        id, name, description, url, type, pid, size, filetype, caption
     </sql>
     <select id="selectParentCourse" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"/> from course t
@@ -31,4 +34,7 @@
         where t.pid = #{id}
     </select>
 
+    <delete id="delByPId">
+        delete from course t where t.pid = #{id}
+    </delete>
 </mapper>

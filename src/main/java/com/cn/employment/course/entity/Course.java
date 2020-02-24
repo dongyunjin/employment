@@ -30,7 +30,7 @@ public class Course extends BaseEntity<Course> {
     /**
      * 课程描述
      */
-    private String desc;
+    private String description;
 
     /**
      * 课程资料
@@ -44,6 +44,12 @@ public class Course extends BaseEntity<Course> {
 
     private int pid;
 
+    private String size;
+
+    private String filetype;
+
+    private String caption;
+
     public String getName() {
         return name;
     }
@@ -52,12 +58,12 @@ public class Course extends BaseEntity<Course> {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getUrl() {
@@ -82,6 +88,30 @@ public class Course extends BaseEntity<Course> {
 
     public void setPid(int pid) {
         this.pid = pid;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getFiletype() {
+        return filetype;
+    }
+
+    public void setFiletype(String filetype) {
+        this.filetype = filetype;
+    }
+
+    public String getCaption() {
+        return caption;
+    }
+
+    public void setCaption(String caption) {
+        this.caption = caption;
     }
 
     @Override
