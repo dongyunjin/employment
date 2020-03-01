@@ -33,7 +33,7 @@ CREATE TABLE `course` (
   `filetype` varchar(45) DEFAULT NULL,
   `caption` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='课程';
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COMMENT='课程';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `course` (
 
 LOCK TABLES `course` WRITE;
 /*!40000 ALTER TABLE `course` DISABLE KEYS */;
-INSERT INTO `course` VALUES (1,'java基础视频','适用于初学者',NULL,NULL,0,NULL,NULL,NULL),(2,'java历史','java历史发展',NULL,'mp4',1,NULL,NULL,NULL),(3,'java基本数据类型',NULL,NULL,'txt',4,NULL,NULL,NULL),(4,'java中级视频','适用于有一定java经验的人',NULL,NULL,0,NULL,NULL,NULL),(5,'java高级视频','适用于高级开发人员',NULL,NULL,0,NULL,NULL,NULL),(16,'11','2233','24b94b3ca3fd4287a0e49cbedf6c2d33.mp4','video',4,'10926602','video/mp4','1.mp4'),(17,'11','223',NULL,NULL,5,NULL,NULL,NULL),(18,'1','1','0005ea5a1d4f41ed841700be490bcf8a.txt','text',4,'377','text/plain','指标.txt'),(19,'2','2','7735bfd6a3454e93a164faddc45bcde1.txt','text',4,'377','text/plain','指标.txt');
+INSERT INTO `course` VALUES (1,'java基础视频','适用于初学者','1.MP4',NULL,0,NULL,NULL,NULL),(2,'java历史','java历史发展',NULL,'mp4',1,NULL,NULL,NULL),(3,'java基本数据类型',NULL,NULL,'txt',4,NULL,NULL,NULL),(4,'java中级视频','适用于有一定java经验的人',NULL,NULL,0,NULL,NULL,NULL),(5,'java高级视频','适用于高级开发人员',NULL,NULL,0,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `course` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,10 +140,16 @@ DROP TABLE IF EXISTS `station`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `station` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `parent_id` int(11) DEFAULT NULL COMMENT '父级id',
-  `description` varchar(45) DEFAULT NULL COMMENT '岗位描述',
+  `name` varchar(100) DEFAULT NULL COMMENT '课程名',
+  `description` varchar(1000) DEFAULT NULL COMMENT '课程描述',
+  `url` varchar(1000) DEFAULT NULL COMMENT '课程资料',
+  `type` varchar(45) DEFAULT NULL COMMENT '资料类型',
+  `pid` int(11) DEFAULT NULL COMMENT '父级id',
+  `size` varchar(1000) DEFAULT NULL,
+  `filetype` varchar(45) DEFAULT NULL,
+  `caption` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='岗位表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='岗位表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -152,8 +158,32 @@ CREATE TABLE `station` (
 
 LOCK TABLES `station` WRITE;
 /*!40000 ALTER TABLE `station` DISABLE KEYS */;
-INSERT INTO `station` VALUES (1,0,'根节点'),(2,1,'IT互联网'),(3,1,'金融'),(4,1,'教育培训'),(5,2,'java工程师'),(6,2,'web前端工程师');
+INSERT INTO `station` VALUES (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(7,'IT 互联网','',NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `station` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `station_course`
+--
+
+DROP TABLE IF EXISTS `station_course`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `station_course` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sid` int(11) DEFAULT NULL COMMENT '岗位id',
+  `cid` int(11) DEFAULT NULL COMMENT '课程id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `station_course`
+--
+
+LOCK TABLES `station_course` WRITE;
+/*!40000 ALTER TABLE `station_course` DISABLE KEYS */;
+/*!40000 ALTER TABLE `station_course` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -249,4 +279,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-24 23:50:18
+-- Dump completed on 2020-03-01 13:20:50
