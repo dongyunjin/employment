@@ -1,5 +1,7 @@
-package com.cn.employment.course.entity;
+package com.cn.employment.station.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.cn.employment.base.entity.BaseEntity;
 import java.io.Serializable;
 import lombok.Data;
@@ -8,16 +10,17 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 课程
+ * 岗位表
  * </p>
  *
  * @author employment
- * @since 2020-02-23
+ * @since 2020-02-25
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public class Course extends BaseEntity<Course> {
+@TableName("station")
+public class StationEntity extends BaseEntity<StationEntity> {
 
     private static final long serialVersionUID = 1L;
 
@@ -41,6 +44,9 @@ public class Course extends BaseEntity<Course> {
      */
     private String type;
 
+    /**
+     * 父级id
+     */
     private Integer pid;
 
     private String size;

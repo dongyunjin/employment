@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'/>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="css/fontsGoogleapis.css" rel="stylesheet">
+    <!--<link href="css/sb-admin-2.min.css" rel="stylesheet">-->
+
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="css/select.dataTables.min.css" rel="stylesheet">
+
+
+    <!--file-input-->
+    <link href="file-input/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="file-input/themes/explorer-fas/theme.css" media="all" rel="stylesheet" type="text/css"/>
+    <style>
+        #loading {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading" style="text-align: right">
+                    <span class="label label-primary" style="font-size: large;float: left">岗位分类</span>
+                    <label class="text-md font-weight-bold text-warning text-uppercase mb-1" id="pTableWarning"></label>
+                    <button id="pAdd" class="btn btn-sm btn-success align-self-center" type="button"
+                            data-toggle="modal"
+                            data-target="#pAddModal">增加
+                    </button>
+                    <button id="pEdit" class="btn btn-sm btn-warning" type="button"
+                            data-toggle="#pEditModal">编辑
+                    </button>
+                    <button id="pDel" class="btn btn-sm btn-danger" type="button"
+                            data-toggle="#pDelModal">
+                        删除
+                    </button>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered" id="pTable" width="100%" cellspacing="0">
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading" style="text-align: right">
+                    <span class="label label-primary" style="font-size: large;float: left">岗位列表</span>
+                    <label class="text-md font-weight-bold text-warning text-uppercase mb-1" id="sTableWarning"></label>
+                    <button id="sAdd" class="btn btn-sm btn-success align-self-center" type="button"
+                            data-target="#sAddModal">增加
+                    </button>
+                    <button id="sEdit" class="btn btn-sm btn-warning" type="button"
+                            data-toggle="#sEditModal">编辑
+                    </button>
+                    <button id="sDel" class="btn btn-sm btn-danger" type="button"
+                            data-toggle="#sDelModal">
+                        删除
+                    </button>
+                </div>
+
+                <div class="panel-body">
+                    <table class="table table-bordered" id="sTable" width="100%" cellspacing="0">
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id='loading'>loadinginput.</div>
+
+<!-- 父级添加modal -->
+<div class="modal fade" id="pAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">新增课程</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="pAddName" class="control-label">课程名称:</label>
+                        <input type="text" class="form-control" id="pAddName">
+                    </div>
+                    <div class="form-group">
+                        <label for="pAddDesc" class="control-label">课程描述:</label>
+                        <input type="text" class="form-control" id="pAddDesc">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" id="pAddSave" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 二级添加modal -->
+<div class="modal fade" id="sAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">新增课程</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="sAddName" class="control-label">课程名称:</label>
+                        <input type="text" class="form-control" id="sAddName">
+                    </div>
+                    <div class="form-group">
+                        <label for="sAddDesc" class="control-label">课程描述:</label>
+                        <input type="text" class="form-control" id="sAddDesc">
+                    </div>
+                </form>
+                <form enctype="multipart/form-data">
+                    <div class="file-loading">
+                        <input id="sAddFile" name="file" type="file" multiple>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" id="sAddSave" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 一级编辑modal -->
+<div class="modal fade" id="pEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">编辑课程</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input type="hidden" id="pEditId">
+                    <div class="form-group">
+                        <label for="pEditName" class="control-label">课程名称:</label>
+                        <input type="text" class="form-control" id="pEditName">
+                    </div>
+                    <div class="form-group">
+                        <label for="pEditDesc" class="control-label">课程描述:</label>
+                        <input type="text" class="form-control" id="pEditDesc">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" id="pEditSave" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 二级 -->
+<div class="modal fade" id="sEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">编辑课程</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input type="hidden" id="sEditId">
+                    <div class="form-group">
+                        <label for="sEditName" class="control-label">课程名称:</label>
+                        <input type="text" class="form-control" id="sEditName">
+                    </div>
+                    <div class="form-group">
+                        <label for="sEditDesc" class="control-label">课程描述:</label>
+                        <input type="text" class="form-control" id="sEditDesc">
+                    </div>
+                </form>
+                <form enctype="multipart/form-data">
+                    <div class="file-loading">
+                        <input id="sEditFile" name="file" type="file" multiple>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" id="sEditSave" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 一级 del Modal-->
+<div class="modal fade" id="pDelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">确认删除？</h4>
+            </div>
+            <div class="modal-body">数据删除后将无法找回！</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" id="pDelSave" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 二级 del Modal-->
+<div class="modal fade" id="sDelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">确认删除</h4>
+            </div>
+            <div class="modal-body">数据删除后将无法找回！</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" id="sDelSave" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="js/jquery.min.js"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script src="js/bootstrap.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="js/dataTables.select.min.js"></script>
+
+<script src="js/jquery.timers-1.2.js" type="text/javascript"></script>
+
+<!--file-input-->
+<script src="file-input/js/plugins/piexif.js" type="text/javascript"></script>
+<script src="file-input/js/plugins/sortable.js" type="text/javascript"></script>
+<script src="file-input/js/fileinput.js" type="text/javascript"></script>
+<script src="file-input/js/locales/fr.js" type="text/javascript"></script>
+<script src="file-input/js/locales/es.js" type="text/javascript"></script>
+<script src="file-input/themes/fas/theme.js" type="text/javascript"></script>
+<script src="file-input/themes/explorer-fas/theme.js" type="text/javascript"></script>
+
+<script src="js/demo/station.js"></script>
+</body>
+</html>

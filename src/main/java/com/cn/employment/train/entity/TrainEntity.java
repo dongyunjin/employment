@@ -1,4 +1,4 @@
-package com.cn.employment.course.entity;
+package com.cn.employment.train.entity;
 
 import com.cn.employment.base.entity.BaseEntity;
 import java.io.Serializable;
@@ -17,7 +17,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public class Course extends BaseEntity<Course> {
+public class TrainEntity extends BaseEntity<TrainEntity> {
 
     private static final long serialVersionUID = 1L;
 
