@@ -19,6 +19,8 @@ public class TreeNode {
 
     private State state;
 
+    private String url;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String icon;
 
@@ -28,11 +30,12 @@ public class TreeNode {
     public TreeNode() {
     }
 
-    public TreeNode(Long id, String name, String sequence, String icon) {
+    public TreeNode(Long id, String name, String sequence, String icon, String url) {
         this.id = id;
         this.name = name;
         this.sequence = sequence;
         this.icon = icon;
+        this.url = url;
     }
 
     public String getIcon() {
@@ -81,6 +84,14 @@ public class TreeNode {
 
     public void setSequence(String sequence) {
         this.sequence = sequence;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public static class State {

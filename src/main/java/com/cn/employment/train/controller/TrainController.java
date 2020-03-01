@@ -64,6 +64,7 @@ public class TrainController extends BaseController {
         if (node != null) {
             treeNode.setId(node.getId());
             treeNode.setName(node.getName());
+            treeNode.setUrl(node.getUrl());
         } else if (id == 0) {
             treeNode.setId((long) 0);
             treeNode.setName("课程分类");
