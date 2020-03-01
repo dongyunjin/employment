@@ -15,10 +15,13 @@ public class TreeNode {
 
     private String name;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String sequence;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private State state;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String url;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
