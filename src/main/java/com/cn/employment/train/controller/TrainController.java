@@ -41,7 +41,7 @@ public class TrainController extends BaseController {
     @GetMapping("trainUI")
     public String trainUI(Model model) {
         model.addAttribute("g", "eee");
-        return "backend/train";
+        return "front/course";
     }
 
 

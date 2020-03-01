@@ -1,56 +1,45 @@
 // Call the dataTables jQuery plugin
 $(document).ready(function() {
-  var table = $('#dataTable').DataTable({
-	  select: {
-		  style:"single"
-	  },
-	  "searching" : true,
-	  "bLengthChange": true,
-	  "aLengthMenu": [5],
-	  "oLanguage": {
-		"sLengthMenu": "每页显示 _MENU_ 条记录",
-		"sZeroRecords": "对不起，查询不到任何相关数据",
-		"sInfo": "当前显示 _START_ 到 _END_ 条，共 _TOTAL_条记录",
-		"sInfoEmtpy": "找不到相关数据",
-		"sInfoFiltered": "数据表中共为 _MAX_ 条记录)",
-		"sProcessing": "正在加载中...",
-		"sSearch": "搜索",
-		"oPaginate": {
-		"sFirst": "第一页",
-		"sPrevious":" 上一页 ",
-		"sNext": " 下一页 ",
-		"sLast": " 最后一页 "
+  var table = $('#sTable').DataTable({
+		select: {
+			style: "single"
 		},
-	  },
-	  "processing": true,
-	  "ajax":"membersList",
-	  "columns": [
-		{
-			"data": "membername"
+		searching: true,
+		bLengthChange: true,
+		aLengthMenu: [10],
+		pagingType: "simple",
+		oLanguage: {
+			sLengthMenu: "每页显示 _MENU_ 条记录",
+			sZeroRecords: "对不起，查询不到任何相关数据",
+			sInfo: "当前显示 _START_ 到 _END_ 条，共 _TOTAL_条记录",
+			sInfoEmpty: "找不到相关数据",
+			sInfoFiltered: "数据表中共为 _MAX_ 条记录)",
+			sProcessing: "正在加载中...",
+			sSearch: "搜索",
+			oPaginate: {
+				sFirst: "第一页",
+				sPrevious: " 上一页 ",
+				sNext: " 下一页 ",
+				sLast: " 最后一页 "
+			},
 		},
-		{
-			"data": "membersex"
+		processing: true,
+		ajax: {
+			url: "course/pList",
+			type: "POST"
 		},
-		{
-			"data": "membercardid"
-		},
-		{
-			"data": "memberidcard"
-		},
-		{
-			"data": "memberphone"
-		},
-		{
-			"data": "memberlevel"
-		},
-		{
-			"data": "memberapply"
-		}
-	],
-	"order": [
-		[1, 'asc']
-	]
-  });
+		columns: [
+			{
+				data: "name", title: "课程名称"
+			},
+			{
+				data: "description", title: "课程描述"
+			}
+		],
+		order: [
+			[0, 'asc']
+		]
+	});
 
   /*$('#dataTable tbody').on( 'click', 'tr', function () {
       if ( table.row( this, { selected: true }).any() ) {
