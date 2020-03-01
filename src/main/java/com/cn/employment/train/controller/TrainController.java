@@ -45,7 +45,7 @@ public class TrainController extends BaseController {
     }
 
 
-    @RequestMapping("treeList")
+    @RequestMapping("trainTreeList")
     @ResponseBody
     public Object treeList(Model model) {
         Map<String, Object> map = new HashMap<>();
