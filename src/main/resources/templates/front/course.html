@@ -181,32 +181,25 @@ var Course = {
 	            chkStyle: "checkbox"//显示 checkbox 选择框，默认checkbox可选择值radio
 	        }
 	    };
-	    var data=[
-	    	
-	        {"name":"北京",
-	        
-	        	"open":true,
-	        	children:[
-	                {"name":"东城区",
-	                 "url":"course_video/it2.mp4",	
-	                },
-	                {"name":"朝阳区",
-	                 "url":"/video/direct1",
-	                },
-	                {"name":"海淀区",
-	                 "url":"/video/direct2",
-	                },
-	                {"name":"通县",
-	                 "url":"/video/direct3",	
-	                },
-	                {"name":"丰台区",
-	                 "url":"/video/direct4",	
-	                },
-	            ]
-	        },//open:true表示默认展开
-	        
-	    ];
-	    var city = $.fn.zTree.init($("#tree"), setting, data);    
+	       
+	    
+	    var course_data="";
+	    $.ajax({
+	        url: "trainTreeList",
+	        dataType: "Json", 
+	        async: false, 
+	        type: "GET", 
+	        success:function(data){
+                course_data=data.data;	        
+	        },
+	        error:function(){
+	        	
+	    
+	        }
+	    })
+	    
+	    
+	    var city = $.fn.zTree.init($("#tree"), setting, course_data);    
 	    var setting={
 	        check: {
 	            enable: true,
@@ -216,19 +209,19 @@ var Course = {
 	            onCheck:chose_node
 	        }
 	    };
-	    var city = $.fn.zTree.init($("#tree"), setting, data);
+	    var city = $.fn.zTree.init($("#tree"), setting, course_data);
 	})
 	function chose_node(event, treeId, treeNode) {
 		
 	        if(treeNode.url){
 	    	    if(treeNode.checked==true){
 	    	    	myPlayer.reset();//重置
-	    			
-	    				myPlayer.src({ type: "video/mp4", src:"course_video/it2.mp4" });
-	    				myPlayer.load("course_video/it2.mp4");
+	    			   
+	    				myPlayer.src({ type: "video/mp4", src:treeNode.url });
+	    				myPlayer.load(treeNode,url);
 						myPlayer.play();
 
-		            console.log("////"+treeNode.url);//弹出name
+		           
 	    	    }
 	        }
 		
