@@ -1,6 +1,6 @@
 // Call the dataTables jQuery plugin
 $(document).ready(function () {
-    var table = $('#sTable').DataTable({
+    var table = $('#dateTable').DataTable({
         select: {
             style: "single"
         },
@@ -100,7 +100,7 @@ $(document).ready(function () {
             //table.row( this ).select();
         }
     } );*/
-    $('#sTable tbody').on(
+    $('#dateTable tbody').on(
         'click',
         'td.details-control',
         function () {
@@ -120,7 +120,7 @@ $(document).ready(function () {
             //阻止冒泡
             return false;
         });
-    $("#membersEdit").click(function () {
+    $("#edit").click(function () {
         if (table.row({selected: true}).any()) {
             $("#editName").val("");
             $("#editSex").val("");
@@ -145,7 +145,7 @@ $(document).ready(function () {
             });
         }
     })
-    $("#membersDel").click(function () {
+    $("#del").click(function () {
         if (table.row({selected: true}).any()) {
             $("#delModal").modal('show');
 
@@ -172,13 +172,14 @@ $(document).ready(function () {
             });
         }
     })
-    $("#membersAdd").click(function () {
+    $("#add").click(function () {
         $("#addName").val("");
         $("#addSex").val("");
         $("#addCardId").val("");
         $("#addIdCard").val("");
         $("#addPhone").val("");
         $("#addLevel").val("");
+        $("#addModal").modal('show');
     })
     $("#addSave").click(function () {
         $.ajax({

@@ -47,21 +47,21 @@
             <!-- Default panel contents -->
             <div class="panel-heading" style="text-align: right">
                 <span class="label label-primary" style="font-size: large;float: left">用户信息</span>
-                <label class="text-md font-weight-bold text-warning text-uppercase mb-1" id="sTableWarning"></label>
-                <button id="sAdd" class="btn btn-sm btn-success align-self-center" type="button"
-                        data-target="#sAddModal">增加
+                <label class="text-md font-weight-bold text-warning text-uppercase mb-1" id="tableWarning"></label>
+                <button id="add" class="btn btn-sm btn-success align-self-center" type="button"
+                        data-target="#addModal">增加
                 </button>
-                <button id="sEdit" class="btn btn-sm btn-warning" type="button"
-                        data-toggle="#sEditModal">编辑
+                <button id="edit" class="btn btn-sm btn-warning" type="button"
+                        data-toggle="#editModal">编辑
                 </button>
-                <button id="sDel" class="btn btn-sm btn-danger" type="button"
-                        data-toggle="#sDelModal">
+                <button id="del" class="btn btn-sm btn-danger" type="button"
+                        data-toggle="#delModal">
                     删除
                 </button>
             </div>
 
             <div class="panel-body">
-                <table class="table table-bordered" id="sTable" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="dateTable" width="100%" cellspacing="0">
                 </table>
             </div>
         </div>
@@ -70,7 +70,7 @@
 <div id='loading'>loadinginput.</div>
 
 <!-- 二级添加modal -->
-<div class="modal fade" id="sAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -81,30 +81,25 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="sAddName" class="control-label">用户名称:</label>
-                        <input type="text" class="form-control" id="sAddName">
+                        <label for="addName" class="control-label">用户名称:</label>
+                        <input type="text" class="form-control" id="addName">
                     </div>
                     <div class="form-group">
-                        <label for="sAddDesc" class="control-label">用户描述:</label>
-                        <input type="text" class="form-control" id="sAddDesc">
-                    </div>
-                </form>
-                <form enctype="multipart/form-data">
-                    <div class="file-loading">
-                        <input id="sAddFile" name="file" type="file" multiple>
+                        <label for="addDesc" class="control-label">用户描述:</label>
+                        <input type="text" class="form-control" id="addDesc">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" id="sAddSave" class="btn btn-primary">保存</button>
+                <button type="button" id="addSave" class="btn btn-primary">保存</button>
             </div>
         </div>
     </div>
 </div>
 
 <!-- 二级 -->
-<div class="modal fade" id="sEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -116,30 +111,30 @@
                 <form>
                     <input type="hidden" id="sEditId">
                     <div class="form-group">
-                        <label for="sEditName" class="control-label">用户名称:</label>
-                        <input type="text" class="form-control" id="sEditName">
+                        <label for="editName" class="control-label">用户名称:</label>
+                        <input type="text" class="form-control" id="editName">
                     </div>
                     <div class="form-group">
-                        <label for="sEditDesc" class="control-label">用户描述:</label>
-                        <input type="text" class="form-control" id="sEditDesc">
+                        <label for="editDesc" class="control-label">用户描述:</label>
+                        <input type="text" class="form-control" id="editDesc">
                     </div>
                 </form>
                 <form enctype="multipart/form-data">
                     <div class="file-loading">
-                        <input id="sEditFile" name="file" type="file" multiple>
+                        <input id="editFile" name="file" type="file" multiple>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" id="sEditSave" class="btn btn-primary">保存</button>
+                <button type="button" id="editSave" class="btn btn-primary">保存</button>
             </div>
         </div>
     </div>
 </div>
 
 <!-- 二级 del Modal-->
-<div class="modal fade" id="sDelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -151,7 +146,7 @@
             <div class="modal-body">数据删除后将无法找回！</div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" id="sDelSave" class="btn btn-primary">保存</button>
+                <button type="button" id="delSave" class="btn btn-primary">保存</button>
             </div>
         </div>
     </div>
@@ -167,6 +162,7 @@
 
 <!-- Page level custom scripts -->
 <script src="js/dataTables.select.min.js"></script>
+<script src="js/jquery.timers-1.2.js" type="text/javascript"></script>
 <script src="js/demo/users.js"></script>
 
 </body>
