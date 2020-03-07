@@ -1,9 +1,9 @@
 package com.cn.employment.login.service.impl;
 
 import com.cn.employment.base.service.impl.BaseServiceImpl;
-import com.cn.employment.login.dao.UsersMapper;
-import com.cn.employment.login.entity.Users;
-import com.cn.employment.login.service.IUsersService;
+import com.cn.employment.login.dao.LoginMapper;
+import com.cn.employment.login.entity.Login;
+import com.cn.employment.login.service.ILoginService;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -17,7 +17,7 @@ import java.util.Map;
  * @since 2020-02-19
  */
 @Service
-public class UsersServiceImpl extends BaseServiceImpl<UsersMapper, Users> implements IUsersService {
+public class LoginServiceImpl extends BaseServiceImpl<LoginMapper, Login> implements ILoginService {
 
     @Override
     public Integer queryUserId(Map<String, String> map) {

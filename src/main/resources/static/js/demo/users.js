@@ -25,7 +25,7 @@ $(document).ready(function () {
         },
         processing: true,
         ajax: {
-            url: "course/sList",
+            url: "user_mgmt/list",
             type: "POST"
         },
         columns: [
@@ -37,31 +37,31 @@ $(document).ready(function () {
                 title: "",
             },
             {
-                data: "name", title: "登录名"
+                data: "username", title: "登录名"
             },
             {
-                data: "description", title: "密码"
+                data: "pwd", title: "密码"
             },
             {
-                data: "description", title: "姓名"
+                data: "name", title: "姓名"
             },
             {
-                data: "description", title: "年龄"
+                data: "age", title: "年龄"
             },
             {
-                data: "description", title: "性别"
+                data: "sex", title: "性别"
             },
             {
-                data: "description", title: "学校"
+                data: "school", title: "学校"
             },
             {
-                data: "description", title: "专业"
+                data: "major", title: "专业"
             },
             {
-                data: "description", title: "期望工作地点"
+                data: "place", title: "期望工作地点"
             },
             {
-                data: "description", title: "期望薪资"
+                data: "money", title: "期望薪资"
             }
         ],
         "order": [[1, 'asc']]
@@ -73,19 +73,19 @@ $(document).ready(function () {
             + '<tr>'
             + '<td style="padding: 8px 10px;">工作经历:</td>'
             + '<td style="padding: 8px 10px;">'
-            + '1java历史, java历史发展, null, mp4, 1, null, null, null'
+            + d.work
             + '</td>'
             + '</tr>'
             + '<tr>'
             + '<td style="padding: 8px 10px;">项目经验:</td>'
             + '<td style="padding: 8px 10px;">'
-            + '2java历史, java历史发展, null, mp4, 1, null, null, null'
+            + d.project
             + '</td>'
             + '</tr>'
             + '<tr>'
             + '<td style="padding: 8px 10px;">个人优势:</td>'
             + '<td style="padding: 8px 10px;">'
-            + '3java历史, java历史发展, null, mp4, 1, null, null, null'
+            + d.advantage
             + '</td>'
             + '</tr>'
             + '</table>';

@@ -1,7 +1,7 @@
 package com.cn.employment.login.controller;
 
-import com.cn.employment.login.entity.Users;
-import com.cn.employment.login.service.IUsersService;
+import com.cn.employment.login.entity.Login;
+import com.cn.employment.login.service.ILoginService;
 import com.cn.employment.usersRole.entity.UsersRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,7 @@ import java.util.Map;
 public class LoginController {
 
     @Autowired
-    private IUsersService usersService;
+    private ILoginService usersService;
 
     /**
      * @Description: 请求登录页面
@@ -65,16 +65,6 @@ public class LoginController {
         return "/backend/index";
     }
 
-    /**
-     * @Description: 用户列表页
-     * @Date: 2020/2/20 21:14
-     */
-    @GetMapping("user_mgmt")
-    public String user_mgmt(Model model) {
-        model.addAttribute("e", "bbb");
-        return "/backend/user_mgmt";
-    }
-    
     /**
      * @Description: 岗位列表页
      * @Date: 2020/2/20 21:14
@@ -157,7 +147,7 @@ public class LoginController {
      */
     @ResponseBody
     @PostMapping("register")
-    public Map<String, Object> register(Users users) {
+    public Map<String, Object> register(Login users) {
         //key :email  username   pwd    phonenum
         Map<String, Object> result = new HashMap<>();
         users.insert();

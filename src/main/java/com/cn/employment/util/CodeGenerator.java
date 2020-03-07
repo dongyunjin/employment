@@ -94,7 +94,7 @@ public class CodeGenerator {
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输入文件名称
                 return projectPath + "/src/main/java/com/cn/employment/" + pc.getModuleName()
-                        + "/dao/mapping/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
+                        + "/dao/mapping/" + tableInfo.getMapperName() + StringPool.DOT_XML;
             }
         });
         cfg.setFileOutConfigList(focList);

@@ -1,13 +1,12 @@
 package com.cn.employment.login.dao;
 
 import com.cn.employment.base.dao.BaseMapper;
-import com.cn.employment.login.entity.Users;
+import com.cn.employment.login.entity.Login;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
 import java.util.Map;
 
-public interface UsersMapper extends BaseMapper<Users> {
+public interface LoginMapper extends BaseMapper<Login> {
 
     /**
     * @Description: 查询用户id

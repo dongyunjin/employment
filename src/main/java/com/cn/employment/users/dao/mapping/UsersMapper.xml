@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.employment.users.dao.UsersMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cn.employment.users.entity.UsersEntity">
+        <result column="id" property="id"/>
+        <result column="email" property="email"/>
+        <result column="username" property="username"/>
+        <result column="pwd" property="pwd"/>
+        <result column="phonenum" property="phonenum"/>
+        <result column="state" property="state"/>
+        <result column="join_time" property="joinTime"/>
+        <result column="last_time" property="lastTime"/>
+
+        <result column="name" property="name"/>
+        <result column="age" property="age"/>
+        <result column="sex" property="sex"/>
+        <result column="education" property="education"/>
+        <result column="school" property="school"/>
+        <result column="major" property="major"/>
+        <result column="advantage" property="advantage"/>
+        <result column="place" property="place"/>
+        <result column="money" property="money"/>
+        <result column="work" property="work"/>
+        <result column="project" property="project"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        email, username, pwd, phonenum, state, join_time, last_time,name, age, education, school, advantage, place, money, work, poject
+    </sql>
+
+    <select id="userList" resultMap="BaseResultMap">
+        SELECT
+            a.id,
+            email,
+            username,
+            pwd,
+            phonenum,
+            state,
+            join_time,
+            last_time,
+            b.id,
+            name,
+            age,
+            education,
+            school,
+            major,
+            advantage,
+            place,
+            money,
+            work,
+            project
+        FROM
+            users a
+                LEFT JOIN
+            resume b ON a.id = b.user_id
+    </select>
+</mapper>

@@ -1,7 +1,7 @@
 package com.cn.employment.login.service;
 
 import com.cn.employment.base.service.IBaseService;
-import com.cn.employment.login.entity.Users;
+import com.cn.employment.login.entity.Login;
 
 import java.util.Map;
 
@@ -12,7 +12,7 @@ import java.util.Map;
  *
  * @author employment
  */
-public interface IUsersService extends IBaseService<Users> {
+public interface ILoginService extends IBaseService<Login> {
 
     /**User
     * @Description: 查询用户

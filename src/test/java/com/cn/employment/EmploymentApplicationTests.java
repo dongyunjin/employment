@@ -1,6 +1,6 @@
 package com.cn.employment;
 
-import com.cn.employment.login.entity.Users;
+import com.cn.employment.login.entity.Login;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -13,7 +13,7 @@ class EmploymentApplicationTests {
 
     @Test
     void usersInsert() {
-        Users users = new Users();
+        Login users = new Login();
         users.setUsername("aaa");
         users.insert();
         System.err.println(users.getId());

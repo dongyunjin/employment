@@ -15,7 +15,6 @@ import com.cn.employment.base.controller.BaseController;
  * @since 2020-02-23
  */
 @Controller
-@RequestMapping("/resume/resume-entity")
 public class ResumeController extends BaseController {
 
 }

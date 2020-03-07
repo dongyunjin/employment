@@ -1,16 +1,19 @@
 package com.cn.employment.login.entity;
 
 import com.cn.employment.base.entity.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author employment
@@ -19,7 +22,7 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public class Users extends BaseEntity<Users> {
+public class Login extends BaseEntity<Login> {
 
     private static final long serialVersionUID = 1L;
 
@@ -51,12 +54,17 @@ public class Users extends BaseEntity<Users> {
     /**
      * 加入时间
      */
-    private LocalDateTime joinTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")//入参格式化
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8") //出参格式化
+
+    private Date joinTime;
 
     /**
      * 上次登录时间
      */
-    private LocalDateTime lastTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")//入参格式化
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8") //出参格式化
+    private Date lastTime;
 
     public String getEmail() {
         return email;
@@ -98,19 +106,19 @@ public class Users extends BaseEntity<Users> {
         this.state = state;
     }
 
-    public LocalDateTime getJoinTime() {
+    public Date getJoinTime() {
         return joinTime;
     }
 
-    public void setJoinTime(LocalDateTime joinTime) {
+    public void setJoinTime(Date joinTime) {
         this.joinTime = joinTime;
     }
 
-    public LocalDateTime getLastTime() {
+    public Date getLastTime() {
         return lastTime;
     }
 
-    public void setLastTime(LocalDateTime lastTime) {
+    public void setLastTime(Date lastTime) {
         this.lastTime = lastTime;
     }
 
