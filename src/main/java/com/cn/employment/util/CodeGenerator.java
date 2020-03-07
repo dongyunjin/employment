@@ -106,7 +106,7 @@ public class CodeGenerator {
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
         strategy.setSuperEntityClass("com.cn.employment.base.entity.BaseEntity");
-        strategy.setEntityLombokModel(true);
+        strategy.setEntityLombokModel(false);
         strategy.setSuperControllerClass("com.cn.employment.base.controller.BaseController");
         strategy.setSuperServiceClass("com.cn.employment.base.service.IBaseService");
         strategy.setSuperServiceImplClass("com.cn.employment.base.service.impl.BaseServiceImpl");
