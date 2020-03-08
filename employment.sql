@@ -33,7 +33,7 @@ CREATE TABLE `course` (
   `filetype` varchar(45) DEFAULT NULL,
   `caption` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COMMENT='课程';
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COMMENT='课程';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `course` (
 
 LOCK TABLES `course` WRITE;
 /*!40000 ALTER TABLE `course` DISABLE KEYS */;
-INSERT INTO `course` VALUES (1,'java基础视频','适用于初学者','1.MP4',NULL,0,NULL,NULL,NULL),(2,'java历史','java历史发展',NULL,'mp4',1,NULL,NULL,NULL),(3,'java基本数据类型',NULL,NULL,'txt',4,NULL,NULL,NULL),(4,'java中级视频','适用于有一定java经验的人',NULL,NULL,0,NULL,NULL,NULL),(5,'java高级视频','适用于高级开发人员',NULL,NULL,0,NULL,NULL,NULL);
+INSERT INTO `course` VALUES (1,'java基础视频','适用于初学者','1.MP4',NULL,0,NULL,NULL,NULL),(2,'java历史','java历史发展',NULL,'mp4',1,NULL,NULL,NULL),(3,'二级','','a891167b4e6b4e9eae39ed2912966b3b.mp4','video',4,'10926602','video/mp4','1.mp4'),(4,'语文','适用于有一定java经验的人',NULL,NULL,0,NULL,NULL,NULL),(5,'java高级视频','适用于高级开发人员',NULL,NULL,0,NULL,NULL,NULL),(26,'一级','2323','23e83dc6e08a470ea5910e45a2816a7a.mp4','video',4,'10926602','video/mp4','1.mp4'),(28,'三级','fsefes','e76215fecfe74764ad2ca25bc31fdf25.mp4','video',4,'10926602','video/mp4','1.mp4');
 /*!40000 ALTER TABLE `course` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -75,6 +75,37 @@ LOCK TABLES `questioin` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `recruit`
+--
+
+DROP TABLE IF EXISTS `recruit`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `recruit` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `company` varchar(45) DEFAULT NULL,
+  `job` varchar(45) DEFAULT NULL,
+  `position` varchar(45) DEFAULT NULL COMMENT '位置',
+  `year` varchar(45) DEFAULT NULL COMMENT '工作年限',
+  `education` varchar(45) DEFAULT NULL COMMENT '学历',
+  `detail` varchar(1000) DEFAULT NULL COMMENT '招聘详情',
+  `pid` int(11) DEFAULT NULL COMMENT '岗位id',
+  `salary` varchar(45) DEFAULT NULL COMMENT '薪资',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='招聘信息';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `recruit`
+--
+
+LOCK TABLES `recruit` WRITE;
+/*!40000 ALTER TABLE `recruit` DISABLE KEYS */;
+INSERT INTO `recruit` VALUES (2,'幼儿园','老师','北京','不限','本科及以上','rw3r3r',2,'10k'),(3,'1','1','1','1','大专及以上','111222',NULL,'1'),(4,'','','','','不限','',2,''),(5,'','语文老师','','','不限','',NULL,'');
+/*!40000 ALTER TABLE `recruit` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `resume`
 --
 
@@ -86,15 +117,17 @@ CREATE TABLE `resume` (
   `user_id` int(11) DEFAULT NULL COMMENT '用户id',
   `name` varchar(45) DEFAULT NULL COMMENT '姓名',
   `age` varchar(45) DEFAULT NULL COMMENT '年龄',
+  `sex` varchar(45) DEFAULT NULL,
   `education` varchar(45) DEFAULT NULL COMMENT '学历',
   `school` varchar(45) DEFAULT NULL COMMENT '毕业院校',
+  `major` varchar(45) DEFAULT NULL COMMENT '专业',
   `advantage` varchar(45) DEFAULT NULL COMMENT '个人优势',
   `place` varchar(45) DEFAULT NULL COMMENT '求职地点',
   `money` varchar(45) DEFAULT NULL COMMENT '期望薪资',
   `work` varchar(45) DEFAULT NULL COMMENT '工作经历',
-  `poject` varchar(45) DEFAULT NULL COMMENT '项目经理',
+  `project` varchar(45) DEFAULT NULL COMMENT '项目经历',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='简历';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='简历';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,6 +136,7 @@ CREATE TABLE `resume` (
 
 LOCK TABLES `resume` WRITE;
 /*!40000 ALTER TABLE `resume` DISABLE KEYS */;
+INSERT INTO `resume` VALUES (1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'fesfse','fsefs','fesfse');
 /*!40000 ALTER TABLE `resume` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,7 +183,7 @@ CREATE TABLE `station` (
   `filetype` varchar(45) DEFAULT NULL,
   `caption` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='岗位表';
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='岗位表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,7 +192,7 @@ CREATE TABLE `station` (
 
 LOCK TABLES `station` WRITE;
 /*!40000 ALTER TABLE `station` DISABLE KEYS */;
-INSERT INTO `station` VALUES (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(7,'IT 互联网','',NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `station` VALUES (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(7,'IT 互联网','',NULL,NULL,NULL,NULL,NULL,NULL),(8,'111','111',NULL,NULL,0,NULL,NULL,NULL),(9,'22','22',NULL,NULL,0,NULL,NULL,NULL),(10,'2','22',NULL,NULL,9,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `station` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -279,4 +313,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-01 13:20:50
+-- Dump completed on 2020-03-08 22:43:33
