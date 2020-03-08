@@ -127,7 +127,7 @@ $(document).ready(function () {
             $('#editPid').next().css('width', '100%');
             $('#editPid').next().find('input').css('width', '100%');
         }
-    })
+    });
 
     function getValue() {
         var val = $('#addPid').combotree('getValue');

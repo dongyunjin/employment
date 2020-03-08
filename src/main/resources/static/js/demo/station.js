@@ -88,7 +88,7 @@ $(document).ready(function () {
                 data: "description", title: "岗位描述"
             },
             {
-                data: "type", title: "岗位类型"
+                data: "type", title: "文件类型"
             },
             {
                 data: "url", title: "文件地址"

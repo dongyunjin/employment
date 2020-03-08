@@ -88,7 +88,7 @@ $(document).ready(function () {
                 data: "description", title: "课程描述"
             },
             {
-                data: "type", title: "课程类型"
+                data: "type", title: "文件类型"
             },
             {
                 data: "url", title: "文件地址"
@@ -113,6 +113,34 @@ $(document).ready(function () {
             }
         }
     );
+
+    //组合树
+    $.ajax({
+        url: "trainTreeList",
+        dataType: "json", //返回格式为json
+        async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+        data: {}, //参数值
+        type: "GET", //请求方式
+        success: function (result) {
+            var reg = new RegExp("\"name\"", "g");//g,表示全部替换。
+            var data = JSON.parse(JSON.stringify(result.data).replace(reg, "\"text\""));
+            //新增
+            $('#addPid').combotree({
+                data: [data],
+                required: false,
+            });
+            $('#addPid').next().css('width', '100%');
+            $('#addPid').next().find('input').css('width', '100%');
+
+            //编辑
+            $('#editPid').combotree({
+                data: [data],
+                required: false,
+            });
+            $('#editPid').next().css('width', '100%');
+            $('#editPid').next().find('input').css('width', '100%');
+        }
+    });
     // $("#pAdd").click(function () {
     //
     // })

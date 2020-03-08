@@ -66,26 +66,6 @@ public class LoginController {
     }
 
     /**
-     * @Description: 岗位列表页
-     * @Date: 2020/2/20 21:14
-     */
-    @GetMapping("job")
-    public String job(Model model) {
-        model.addAttribute("f", "ccc");
-        return "/backend/job";
-    }
-
-    /**
-     * @Description: 教材列表页
-     * @Date: 2020/2/20 21:14
-     */
-    @GetMapping("video")
-    public String video(Model model) {
-        model.addAttribute("h", "fff");
-        return "/backend/video";
-    }
-    
-    /**
      * @Description: admin修改密码页
      * @Date: 2020/2/20 21:14
      */
