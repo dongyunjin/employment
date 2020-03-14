@@ -3,7 +3,7 @@ package com.cn.employment.station.controller;
 
 import com.cn.employment.station.entity.StationEntity;
 import com.cn.employment.station.service.IStationService;
-import com.cn.employment.station.service.IStationService;
+import com.cn.employment.util.TreeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
@@ -14,10 +14,7 @@ import com.cn.employment.base.controller.BaseController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * <p>
@@ -225,4 +222,72 @@ public class StationController extends BaseController {
         return map;
     }
 
+
+    @RequestMapping("stationTreeList")
+    @ResponseBody
+    public Object stationTreeList(Model model) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("data", this.getTreeNode(0, stationService.selectAllStation()));
+        return map;
+    }
+
+    @RequestMapping("recruitTreeList")
+    @ResponseBody
+    public Object recruitTreeList(Model model) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("data", this.getTreeNode(0, stationService.selectAllStationRecruit()));
+        return map;
+    }
+
+    public TreeNode getTreeNode(Integer id, List<StationEntity> list) {
+
+        List<TreeNode> treeNodeList = new ArrayList<>();
+
+        //当前节点
+        TreeNode treeNode = new TreeNode();
+        StationEntity node = this.getThisNodeByID(id, list);
+        //treeNode.setIcon("fa fa-flask");
+        if (node != null) {
+            treeNode.setId(node.getId());
+            treeNode.setName(node.getName());
+            treeNode.setUrl(node.getUrl());
+        } else if (id == 0) {
+            treeNode.setId((long) 0);
+            treeNode.setName("岗位分类");
+        }
+
+        //treeNode.setState();
+        //获取所有子节点
+        List<StationEntity> childList = this.getChildListByPID(id, list);
+        //遍历子节点
+        for (StationEntity child : childList) {
+            TreeNode childNode = this.getTreeNode((int) child.getId().longValue(), list); //递归
+            treeNodeList.add(childNode);
+        }
+        treeNode.setChildren(treeNodeList);
+        return treeNode;
+    }
+
+    private StationEntity getThisNodeByID(Integer id, List<StationEntity> list) {
+        for (StationEntity train : list) {
+            if (train.getId().intValue() == id) {
+                return train;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * @param list
+     * @return
+     */
+    private List<StationEntity> getChildListByPID(Integer pid, List<StationEntity> list) {
+        List<StationEntity> childList = new ArrayList<>();
+        for (StationEntity node : list) {
+            if (pid.equals(node.getPid())) {
+                childList.add(node);
+            }
+        }
+        return childList;
+    }
 }

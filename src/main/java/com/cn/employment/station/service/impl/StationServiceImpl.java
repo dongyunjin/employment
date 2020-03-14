@@ -67,4 +67,14 @@ public class StationServiceImpl extends BaseServiceImpl<StationMapper, StationEn
         StationEntity course = new StationEntity();
         course.deleteById(id);
     }
+
+    @Override
+    public List<StationEntity> selectAllStation() {
+        return this.baseMapper.selectAllStation();
+    }
+
+    @Override
+    public List<StationEntity> selectAllStationRecruit() {
+        return this.baseMapper.selectAllStationRecruit();
+    }
 }

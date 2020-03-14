@@ -41,4 +41,10 @@ public interface IStationService extends IBaseService<StationEntity> {
     void sEdit(StationEntity course);
     void pDel(Long id);
     void sDel(Long id);
+
+
+
+    List<StationEntity> selectAllStation();
+
+    List<StationEntity>  selectAllStationRecruit();
 }

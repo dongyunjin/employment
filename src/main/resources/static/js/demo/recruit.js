@@ -103,7 +103,7 @@ $(document).ready(function () {
     //组合树
     var data = "";
     $.ajax({
-        url: "trainTreeList",
+        url: "stationTreeList",
         dataType: "json", //返回格式为json
         async: true, //请求是否异步，默认为异步，这也是ajax重要特性
         data: {}, //参数值

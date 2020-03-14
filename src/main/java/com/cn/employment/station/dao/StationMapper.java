@@ -37,4 +37,9 @@ public interface StationMapper extends BaseMapper<StationEntity> {
     List<StationEntity> selectSonStationByPid(@Param("id") Long id);
 
     void delByPId(@Param("id") Long id);
+
+
+    List<StationEntity> selectAllStation();
+
+    List<StationEntity>  selectAllStationRecruit();
 }

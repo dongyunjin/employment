@@ -39,4 +39,15 @@
         delete from station t where t.pid = #{id}
     </delete>
 
+    <select id="selectAllStation" resultMap="BaseResultMap">
+        select id, name, description, url, type, pid, size, filetype, caption from station t
+    </select>
+
+    <select id="selectAllStationRecruit" resultMap="BaseResultMap">
+        /*select id, name, description, url, type, pid, size, filetype, caption
+          from station t
+          left join recruit t2
+            on t.id = t2.pid*/
+    </select>
+
 </mapper>
