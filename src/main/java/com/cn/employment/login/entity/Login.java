@@ -1,5 +1,6 @@
 package com.cn.employment.login.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.cn.employment.base.entity.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -22,6 +23,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
+@TableName("users")
 public class Login extends BaseEntity<Login> {
 
     private static final long serialVersionUID = 1L;

@@ -73,22 +73,29 @@ $(document).ready(function () {
             + '<tr>'
             + '<td style="padding: 8px 10px;">工作经历:</td>'
             + '<td style="padding: 8px 10px;">'
-            + d.work
+            + null2empty(d.work)
             + '</td>'
             + '</tr>'
             + '<tr>'
             + '<td style="padding: 8px 10px;">项目经验:</td>'
             + '<td style="padding: 8px 10px;">'
-            + d.project
+            + null2empty(d.project)
             + '</td>'
             + '</tr>'
             + '<tr>'
             + '<td style="padding: 8px 10px;">个人优势:</td>'
             + '<td style="padding: 8px 10px;">'
-            + d.advantage
+            + null2empty(d.advantage)
             + '</td>'
             + '</tr>'
             + '</table>';
+    }
+
+    function null2empty(val) {
+        if (val == null) {
+            return "";
+        }
+        return val;
     }
 
     /*$('#dataTable tbody').on( 'click', 'tr', function () {

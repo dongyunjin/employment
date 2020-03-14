@@ -3,182 +3,188 @@
 
 <head>
 
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-  <title>SB Admin 2 - Register</title>
+    <title>SB Admin 2 - Register</title>
 
-  <!-- Custom fonts for this template-->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="css/fontsGoogleapis.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="css/fontsGoogleapis.css" rel="stylesheet">
 
-  <!-- Custom styles for this template-->
-  <link href="css/sb-admin-2.css" rel="stylesheet">
-  <link href="css/toastr.min.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+    <link href="css/toastr.min.css" rel="stylesheet">
 </head>
 
 <body class="bg-gradient-primary">
 
-  <div class="container">
+<div class="container">
 
     <div class="card o-hidden border-0 shadow-lg my-5">
-      <div class="card-body p-0">
-        <!-- Nested Row within Card Body -->
-        <div class="row">
-          <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-          <div class="col-lg-7">
-            <div class="p-5">
-              <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
-              </div>
-              <form class="user">
-                <div class="form-group">
-                  <input type="email" class="form-control form-control-user" id="user" placeholder="User Name(consist of number,letter)" onblur="check_user();">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                        </div>
+                        <form class="user">
+                            <div class="form-group">
+                                <input type="email" class="form-control form-control-user" id="user"
+                                       placeholder="User Name(consist of number,letter)" onblur="check_user();">
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="password" class="form-control form-control-user" id="pwd"
+                                           placeholder="Password(eight digit,consist of number,letter)">
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="password" class="form-control form-control-user" id="re_pwd"
+                                           placeholder="Repeat Password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control form-control-user" id="phone"
+                                       placeholder="Phone Number">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control form-control-user" id="email"
+                                       placeholder="Email Address">
+                            </div>
+                            <a href="javascript:void(0)" onClick="user_register();"
+                               class="btn btn-primary btn-user btn-block">
+                                Register Account
+                            </a>
+                            <hr>
+                        </form>
+                        <hr>
+                        <div class="text-center">
+                            <a class="small" href="forgotPasswordUI">Forgot Password?</a>
+                        </div>
+                        <div class="text-center">
+                            <a class="small" href="..">Already have an account? Login!</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group row">
-                  <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="password" class="form-control form-control-user" id="pwd" placeholder="Password(eight digit,consist of number,letter)">
-                  </div>
-                  <div class="col-sm-6">
-                    <input type="password" class="form-control form-control-user" id="re_pwd" placeholder="Repeat Password">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <input type="email" class="form-control form-control-user" id="phone" placeholder="Phone Number">
-                </div>
-                <div class="form-group">
-                  <input type="email" class="form-control form-control-user" id="email" placeholder="Email Address">
-                </div>
-                <a href="javascript:void(0)" onClick="user_register();" class="btn btn-primary btn-user btn-block">
-                  Register Account
-                </a>
-                <hr>
-              </form>
-              <hr>
-              <div class="text-center">
-                <a class="small" href="forgotPasswordUI">Forgot Password?</a>
-              </div>
-              <div class="text-center">
-                <a class="small" href="..">Already have an account? Login!</a>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
 
-  </div>
-  <script>
-      function check_user(){
-    	  var user=$("#user").val();
-    	  
-	      
-	  $.ajax({
-              type: "POST",
-              url: "isExistUserName",
-              async: true,
-              data: {userName: user,},
-              dataType: "json",
-              success: function(data){
-		      if(data.isExist=='1'){
-		          toastr.error("User already exist!!");
-		          $("#user").focus();
-		      }
-              },
-          })
-      }
+</div>
+<script>
+    function check_user() {
+        var user = $("#user").val();
 
-       function user_register(){
-          var user=$("#user").val();
-	  var pwd=$("#pwd").val();
-	  var re_pwd=$("#re_pwd").val();
-	  var email=$("#email").val();
-	  var phone=$("#phone").val();
 
-	  if(user==""){
-	       toastr.error("Please input User Name!!");
-	       $("#pwd").focus();
-	       return false;
-	   }
-	  if(pwd==""){
-	       toastr.error("Please input password!!");
-	       $("#pwd").focus();
-	       return false;
-	   }
-	  if(pwd!=re_pwd){
-	       toastr.error("Wrong confirm password,please re-enter");
-	       return false;
-	   }
-	  if(phone==""){
-	       toastr.error("Please input phone number!!");
-	       $("#phone").focus();
-	        return false;
-	   }
-	  if(email==""){
-	       toastr.error("Please input email!!");
-	       $("#email").focus();
-	       return false;
-	   }
-	   if(pwd.length!=8){
-	       toastr.error("Password must be 8 digit")
-	   }
+        $.ajax({
+            type: "POST",
+            url: "isExistUserName",
+            async: true,
+            data: {userName: user,},
+            dataType: "json",
+            success: function (data) {
+                if (data.isExist == '1') {
+                    toastr.error("User already exist!!");
+                    $("#user").focus();
+                }
+            },
+        })
+    }
 
-	  var reg=/^[A-Za-z0-9]+$/;
-	  if(!reg.test(pwd)){
-	       toastr.error("Wrong password,please check it!!");
-	       return false;
-	   }
-	  
-	  if(user.length>20){
-    	      toastr.error("Wrong User Name,Please input 1-20 digit number and letters!!");
-	      return false;
-          }
-          if(!reg.test(user)){
-              toastr.error("Wrong User Name,Please input 1-20 digit number and letters!!");
-              return false;
-          }
-    	  if(!reg.test(pwd)){
-    	      toastr.error("Wrong password,please check it!!");
-	      return false;
-    	   }
-    	  if (!$("#phone").val().match(/^1[34578]\d{9}$/)) {
-    	      toastr.error("Wrong phone number,please check it!!");
-    	      return false;	    
-    	   }
-           reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
-   	   if(!reg.test(email)){
-   	      toastr.error("Wrong Email,please check it!!");
-	      return false;
-   	   }
-   	   
-              $.ajax({
-                  type: "POST",
-                  url: "register",
-                  async: true,
-                  data: {username: user, pwd: pwd,email: email,phonenum:phone},
-                  dataType: "json",
-                  success: function(data){
-                      window.location.href="..";
-                  },
-                  error: function(data){
-                	  window.location.href="../404.html";
-                  },
-              })
-	  }
-  </script>
-  <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    function user_register() {
+        var user = $("#user").val();
+        var pwd = $("#pwd").val();
+        var re_pwd = $("#re_pwd").val();
+        var email = $("#email").val();
+        var phone = $("#phone").val();
 
-  <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        if (user == "") {
+            toastr.error("Please input User Name!!");
+            $("#pwd").focus();
+            return false;
+        }
+        if (pwd == "") {
+            toastr.error("Please input password!!");
+            $("#pwd").focus();
+            return false;
+        }
+        if (pwd != re_pwd) {
+            toastr.error("Wrong confirm password,please re-enter");
+            return false;
+        }
+        // if (phone == "") {
+        //     toastr.error("Please input phone number!!");
+        //     $("#phone").focus();
+        //     return false;
+        // }
+        // if (email == "") {
+        //     toastr.error("Please input email!!");
+        //     $("#email").focus();
+        //     return false;
+        // }
+        // if (pwd.length != 8) {
+        //     toastr.error("Password must be 8 digit")
+        // }
+        //
+        // var reg = /^[A-Za-z0-9]+$/;
+        // if (!reg.test(pwd)) {
+        //     toastr.error("Wrong password,please check it!!");
+        //     return false;
+        // }
+        //
+        // if (user.length > 20) {
+        //     toastr.error("Wrong User Name,Please input 1-20 digit number and letters!!");
+        //     return false;
+        // }
+        // if (!reg.test(user)) {
+        //     toastr.error("Wrong User Name,Please input 1-20 digit number and letters!!");
+        //     return false;
+        // }
+        // if (!reg.test(pwd)) {
+        //     toastr.error("Wrong password,please check it!!");
+        //     return false;
+        // }
+        // if (!$("#phone").val().match(/^1[34578]\d{9}$/)) {
+        //     toastr.error("Wrong phone number,please check it!!");
+        //     return false;
+        // }
+        // reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+        // if (!reg.test(email)) {
+        //     toastr.error("Wrong Email,please check it!!");
+        //     return false;
+        // }
 
-  <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
-  <script src="js/toastr.min.js"></script>
+        $.ajax({
+            type: "POST",
+            url: "register",
+            async: true,
+            data: {username: user, pwd: pwd, email: email, phonenum: phone},
+            dataType: "json",
+            success: function (data) {
+                window.location.href = "..";
+            },
+            error: function (data) {
+                window.location.href = "../404.html";
+            },
+        })
+    }
+</script>
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+<script src="js/toastr.min.js"></script>
 </body>
 
 </html>

@@ -27,16 +27,16 @@ public class WebMvnConfigurer implements WebMvcConfigurer {
         List<String> list = new ArrayList<>();
         list.add("/");
         list.add("/login");
+        list.add("/registerUI");
+        list.add("/isExistUserName");
+        list.add("/register");
         list.add("/ftl/**");
-        list.add("/static/**");
         list.add("/css/**");
         list.add("/js/**");
-        list.add("/file-input/**");
         list.add("/img/**");
         list.add("/packages/**");
         list.add("/scss/**");
         list.add("/vendor/**");
-        list.add("/video-js.swf/**");
         registry.addInterceptor(webInterceptor).addPathPatterns("/**").excludePathPatterns(list);
     }
 }
