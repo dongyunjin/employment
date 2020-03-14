@@ -17,7 +17,7 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
+    <link href="css/toastr.min.css" rel="stylesheet">
 </head>
 <style>
     .modal-backdrop{
@@ -30,6 +30,26 @@
 </style>
 <body id="page-top" style="background-color: #ddf4ff">
     <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-md-6" style="background-color: white">
+                <div class="row" id="chose_job">
+                    <div class="card shadow mb-4" style="width:100%">
+                        <div><br></div>
+                        <div class="card-body row">
+                            <h5 style="text-align: center" class="m-0 font-weight-bold text-primary col-lg-12">岗位甄选</h5><br><br><br>
+                            
+                            <p style="font-size:18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请在下列行业中点击选择您的意向行业，本系统将给出优选岗位，请您点击选择。并完成后续的测试环节。</p><br><br>
+                            <div style="line-height:40px;font-size:23px;color:blue;" class="col-lg-2">行业</div><br><div class="col-lg-10"  style="line-height:40px" id="industry"></div><br><br>
+                            <br>
+                            <div style="line-height:40px;font-size:18px;color:blue" class="col-lg-2" id="job_title" hidden>岗位</div><br><div id="job"  style="line-height:40px" class="col-lg-10"></div><br><br>
+                            <p>计划此处还有一个水平小测试，是针对该岗位的，默认隐藏，选择岗位后弹出，根据做题结果，将返回水平（a,b,c->水平由高到低的顺序？）。岗位的选择是必做项，我在开始学习按钮上已经做了限制</p>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>       
+                            
         <div class="row">
             <div class="col-lg-3"></div>
             <div class="col-md-6" style="background-color: white">
@@ -118,8 +138,37 @@
     
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="js/toastr.min.js"></script>
     <script>
-        $(function(){
+    var industry={金融:['1','2','3','4'],it:['a','b','c','d']};
+    var job="";
+    $(function(){
+    	 
+        var industry_item="";
+    	for(var key in industry){
+    	    industry_item+='<input type="button" class="btn" style="font-size:18px;padding-top:0;padding-bottom:0" id="industry_'+key+'"value="'+key+'">';
+    	}
+    	$("#industry").append(industry_item);
+    	$("input[id^=industry]").each(function(){
+    		$(this).click(function(){
+    			$("#job_title").prop("hidden",false);
+    			$("#job").empty();
+    			$("input[id^=industry]").prop("style","background-color:#fff");
+    			$(this).prop("style","background-color:green");
+    			var job_item="";
+    			for(var i=0;i<industry[$(this).val()].length;i++){
+    				job_item+='<input type="button" class="btn btn-sm" id="job_'+i+'" value="'+industry[$(this).val()][i]+'"><br>';
+    			}
+    			$("#job").append(job_item);
+    			$("input[id^=job]").each(function(){
+    				$(this).click(function(){
+    				    $("input[id^=job]").prop("style","border:0");
+    				    $(this).prop("style","border:1px solid #ddd");
+    				    job=$(this).val();
+    				})
+    			})
+    		})
+    	});
 	    render_solomon_item();
 	})
 
@@ -237,6 +286,15 @@
 	}        
 
         function handle_click_check(){
+        	
+        if(!job){
+        	toastr.error("请选择您的岗位！");
+        	$("html,body").animate({
+        	    scrollTop: 0
+        	}, 500);
+        	return false;
+        }
+        	
 	    var result=[];
 	    $("#result_table").next().empty();
 	    

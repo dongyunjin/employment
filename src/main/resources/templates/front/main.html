@@ -26,39 +26,23 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
         <div class="col-lg-12" style="height:50px;background-color:#444;padding-top:15px;text-align:center;">
-            <div class="col-lg-11" style="margin-top:0;font-size:20px;color:white">大学生精准就业辅导系统</div>
-            <a class="col-lg-1" href="login" style="color:gray" align="right"><i class="fas fa-sign-out-alt fa-2x" style="margin-right:20px" aria-hidden="true"></i></a>
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10" style="margin:0;font-size:20px;color:white">大学生精准就业辅导系统</div>
+            <a class="col-lg-1" href="/" style="color:gray" align="right"><i class="fas fa-sign-out-alt fa-2x" style="margin-right:20px" aria-hidden="true"></i></a>
         </div>
         <div class="col-lg-12" id="page_main" style="background-color:black;padding:0">
             <div class="col-lg-2"></div>
             <div class="col-lg-2 btn btn-lg" id="1title" style="color:#eeeeee;">课程培训</div>
-            <div class="col-lg-2 btn btn-lg" id="2title" style="color:gray;">学习历程</div>
-            <div class="col-lg-2 btn btn-lg" id="3title" style="color:gray;">简历</div>
-            <div class="col-lg-2 btn btn-lg" id="4title" style="color:gray;">个人中心</div>    
+            <a class="col-lg-2 btn btn-lg" id="2title" style="color:gray;" href="jobinterview" target="main_iframe">学习历程</a>
+            <a class="col-lg-2 btn btn-lg" id="3title" style="color:gray;" href="cv" target="main_iframe">简历</a>
+            <a class="col-lg-2 btn btn-lg" id="4title" style="color:gray;" href="questionnaire" target="main_iframe">意见反馈</a>
             <div class="col-lg-2"></div>
             <div class="col-lg-4"></div>
             <div class="col-lg-3 nav navbar-nav" id="second_title1">
                 <br><br><br><br><br><br><br><br>
-                <a id="second_title1" class="col-lg-12 btn btn-lg"  style="margin:10px;color:#eeeeee;font-size:15px" href="user_mgmt" target="main_iframe">专业课程 &nbsp;&nbsp;&nbsp;&nbsp;></a>
-                <div class="col-lg-12 btn btn-lg" style="margin:10px;color:#eeeeee;font-size:15px">面试技巧 &nbsp;&nbsp;&nbsp;&nbsp;></div>
-                <div class="col-lg-12 btn btn-lg" style="margin:10px;color:#eeeeee;font-size:15px">阶段测试 &nbsp;&nbsp;&nbsp;&nbsp;></div>
-            </div>
-            <div class="col-lg-3" id="second_title2" hidden>
-                <br><br><br><br><br><br><br><br>
-                <div class="col-lg-12 btn btn-lg" style="margin:10px;color:#eeeeee;font-size:15px">学习监控 &nbsp;&nbsp;&nbsp;&nbsp;></div>
-                <div class="col-lg-12 btn btn-lg" style="margin:10px;color:#eeeeee;font-size:15px">操作日志 &nbsp;&nbsp;&nbsp;&nbsp;></div>
-                
-            </div>
-            <div class="col-lg-3" id="second_title3" hidden>
-                <br><br><br><br><br><br><br><br>
-                <div class="col-lg-12 btn btn-lg" style="margin:10px;color:#eeeeee;font-size:15px">生成简历 &nbsp;&nbsp;&nbsp;&nbsp;></div>
-                
-            </div>
-            <div class="col-lg-3" id="second_title4" hidden>
-                <br><br><br><br><br><br><br><br>
-                <div class="col-lg-12 btn btn-lg" style="margin:10px;color:#eeeeee;font-size:15px">学习效果问卷调查 &nbsp;&nbsp;&nbsp;&nbsp;></div>
-                <div class="col-lg-12 btn btn-lg" style="margin:10px;color:#eeeeee;font-size:15px">测试结果 &nbsp;&nbsp;&nbsp;&nbsp;></div>
-                <div class="col-lg-12 btn btn-lg" style="margin:10px;color:#eeeeee;font-size:15px">账号密码 &nbsp;&nbsp;&nbsp;&nbsp;></div>
+                <a id="title1" class="col-lg-12 btn btn-lg"  style="margin:10px;color:#eeeeee;font-size:15px" href="course" target="main_iframe">专业课程 &nbsp;&nbsp;&nbsp;&nbsp;></a>
+                <a id="title2" class="col-lg-12 btn btn-lg" style="margin:10px;color:#eeeeee;font-size:15px" href="jobinterview" target="main_iframe">面试技巧 &nbsp;&nbsp;&nbsp;&nbsp;></a>
+                <!--  <div class="col-lg-12 btn btn-lg" style="margin:10px;color:#eeeeee;font-size:15px">阶段测试 &nbsp;&nbsp;&nbsp;&nbsp;></div>-->
             </div>
             <div class="col-lg-5"></div>
             <iframe class="col-lg-12" src="" name="main_iframe"  style="padding:0"  frameborder="0" width="100%">
@@ -87,6 +71,7 @@
       $("#1title").click(function(){
     	  $("iframe").prop("hidden",true);
     	  $("div[id$='title'").css("color","gray");
+    	  $("a[id$='title'").css("color","gray");
     	  $("#1title").css("color","#eeeeee")
     	  $("div[id^='second_title']").prop("hidden",true);
     	  $("#second_title1").prop("hidden",false);
@@ -94,25 +79,34 @@
       $("#2title").click(function(){
     	  $("iframe").prop("hidden",true);
     	  $("div[id$='title'").css("color","gray");
+    	  $("a[id$='title'").css("color","gray");
     	  $("#2title").css("color","#eeeeee")
     	  $("div[id^='second_title']").prop("hidden",true);
-    	  $("#second_title2").prop("hidden",false);
+    	  $("iframe").prop("hidden",false);
+    	  $("div[id^='second_title']").prop("hidden",true);
+    	  $("iframe").height(Number($(window).height()-100));
       });
       $("#3title").click(function(){
     	  $("iframe").prop("hidden",true);
     	  $("div[id$='title'").css("color","gray");
+    	  $("a[id$='title'").css("color","gray");
     	  $("#3title").css("color","#eeeeee")
     	  $("div[id^='second_title']").prop("hidden",true);
-    	  $("#second_title3").prop("hidden",false);
+    	  $("iframe").prop("hidden",false);
+    	  $("div[id^='second_title']").prop("hidden",true);
+    	  $("iframe").height(Number($(window).height()-100));
       });
       $("#4title").click(function(){
     	  $("iframe").prop("hidden",true);
     	  $("div[id$='title'").css("color","gray");
+    	  $("a[id$='title'").css("color","gray");
     	  $("#4title").css("color","#eeeeee")
     	  $("div[id^='second_title']").prop("hidden",true);
-    	  $("#second_title4").prop("hidden",false);
+    	  $("iframe").prop("hidden",false);
+    	  $("div[id^='second_title']").prop("hidden",true);
+    	  $("iframe").height(Number($(window).height()-100));
       });
-      $("a[id^='second_title']").click(function(){
+      $("a[id^='title']").click(function(){
     	  $("iframe").prop("hidden",false);
     	  $("div[id^='second_title']").prop("hidden",true);
     	  $("iframe").height(Number($(window).height()-100));
