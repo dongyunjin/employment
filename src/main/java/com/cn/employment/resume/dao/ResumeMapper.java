@@ -2,6 +2,10 @@ package com.cn.employment.resume.dao;
 
 import com.cn.employment.resume.entity.ResumeEntity;
 import com.cn.employment.base.dao.BaseMapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -13,4 +17,5 @@ import com.cn.employment.base.dao.BaseMapper;
  */
 public interface ResumeMapper extends BaseMapper<ResumeEntity> {
 
+    Map<String, Object> getResume(@Param("id") Integer id);
 }

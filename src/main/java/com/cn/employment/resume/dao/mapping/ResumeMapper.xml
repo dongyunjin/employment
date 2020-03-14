@@ -3,8 +3,8 @@
 <mapper namespace="com.cn.employment.resume.dao.ResumeMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.cn.employment.resume.entity.ResumeEntity">
-    <result column="id" property="id" />
+    <resultMap id="ResultMap" type="java.util.HashMap">
+        <result column="id" property="id" />
         <result column="user_id" property="userId" />
         <result column="name" property="name" />
         <result column="age" property="age" />
@@ -14,13 +14,37 @@
         <result column="place" property="place" />
         <result column="money" property="money" />
         <result column="work" property="work" />
-        <result column="poject" property="poject" />
+        <result column="project" property="project" />
+
+        <result column="phonenum" property="phoneNum" />
+        <result column="email" property="email" />
+    </resultMap>
+
+    <resultMap id="BaseResultMap" type="com.cn.employment.resume.entity.ResumeEntity">
+        <result column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="name" property="name" />
+        <result column="age" property="age" />
+        <result column="education" property="education" />
+        <result column="school" property="school" />
+        <result column="advantage" property="advantage" />
+        <result column="place" property="place" />
+        <result column="money" property="money" />
+        <result column="work" property="work" />
+        <result column="project" property="project" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id,
-        user_id, name, age, education, school, advantage, place, money, work, poject
+        user_id, name, age, education, school, advantage, place, money, work, project
     </sql>
 
+    <select id="getResume" resultMap="ResultMap">
+        select t1.phonenum, t1.email, t2.id, t2.user_id, name, age, education, school, advantage, place, money, work, project
+          from users t1
+          left join resume t2
+          on t1.id = t2.user_id
+         where t1.id = #{id}
+    </select>
 </mapper>

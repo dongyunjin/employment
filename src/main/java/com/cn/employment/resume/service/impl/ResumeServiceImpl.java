@@ -6,6 +6,8 @@ import com.cn.employment.resume.service.IResumeService;
 import com.cn.employment.base.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 /**
  * <p>
  * 简历 服务实现类
@@ -17,4 +19,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ResumeServiceImpl extends BaseServiceImpl<ResumeMapper, ResumeEntity> implements IResumeService {
 
+    @Override
+    public Map<String, Object> getResume(Integer id) {
+        return this.baseMapper.getResume(id);
+    }
 }
