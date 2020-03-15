@@ -21,4 +21,7 @@ public interface IResumeService extends IBaseService<ResumeEntity> {
     * @Author: dyj
     */
     Map<String, Object> getResume(Integer id);
+
+
+    void updateResume(ResumeEntity resumeEntity);
 }

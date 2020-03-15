@@ -23,4 +23,9 @@ public class ResumeServiceImpl extends BaseServiceImpl<ResumeMapper, ResumeEntit
     public Map<String, Object> getResume(Integer id) {
         return this.baseMapper.getResume(id);
     }
+
+    @Override
+    public void updateResume(ResumeEntity resumeEntity) {
+        this.baseMapper.updateById(resumeEntity);
+    }
 }

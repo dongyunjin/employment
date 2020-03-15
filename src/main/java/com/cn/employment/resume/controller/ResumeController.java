@@ -1,6 +1,7 @@
 package com.cn.employment.resume.controller;
 
 
+import com.cn.employment.resume.entity.ResumeEntity;
 import com.cn.employment.resume.service.IResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +43,16 @@ public class ResumeController extends BaseController {
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("userId");
         map.put("data", this.resumeService.getResume(userId));
+        return map;
+    }
+
+    //查询个人简历信息
+    @RequestMapping("updateResume")
+    @ResponseBody
+    public Map<String, Object> updateResume(ResumeEntity resumeEntity) {
+        Map<String,Object> map = new HashMap<>();
+        this.resumeService.updateResume(resumeEntity);
+        map.put("success", 1);
         return map;
     }
 }
