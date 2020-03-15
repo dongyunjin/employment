@@ -2,6 +2,7 @@ package com.cn.employment.login.controller;
 
 import com.cn.employment.login.entity.Login;
 import com.cn.employment.login.service.ILoginService;
+import com.cn.employment.resume.entity.ResumeEntity;
 import com.cn.employment.usersRole.entity.UsersRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -142,6 +143,10 @@ public class LoginController {
             usersRole.setUserId(id);
             usersRole.setRoleId(2);
             usersRole.insert();
+
+            ResumeEntity resumeEntity = new ResumeEntity();
+            resumeEntity.setUserId(id);
+            resumeEntity.insert();
             result.put("success", 1);
         } else {
             result.put("success", 0);

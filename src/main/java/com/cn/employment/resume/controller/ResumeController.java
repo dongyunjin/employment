@@ -30,9 +30,9 @@ public class ResumeController extends BaseController {
     @Autowired
     private IResumeService resumeService;
     //
-    @RequestMapping("")
+    @RequestMapping("personalUI")
     public String resumeUI() {
-        return "";
+        return "front/personal";
     }
 
     //查询个人简历信息
