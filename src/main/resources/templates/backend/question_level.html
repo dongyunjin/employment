@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>招聘信息</title>
+
+    <!--easyui-->
+    <link href="css/easyui.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="css/fontsGoogleapis.css" rel="stylesheet">
+    <!--<link href="css/sb-admin-2.min.css" rel="stylesheet">-->
+
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="css/select.dataTables.min.css" rel="stylesheet">
+
+    <link href="css/icon.css" rel="stylesheet">
+    <style>
+        #loading {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        td.details-control {
+            background: url('img/details_open.png') no-repeat center center;
+            cursor: pointer;
+        }
+
+        tr.shown td.details-control {
+            background: url('img/details_close.png') no-repeat center center;
+        }
+
+        .panel-header, .panel-body {
+            border-width: 0px;
+        }
+
+        .datagrid, .combo-p {
+            border: solid 1px #D4D4D4;
+        }
+
+        .datagrid * {
+            -webkit-box-sizing: content-box;
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading" style="text-align: right">
+                <span class="label label-primary" style="font-size: large;float: left">题库</span>
+                <label class="text-md font-weight-bold text-warning text-uppercase mb-1" id="tableWarning"></label>
+                <button id="add" class="btn btn-sm btn-success align-self-center" type="button"
+                        data-target="#addModal">增加
+                </button>
+                <button id="edit" class="btn btn-sm btn-warning" type="button"
+                        data-toggle="#editModal">编辑
+                </button>
+                <button id="del" class="btn btn-sm btn-danger" type="button"
+                        data-toggle="#delModal">
+                    删除
+                </button>
+            </div>
+
+            <div class="panel-body">
+                <table class="table table-bordered" id="dateTable" width="100%" cellspacing="0">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div id='loading'>loadinginput.</div>
+
+<!-- 二级添加modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">新增测试题</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="addQuestion" class="col-sm-2 control-label">题目:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="addQuestion">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addOptionA" class="col-sm-2 control-label">选项A:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="addOptionA">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addOptionB" class="col-sm-2 control-label">选项B:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="addOptionB">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addOptionC" class="col-sm-2 control-label">选项C:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="addOptionC">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addOptionD" class="col-sm-2 control-label">选项D:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="addOptionD">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addAnswer" class="col-sm-2 control-label">答案:</label>
+                        <div class="col-sm-10">
+                            <select id="addAnswer" class="form-control">
+                                <option value="A">选项A</option>
+                                <option value="B">选项B</option>
+                                <option value="C">选项C</option>
+                                <option value="D">选项D</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addPid" class="col-sm-2 control-label">关联岗位:</label>
+                        <div class="col-sm-10">
+                            <input id="addPid" style="width: 100%">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" id="addSave" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 二级 -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">编辑测试题</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <input type="hidden" id="editId">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="editQuestion" class="col-sm-2 control-label">题目:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="editQuestion">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editOptionA" class="col-sm-2 control-label">选项A:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="editOptionA">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editOptionB" class="col-sm-2 control-label">选项B:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="editOptionB">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editOptionC" class="col-sm-2 control-label">选项C:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="editOptionC">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editOptionD" class="col-sm-2 control-label">选项D:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="editOptionD">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="EditAnswer" class="col-sm-2 control-label">答案:</label>
+                            <div class="col-sm-10">
+                                <select id="EditAnswer" class="form-control">
+                                    <option value="A">选项A</option>
+                                    <option value="B">选项B</option>
+                                    <option value="C">选项C</option>
+                                    <option value="D">选项D</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editPid" class="col-sm-2 control-label">关联岗位:</label>
+                            <div class="col-sm-10">
+                                <input id="editPid" style="width: 100%">
+                            </div>
+                        </div>
+                    </form>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" id="editSave" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 二级 del Modal-->
+<div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">确认删除</h4>
+            </div>
+            <div class="modal-body">数据删除后将无法找回！</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" id="delSave" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="js/jquery.min.js"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script src="js/bootstrap.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="js/dataTables.select.min.js"></script>
+<script src="js/jquery.timers-1.2.js" type="text/javascript"></script>
+<!--easyui-->
+<script src="js/jquery.easyui.min.js"></script>
+<script src="js/demo/question_level.js"></script>
+</body>
+
+</html>

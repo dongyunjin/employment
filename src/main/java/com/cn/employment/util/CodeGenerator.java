@@ -61,7 +61,7 @@ public class CodeGenerator {
         gc.setBaseResultMap(true);// XML ResultMap
         gc.setBaseColumnList(true);// XML columList
         gc.setAuthor("employment");
-        gc.setEntityName("%sEntity");
+        //gc.setEntityName("%sEntity");
         gc.setOpen(false);
         mpg.setGlobalConfig(gc);
 

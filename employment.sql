@@ -47,31 +47,35 @@ INSERT INTO `course` VALUES (1,'java基础视频','适用于初学者','1.MP4',N
 UNLOCK TABLES;
 
 --
--- Table structure for table `questioin`
+-- Table structure for table `question`
 --
 
-DROP TABLE IF EXISTS `questioin`;
+DROP TABLE IF EXISTS `question`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `questioin` (
+CREATE TABLE `question` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `question` varchar(45) DEFAULT NULL COMMENT '问题',
+  `question` varchar(1000) DEFAULT NULL COMMENT '问题',
   `option_a` varchar(45) DEFAULT NULL COMMENT '选项',
   `option_b` varchar(45) DEFAULT NULL COMMENT '选项',
   `option_c` varchar(45) DEFAULT NULL COMMENT '选项',
   `option_d` varchar(45) DEFAULT NULL COMMENT '选项',
   `answer` varchar(45) DEFAULT NULL COMMENT '答案',
+  `type` int(1) DEFAULT NULL COMMENT '类型 1.水平测试 2.课后测试 3.阶段测试 4.最终测试',
+  `bus_id` int(11) DEFAULT NULL COMMENT '关联的岗位，或者课程id',
+  `bus_name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='题库';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='题库';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `questioin`
+-- Dumping data for table `question`
 --
 
-LOCK TABLES `questioin` WRITE;
-/*!40000 ALTER TABLE `questioin` DISABLE KEYS */;
-/*!40000 ALTER TABLE `questioin` ENABLE KEYS */;
+LOCK TABLES `question` WRITE;
+/*!40000 ALTER TABLE `question` DISABLE KEYS */;
+INSERT INTO `question` VALUES (1,'今天周几','周二','周三','周四','周五','A',1,8,NULL),(2,'问题','a','b','c','d','C',1,8,'111');
+/*!40000 ALTER TABLE `question` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -136,7 +140,7 @@ CREATE TABLE `resume` (
 
 LOCK TABLES `resume` WRITE;
 /*!40000 ALTER TABLE `resume` DISABLE KEYS */;
-INSERT INTO `resume` VALUES (1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'fesfse','fsefs','fesfse');
+INSERT INTO `resume` VALUES (1,1,'fesfse','',NULL,'31231231','13131312',NULL,'','131231321','fesfse3131','fsefs','fesfse');
 /*!40000 ALTER TABLE `resume` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -264,7 +268,7 @@ CREATE TABLE `users` (
   `join_time` datetime DEFAULT NULL COMMENT '加入时间',
   `last_time` datetime DEFAULT NULL COMMENT '上次登录时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -273,7 +277,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'','admin','1',NULL,NULL,NULL,NULL);
+INSERT INTO `users` VALUES (1,'','admin','1',NULL,NULL,NULL,NULL),(55,'1','test','1','1',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -300,7 +304,7 @@ CREATE TABLE `users_role` (
 
 LOCK TABLES `users_role` WRITE;
 /*!40000 ALTER TABLE `users_role` DISABLE KEYS */;
-INSERT INTO `users_role` VALUES (1,1,1),(NULL,2,3),(36,2,4),(39,2,5),(41,2,6),(42,2,7),(44,2,8),(53,2,9);
+INSERT INTO `users_role` VALUES (36,2,4),(39,2,5),(41,2,6),(42,2,7),(44,2,8),(53,2,9);
 /*!40000 ALTER TABLE `users_role` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -313,4 +317,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-08 22:43:33
+-- Dump completed on 2020-03-22 17:59:22
