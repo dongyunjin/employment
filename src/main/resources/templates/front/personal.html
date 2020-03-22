@@ -164,8 +164,11 @@
                 project: $("#project").val(),
             },
             type: "POST", //请求方式
-            success: function () {
-
+            success: function (data) {
+            	console.log(data)
+                if(data.success==1){
+                	window.location.reload();                	
+                }
             }
         })
     }
