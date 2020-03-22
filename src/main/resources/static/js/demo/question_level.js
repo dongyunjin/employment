@@ -137,22 +137,21 @@ $(document).ready(function () {
 
     $("#edit").click(function () {
         if (table.row({selected: true}).any()) {
-            $("#editCompany").val("");
-            $("#editJob").val("");
-            $("#editSalary").val("");
-            $("#editPosition").val("");
-            $("#editYear").val("");
-            $("#editDetail").val("");
+            $("#editQuestion").val("");
+            $("#editOptionA").val("");
+            $("#editOptionB").val("");
+            $("#editOptionC").val("");
+            $("#editOptionD").val("");
+            $("#editAnswer").val("");
             var rdata = table.row({selected: true}).data();
             $("#editId").val(rdata.id);
-            $("#editCompany").val(rdata.company);
-            $("#editJob").val(rdata.job);
-            $("#editSalary").val(rdata.salary);
-            $("#editPosition").val(rdata.position);
-            $("#editYear").val(rdata.year);
-            $("#editEducation").val(rdata.education);
-            $("#editDetail").val(rdata.detail);
-            $('#editPid').combotree('setValue', rdata.pid);
+            $("#editQuestion").val(rdata.question);
+            $("#editOptionA").val(rdata.optionA);
+            $("#editOptionB").val(rdata.optionB);
+            $("#editOptionC").val(rdata.optionC);
+            $("#editOptionD").val(rdata.optionD);
+            $("#editAnswer").val(rdata.answer);
+            $('#editPid').combotree('setValue', rdata.busId);
             $("#editModal").modal('show');
         } else {
             $("#tableWarning").text("请先选择数据");
@@ -168,7 +167,7 @@ $(document).ready(function () {
             $("#delSave").click(function () {
                 var rdata = table.row({selected: true}).data();
                 $.ajax({
-                    url: "recruit/del",
+                    url: "question/del",
                     dataType: "json", //返回格式为json
                     async: false, //请求是否异步，默认为异步，这也是ajax重要特性
                     data: {
@@ -189,13 +188,12 @@ $(document).ready(function () {
         }
     })
     $("#add").click(function () {
-        $("#addCompany").val("");
-        $("#addJob").val("");
-        $("#addSalary").val("");
-        $("#addPosition").val("");
-        $("#addYear").val("");
-        $("#addEducation").find("option").eq(0).prop("selected", true)
-        $("#addDetail").val("");
+        $("#addQuestion").val("");
+        $("#addOptionA").val("");
+        $("#addOptionB").val("");
+        $("#addOptionC").val("");
+        $("#addOptionD").val("");
+        $("#addAnswer").find("option").eq(0).prop("selected", true)
         $("#addModal").modal('show');
     })
     $("#addSave").click(function () {

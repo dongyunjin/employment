@@ -26,7 +26,6 @@
         select id, question, option_a, option_b, option_c, option_d, answer, bus_id, bus_name
           from question t
          where t.type = #{type}
-         limit 5
     </select>
 
     <select id="questionListByBusId" resultMap="BaseResultMap">
@@ -34,6 +33,11 @@
           from question t
          where t.type = #{type}
            and t.bus_id = #{busId}
-         limit 1
+         <if test="type == 1">
+             limit 5
+         </if>
+        <if test="type == 2">
+            limit 1
+        </if>
     </select>
 </mapper>
