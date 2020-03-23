@@ -35,7 +35,7 @@
             <div class="col-lg-2 btn btn-lg" id="1title" style="color:#eeeeee;">课程培训</div>
             <a class="col-lg-2 btn btn-lg" id="2title" style="color:gray;" href="jobinterview" target="main_iframe">学习历程</a>
             <a class="col-lg-2 btn btn-lg" id="3title" style="color:gray;" href="cv" target="main_iframe">简历</a>
-            <a class="col-lg-2 btn btn-lg" id="4title" style="color:gray;" href="questionnaire" target="main_iframe">意见反馈</a>
+            <div class="col-lg-2 btn btn-lg" id="4title" style="color:gray;"  target="main_iframe">个人信息</div>
             <div class="col-lg-2"></div>
             <div class="col-lg-4"></div>
             <div class="col-lg-3 nav navbar-nav" id="second_title1">
@@ -43,6 +43,11 @@
                 <a id="title1" class="col-lg-12 btn btn-lg"  style="margin:10px;color:#eeeeee;font-size:15px" href="course" target="main_iframe">专业课程 &nbsp;&nbsp;&nbsp;&nbsp;></a>
                 <a id="title2" class="col-lg-12 btn btn-lg" style="margin:10px;color:#eeeeee;font-size:15px" href="jobinterview" target="main_iframe">面试技巧 &nbsp;&nbsp;&nbsp;&nbsp;></a>
                 <!--  <div class="col-lg-12 btn btn-lg" style="margin:10px;color:#eeeeee;font-size:15px">阶段测试 &nbsp;&nbsp;&nbsp;&nbsp;></div>-->
+            </div>
+            <div class="col-lg-3 nav navbar-nav" id="second_title4" hidden>
+                <br><br><br><br><br><br><br><br>
+                <a id="title3" class="col-lg-12 btn btn-lg"  style="margin:10px;color:#eeeeee;font-size:15px" href="personal" target="main_iframe">个人信息管理 &nbsp;&nbsp;&nbsp;&nbsp;></a>
+                <a id="title4" class="col-lg-12 btn btn-lg" style="margin:10px;color:#eeeeee;font-size:15px" href="questionnaire" target="main_iframe">意见反馈 &nbsp;&nbsp;&nbsp;&nbsp;></a>
             </div>
             <div class="col-lg-5"></div>
             <iframe class="col-lg-12" src="" name="main_iframe"  style="padding:0"  frameborder="0" width="100%">
@@ -102,9 +107,7 @@
     	  $("a[id$='title'").css("color","gray");
     	  $("#4title").css("color","#eeeeee")
     	  $("div[id^='second_title']").prop("hidden",true);
-    	  $("iframe").prop("hidden",false);
-    	  $("div[id^='second_title']").prop("hidden",true);
-    	  $("iframe").height(Number($(window).height()-100));
+    	  $("#second_title4").prop("hidden",false);
       });
       $("a[id^='title']").click(function(){
     	  $("iframe").prop("hidden",false);

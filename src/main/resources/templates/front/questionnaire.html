@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>大学生精准就业辅导管理系统</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="css/fontsGoogleapis.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/toastr.min.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link rel="stylesheet" type="text/css" href="css/bootoast.css">
+<style>
+    code{
+        line-height:29px;
+        background-color:black;
+        color:gray;
+    }
+</style>
+</head>
+
+<body>
+<div id="cv" class="col-lg-12" style="padding:0;margin:0;" >
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10" style="background-color:#F5F5F5;">
+       <div class="col-lg-1"></div>
+       <div class="col-lg-10" id="print_item" style="margin-top:30px;margin-bottom:30px;padding-bottom:30px;border:1px solid #ddd;min-width:752;min-height:500px">
+           
+           <div class="col-lg-1"></div>
+           <div style="color:gray;" class="col-lg-10">
+               <h4>意见反馈</h4>
+               <p>&nbsp;&nbsp;&nbsp;&nbsp;您对本系统的任何意见或者建议，都将对其他学习者产生正向作用，还请在此提供，我们将做出必要的调整和改正。</p>
+               <textarea class="col-lg-12" style="border:1px solid #ddd;height:200px;margin-bottom:20px">
+               
+               </textarea>
+               <br><br><br><br>
+               <div class="col-lg-12" align="right">
+                   <input type="button" value="提交给我们" class="btn btn-success" onClick="question_submit();">
+               </div>
+           </div>
+           <br><br><br><br><br><br>
+           <div class="col-lg-1"></div>
+       </div>
+       
+    </div>
+    <div class="col-lg-1"></div>
+</div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  
+  <script type="text/javascript" src="js/bootoast.js"></script>
+  <script src="js/toastr.min.js"></script>
+  <script>
+      function question_submit(){
+    	  toastr.success("感谢您的帮助");
+      }
+  </script>
+
+</body>
+
+</html>
