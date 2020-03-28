@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>大学生精准就业辅导管理系统</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="css/fontsGoogleapis.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link rel="stylesheet" type="text/css" href="css/bootoast.css">
+<style>
+    code{
+        line-height:29px;
+        background-color: #F5F5F5;
+        color:gray;
+    }
+    input{
+        line-height:20px;
+        border:1px solid #ddd;
+        max-width:100%;
+    }
+    .col-lg-2{
+        padding:0
+    }
+    .col-lg-4{
+        padding:0
+    }
+    .col-lg-12{
+        padding:0
+    }
+    .col-lg-8{
+        padding:0
+    }
+</style>
+</head>
+
+<body>
+<div id="cv" class="col-lg-12" style="padding:0;margin:0;">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10" style="background-color:#F5F5F5;">
+       <div class="col-lg-1"></div>
+       <div class="col-lg-10" id="print_item" style="margin-top:30px;margin-bottom:30px;padding-bottom:30px;border:1px solid #ddd;min-width:752">
+           <div class="col-lg-12" style="color:gray" align="center"><br><br><h3>个人简历</h3><br><br><br></div>
+           <div class="col-lg-1"></div>
+           <div style="color:gray;" class="col-lg-10">
+               <div class="col-lg-12">
+               <h4 style="margin-top:20px">基本信息</h4>
+               <div style="border:1px solid #ddd" class="col-lg-12">
+                   
+                   <div class="col-lg-12">
+                       <div class="col-lg-2"><code>姓名:</code></div>
+                       <div class="col-lg-4"><code id="name"></code></div>
+                       <div class="col-lg-2"><code>年龄:</code></div>
+                       <div class="col-lg-4"><code id="age"></code></div>
+                   </div>
+                   <div class="col-lg-12">
+                       <div class="col-lg-2"><code>民族:</code></div>
+                       <div class="col-lg-4"><input id="nation" /></div>
+                       <div class="col-lg-2"><code>身高:</code></div>
+                       <div class="col-lg-4"><input id="height"></div>
+                   </div>
+                   <div class="col-lg-12">
+                       <div class="col-lg-2"><code>电话:</code></div>
+                       <div class="col-lg-4"><input type="text" id="phone" /></div>
+                       <div class="col-lg-2"><code>政治面貌:</code></div>
+                       <div class="col-lg-4"><input id="politics"></div>
+                   </div>
+                   <div class="col-lg-12">
+                       <div class="col-lg-2"><code>邮箱:</code></div>
+                       <div class="col-lg-4"><input id="mail"></div>
+                       <div class="col-lg-2"><code>地址:</code></div>
+                       <div class="col-lg-4"><code id="place"></code></div>
+                   </div>
+                   <div class="col-lg-12">
+                       <div class="col-lg-2"><code>毕业院校:</code></div>
+                       <div class="col-lg-4"><code id="school"></code></div>
+                       <div class="col-lg-2"><code>最高学历:</code></div>
+                       <div class="col-lg-4"><code id="education"></code></div>
+                   </div>
+                   <div class="col-lg-12">
+                       <div class="col-lg-2"><code>主修专业:</code></div>
+                       <div class="col-lg-4"><input id="major"></div>
+                   </div>
+                   
+               </div>
+               </div>
+               <div class="col-lg-12">
+               <h4 style="margin-top:40px;">项目经历</h4>
+               <code class="col-lg-12" style="border:1px solid #ddd;min-height:120px;width:100%" id="project">
+                   
+               </code>
+               </div>
+               <div class="col-lg-12">
+               <h4 style="margin-top:40px;">实习经历</h4>
+               <code class="col-lg-12" id="work" style="border:1px solid #ddd;min-height:120px;width:100%;">
+                   
+               </code>
+               </div>
+               
+               <div class="col-lg-12">
+               <h4 style="margin-top:40px;">自我评价</h4>
+               <code class="col-lg-12" id="advantage" style="border:1px solid #ddd;min-height:120px;width:100%">
+                   
+               </code>
+               </div>
+               <br><br><br><br>
+           </div>
+           <br><br><br><br><br><br>
+           <div class="col-lg-1"></div>
+       </div>
+       <div class="col-lg-12" align="center" style="margin-top:30px;margin-bottom:60px;">
+           <input class="btn btn-success" value="打印" type="button" id="cv_print" onClick="cvprint();">
+       </div>   
+    </div>
+    <div class="col-lg-1"></div>
+</div>
+
+
+
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  
+  <script type="text/javascript" src="js/bootoast.js"></script>
+  <script type="text/javascript" src="js/jquery.jqprint-0.3.js"></script>
+  <script>
+      var user_info={'name':'sb-admin','age':'7','nation':'汉族','height':'172cm','phone':'13355467834','politics':'党员','mail':'1018723121@qq.com','address':'龙凤','university':'大庆石油学院','qualification':'硕士'}
+      var study_info={'study_time':'2013/9/1-2017/6/23','study_place':'','study_major':'计算机工程与技术','study_place':'大庆石油学院','main_classes':'面向对象课程设计，数据库原理，数据结构，C++，高等数学，线性代数，大学物理，矩阵论，概率论，最优化理论与算法'};
+      var praise_info='本人性格开朗，待人真诚，责任心强，办事沉稳，吃苦耐劳，适应性强，具有良好的心理素质。我一直认为机会是留给有准备的人的。读书期间，在学习理论知识的同时，积极参与社会工作，尽自己所能，将理论与生产结合。对java和页面设计有独特的认知和理解，相信可以在较短的时间内适应工作环境，展现自己的才能。';
+      var experience=['2013/9/1-2014/6/2 食堂打工，满足自身生活需求，经济独立','2014/9/1-2015/6/2 敬老院热心服务，帮助维护敬老院信息管理系统','2015/9/5-2016/4/3 在油公司进行社会实习，学习、应用java，为油公司采购系统、运输系统做调整维护'];
+      $(function(){
+    	  $.ajax({
+              url: "/resume",
+              dataType: "json", //返回格式为json
+              async: false, //请求是否异步，默认为异步，这也是ajax重要特性
+              type: "GET", //请求方式
+              success: function (data) {
+            	  for(key in data){
+            		  $("#"+key).html(data[key]);
+            	  }
+                  console.log(data)
+                  
+              }
+          })
+    	      	      	  
+      });
+      function cvprint(){
+    	  $("input").each(function(){
+    		  $(this).prop("style","background-color:#F5F5F5;border:0px solid #F5F5F5;")
+    	  });
+          $("#print_item").jqprint({
+              debug: false,            
+              importCSS: true,         
+              printContainer: true,    
+              operaSupport: false  
+          });
+      }
+
+      
+  </script>
+
+</body>
+
+</html>

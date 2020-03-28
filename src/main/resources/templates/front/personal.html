@@ -49,12 +49,6 @@
                             <input class="col-lg-3 form-control" id="age" placeholder="24">
                         </div>
                         <div class="col-lg-12">
-                            <div class="col-lg-3"><code>电话:</code></div>
-                            <input class="col-lg-3 form-control" id="phoneNum" placeholder="13335432376">
-                            <div class="col-lg-3"><code>邮箱:</code></div>
-                            <input class="col-lg-3 form-control" placeholder="xxxx@qq/163/ectxxx.com" id="email">
-                        </div>
-                        <div class="col-lg-12">
                             <div class="col-lg-3"><code>地址:</code></div>
                             <input class="col-lg-3 form-control" id="place" placeholder="黑龙江省大庆市龙凤区祥阁小区7号楼2单元301室">
                             <div class="col-lg-3"><code>毕业院校:</code></div>
@@ -67,9 +61,9 @@
                             <input class="col-lg-3 form-control" id="money" placeholder="5000-7000">
                         </div>
                         <div class="col-lg-12">
-                            <div class="col-lg-3"><code>教育背景:</code></div>
+                            <div class="col-lg-3"><code>项目经历:</code></div>
                             <textarea class="col-lg-3 form-control" id="project" style="min-height:80px;"
-                                      placeholder="2013/9/1-2017/6/23 东北石油大学计算机与工程学院软件学院">
+                                      placeholder="2013/9/1-2017/6/23 油公司机房温度控制系统">
                            
                        </textarea>
                         </div>
@@ -165,7 +159,6 @@
             },
             type: "POST", //请求方式
             success: function (data) {
-            	console.log(data)
                 if(data.success==1){
                 	window.location.reload();                	
                 }

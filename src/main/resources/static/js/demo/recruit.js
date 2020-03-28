@@ -1,4 +1,6 @@
 // Call the dataTables jQuery plugin
+var rid="";
+var answer=[];
 $(document).ready(function () {
     var table = $('#dateTable').DataTable({
         select: {
@@ -58,7 +60,7 @@ $(document).ready(function () {
         "order": [[1, 'asc']]
     });
 
-    function format(d) {
+    function format(d) {    	
         // `d` is the original data object for the row
         return '<table cellpadding="5" cellspacing="0" border="0">'
             + '<tr>'
@@ -70,22 +72,98 @@ $(document).ready(function () {
             + '</table>';
     }
 
-    /*$('#dataTable tbody').on( 'click', 'tr', function () {
+  /*  $('#dataTable tbody').on( 'click', 'tr', function () {
         if ( table.row( this, { selected: true }).any() ) {
-            //table.row( this ).deselect();
-            //console.log( table.row( this ).data() );
+            table.row( this ).deselect();
+            console.log( table.row( this ).data() );
         }
         else {
-            //table.row( this ).select();
+            table.row( this ).select();
         }
     } );*/
+    
+    $('#thorough_test').click(function () {
+    	answer=[];
+    	$("#after_test").empty();
+        if(table.row({selected:true}).any()){
+        /*	console.log(table.row({selected:true}).data())*/
+        	var pid=table.row({selected:true}).data().pid;
+        	$.ajax({
+                url: "questionList",
+                async: false,
+                type: "post",
+                data:{type:1,
+                	busId:pid},
+                success: function (data) {
+                	var data=data.data;
+                	console.log(data)
+                	var test_item="";
+                    for(var i=0;i<data.length;i++){
+                    	
+                    		answer.push(data[i].answer);
+                    		 test_item+=
+                    		'<h5>'+data[i].question+'</h5>'+
+                    		'<div class="col-lg-12"><input class="col-lg-1" type="radio"  name="test'+i+'" value="A" > <p>'+data[i].optionA+'</p></div>'+
+                    		'<div class="col-lg-12"><input class="col-lg-1" type="radio"  name="test'+i+'" value="B" > <p>'+data[i].optionB+'</p></div>'+
+                    		'<div class="col-lg-12"><input class="col-lg-1" type="radio"  name="test'+i+'" value="C" > <p>'+data[i].optionC+'</p></div>'+
+                    		'<div class="col-lg-12"><input class="col-lg-1" type="radio"  name="test'+i+'" value="D" > <p>'+data[i].optionD+'</p></div>';              		                    	
+                    }
+                	test_item+='<div class="col-lg-12" align="right"><input type="button" class="btn btn-success" value="确认" id="judge_result"></div>';
+            		$("#after_test").append(test_item);
+            		$("#judge_result").click(function(){
+            			judge_result();
+            		})
+                },
+                error: function () {
+
+
+                }
+            })
+        	
+        }else{
+        	toastr.error("请先选择岗位");        	
+        }
+    })
+    
+    function judge_result(){
+    	var current_answer=[];
+    	var level=0;
+    	$('input[name^="test"]:radio:checked').each(
+    	    function(){
+    	    	current_answer.push($(this).val())
+    	    }
+    	)
+    	if(answer.length!=current_answer.length){
+    		toastr.error("请完成所有题目");
+    		return false;
+    	}
+    	for(var i=0;i<answer.length;i++){
+    		if(answer[i]==current_answer[i]){
+    			level++;
+    		}
+    	}
+    	if(level/answer.length>=0.8){
+    		alert("您已完成测试，您战胜大多数学员，我们为您定制了相应水平的课程，相信通过学习我们为您精心准备的课程，一定可以百尺竿头更进一步。请点击‘确认’退出，并进入下一阶段");
+    	}
+    	else if(level/answer.length>=0.6){
+    		alert("您已完成测试，您处于中等水平，相信通过学习我们为您精心准备的课程，一定可以百尺竿头更进一步。请点击‘确认’退出，并进入下一阶段。");
+    	}
+    	else{
+    		alert("您已完成测试，您进步空间很大，相信通过学习我们为您精心准备的课程，一定可以发生质的飞跃。请点击‘确认’退出，并进入下一阶段。");
+    	}
+    	$("#thorough_test").hide();
+    	$("#after_test").hide();
+    	$("#next_step").show();
+    	
+    }
+    
     $('#dateTable tbody').on(
         'click',
         'td.details-control',
         function () {
             var tr = $(this).closest('tr');
             var row = table.row(tr);
-
+            
             if (row.child.isShown()) {
                 // This row is already open - close it
                 row.child.hide();

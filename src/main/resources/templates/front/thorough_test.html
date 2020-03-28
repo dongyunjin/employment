@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>岗位甄选与程度评测</title>
+
+    <!--easyui-->
+    <link href="css/easyui.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="css/fontsGoogleapis.css" rel="stylesheet">
+    <!--<link href="css/sb-admin-2.min.css" rel="stylesheet">-->
+
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="css/select.dataTables.min.css" rel="stylesheet">
+    <link href="css/toastr.min.css" rel="stylesheet">
+    <link href="css/icon.css" rel="stylesheet">
+    <style>
+        #loading {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        td.details-control {
+            background: url('img/details_open.png') no-repeat center center;
+            cursor: pointer;
+        }
+
+        tr.shown td.details-control {
+            background: url('img/details_close.png') no-repeat center center;
+        }
+
+        .panel-header, .panel-body {
+            border-width: 0px;
+        }
+
+        .datagrid, .combo-p {
+            border: solid 1px #D4D4D4;
+        }
+
+        .datagrid * {
+            -webkit-box-sizing: content-box;
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
+        }
+    </style>
+</head>
+
+<body id="page-top" style="background-color: #ddf4ff">
+<div class="container-fluid">
+
+
+<div class="row" style="margin-bottom:40px">
+            <div class="col-lg-3"></div>
+            <div class="col-md-6" style="background-color: white">
+                <div class="row" style="height:900px">
+                    <div class="card shadow mb-4">
+                        <div><br></div>
+                        <div class="card-body">
+
+    
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading" style="text-align: right">
+                <span class="label label-primary" style="font-size: large;float: left">岗位甄选</span>
+                <label class="text-md font-weight-bold text-warning text-uppercase mb-1" id="tableWarning"></label>
+            </div>
+
+            <div class="panel-body" align="center">
+                <table class="table table-bordered" id="dateTable" width="80%" cellspacing="0">
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-12" align="right">
+            <input class="btn btn-success" type="button" id="thorough_test" value="程度评测">
+        </div>
+        
+        <div class="col-lg-12" id="after_test"></div>
+        <div class="col-lg-12" align="right" id="next_step" hidden>
+            <a class="btn btn-success" href="main">下一步</a>
+        </div>
+</div>
+</div></div></div>
+
+<div id='loading'>loadinginput.</div>
+
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="js/jquery.min.js"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script src="js/bootstrap.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="js/dataTables.select.min.js"></script>
+<script src="js/jquery.timers-1.2.js" type="text/javascript"></script>
+<!--easyui-->
+<script src="js/jquery.easyui.min.js"></script>
+<script src="js/toastr.min.js"></script>
+<script src="js/demo/recruit.js"></script>
+<script>
+
+</script>
+</body>
+
+</html>
