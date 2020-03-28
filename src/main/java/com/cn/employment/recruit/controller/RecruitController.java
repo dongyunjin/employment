@@ -1,19 +1,16 @@
 package com.cn.employment.recruit.controller;
 
 
-import com.cn.employment.course.entity.Course;
+import com.cn.employment.framework.annotion.BussinessLog;
 import com.cn.employment.recruit.entity.RecruitEntity;
 import com.cn.employment.recruit.service.IRecruitService;
-import com.cn.employment.station.entity.StationEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
-import com.cn.employment.base.controller.BaseController;
+import com.cn.employment.framework.base.controller.BaseController;
 
-import java.io.File;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,6 +28,7 @@ public class RecruitController extends BaseController {
     private IRecruitService recruitService;
 
     @RequestMapping("recruitUI")
+    @BussinessLog("岗位页面")
     public String recruitUI() {
         return "backend/recruit";
     }
@@ -41,6 +39,7 @@ public class RecruitController extends BaseController {
     */
     @RequestMapping("recruitList")
     @ResponseBody
+    @BussinessLog("获取岗位信息")
     public Map<String,Object> recruitList() {
         Map<String,Object> map = new HashMap<>();
         map.put("data", this.recruitService.recruitList());
@@ -49,6 +48,7 @@ public class RecruitController extends BaseController {
 
     @PostMapping("recruit/add")
     @ResponseBody
+    @BussinessLog("增加岗位信息")
     public Map<String,Object> add(RecruitEntity recruitEntity) {
         Map<String,Object> map = new HashMap<>();
         this.recruitService.add(recruitEntity);
@@ -58,6 +58,7 @@ public class RecruitController extends BaseController {
 
     @PostMapping("recruit/edit")
     @ResponseBody
+    @BussinessLog("修改岗位信息")
     public Map<String,Object> edit(RecruitEntity recruitEntity) {
         Map<String,Object> map = new HashMap<>();
         this.recruitService.edit(recruitEntity);
@@ -67,6 +68,7 @@ public class RecruitController extends BaseController {
 
     @PostMapping("recruit/del")
     @ResponseBody
+    @BussinessLog("删除岗位信息")
     public Map<String,Object> pDel(Long id) {
         Map<String,Object> map = new HashMap<>();
         this.recruitService.del(id);

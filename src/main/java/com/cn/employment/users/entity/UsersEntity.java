@@ -1,9 +1,7 @@
 package com.cn.employment.users.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
-import java.time.LocalDateTime;
-import com.cn.employment.base.entity.BaseEntity;
+import com.cn.employment.framework.base.entity.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 

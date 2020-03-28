@@ -1,6 +1,6 @@
 package com.cn.employment.train.service.impl;
 
-import com.cn.employment.base.service.impl.BaseServiceImpl;
+import com.cn.employment.framework.base.service.impl.BaseServiceImpl;
 import com.cn.employment.train.dao.TrainMapper;
 import com.cn.employment.train.entity.TrainEntity;
 import com.cn.employment.train.service.ITrainService;

@@ -3,7 +3,7 @@ package com.cn.employment.recruit.service.impl;
 import com.cn.employment.recruit.entity.RecruitEntity;
 import com.cn.employment.recruit.dao.RecruitMapper;
 import com.cn.employment.recruit.service.IRecruitService;
-import com.cn.employment.base.service.impl.BaseServiceImpl;
+import com.cn.employment.framework.base.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

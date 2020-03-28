@@ -1,6 +1,6 @@
 package com.cn.employment.train.entity;
 
-import com.cn.employment.base.entity.BaseEntity;
+import com.cn.employment.framework.base.entity.BaseEntity;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

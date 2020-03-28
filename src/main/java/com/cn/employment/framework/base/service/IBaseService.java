@@ -1,4 +1,4 @@
-package com.cn.employment.base.service;
+package com.cn.employment.framework.base.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 

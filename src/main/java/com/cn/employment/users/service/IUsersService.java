@@ -1,7 +1,7 @@
 package com.cn.employment.users.service;
 
 import com.cn.employment.users.entity.UsersEntity;
-import com.cn.employment.base.service.IBaseService;
+import com.cn.employment.framework.base.service.IBaseService;
 
 import java.util.List;
 

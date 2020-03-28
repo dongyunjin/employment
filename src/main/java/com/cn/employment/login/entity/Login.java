@@ -1,7 +1,7 @@
 package com.cn.employment.login.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.cn.employment.base.entity.BaseEntity;
+import com.cn.employment.framework.base.entity.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -9,7 +9,6 @@ import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**

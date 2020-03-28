@@ -3,13 +3,14 @@ package com.cn.employment.course.controller;
 
 import com.cn.employment.course.entity.Course;
 import com.cn.employment.course.service.ICourseService;
+import com.cn.employment.framework.annotion.BussinessLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
-import com.cn.employment.base.controller.BaseController;
+import com.cn.employment.framework.base.controller.BaseController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -42,6 +43,7 @@ public class CourseController extends BaseController {
      * @Date: 2020/2/20 21:14
      */
     @GetMapping("courseUI")
+    @BussinessLog("课程页面")
     public String courseUI(Model model) {
         model.addAttribute("g", "eee");
         return "backend/course";
@@ -50,6 +52,7 @@ public class CourseController extends BaseController {
 
     @PostMapping("course/pList")
     @ResponseBody
+    @BussinessLog("课程分类")
     public Map<String,Object> pList() {
         Map<String,Object> map = new HashMap<>();
         map.put("data", courseService.selectParentCourse());
@@ -59,6 +62,7 @@ public class CourseController extends BaseController {
 
     @PostMapping("course/sList")
     @ResponseBody
+    @BussinessLog("课程列表")
     public Map<String,Object> sList() {
         Map<String,Object> map = new HashMap<>();
         map.put("data", courseService.selectSonCourse());
@@ -68,6 +72,7 @@ public class CourseController extends BaseController {
 
     @PostMapping("course/sList/{id}")
     @ResponseBody
+    @BussinessLog("课程列表")
     public Map<String,Object> sList(@PathVariable Long id) {
         Map<String,Object> map = new HashMap<>();
         map.put("data", courseService.selectSonCourseByPid(id));
@@ -76,6 +81,7 @@ public class CourseController extends BaseController {
 
     @PostMapping("course/pAdd")
     @ResponseBody
+    @BussinessLog("添加课程分类")
     public Map<String,Object> pAdd(Course course) {
         Map<String,Object> map = new HashMap<>();
         courseService.pAdd(course);
@@ -85,6 +91,7 @@ public class CourseController extends BaseController {
 
     @PostMapping("course/sAdd")
     @ResponseBody
+    @BussinessLog("添加课程")
     public Map<String, Object> sAdd(@RequestParam(value = "file", required=false) MultipartFile file,
                                             @RequestParam("name") String name, @RequestParam("description") String description,
                                     @RequestParam("pid") int pid) {
@@ -132,6 +139,7 @@ public class CourseController extends BaseController {
 
     @PostMapping("course/pEdit")
     @ResponseBody
+    @BussinessLog("编辑课程分类")
     public Map<String,Object> pEdit(Course course) {
         Map<String,Object> map = new HashMap<>();
         courseService.pEdit(course);
@@ -141,6 +149,7 @@ public class CourseController extends BaseController {
 
     @PostMapping("course/sEdit")
     @ResponseBody
+    @BussinessLog("编辑课程")
     public Map<String, Object> sEdit(@RequestParam(value = "file", required=false) MultipartFile file,
                                     @RequestParam("name") String name, @RequestParam("description") String description,
                                      @RequestParam("id") long id,@RequestParam("pid") int pid,@RequestParam("url") String url) {
@@ -194,6 +203,7 @@ public class CourseController extends BaseController {
 
     @PostMapping("course/pDel/{id}")
     @ResponseBody
+    @BussinessLog("删除课程分类")
     public Map<String,Object> pDel(@PathVariable Long id) {
         Map<String,Object> map = new HashMap<>();
         List<Course> list = courseService.selectSonCourseByPid(id);
@@ -211,6 +221,7 @@ public class CourseController extends BaseController {
 
     @PostMapping("course/sDel/{id}")
     @ResponseBody
+    @BussinessLog("删除课程")
     public Map<String,Object> sDel(@PathVariable Long id, @RequestParam("url") String url) {
         Map<String,Object> map = new HashMap<>();
 

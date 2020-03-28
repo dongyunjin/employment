@@ -1,7 +1,7 @@
 package com.cn.employment.usersRole.dao;
 
 import com.cn.employment.usersRole.entity.UsersRole;
-import com.cn.employment.base.dao.BaseMapper;
+import com.cn.employment.framework.base.dao.BaseMapper;
 
 /**
  * <p>

@@ -1,9 +1,8 @@
 package com.cn.employment.resume.dao;
 
 import com.cn.employment.resume.entity.ResumeEntity;
-import com.cn.employment.base.dao.BaseMapper;
+import com.cn.employment.framework.base.dao.BaseMapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Map;
 

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.employment.sysOperationLog.dao.SysOperationLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cn.employment.sysOperationLog.entity.SysOperationLog">
+    <result column="id" property="id" />
+        <result column="log_type" property="logType" />
+        <result column="log_name" property="logName" />
+        <result column="user_id" property="userId" />
+        <result column="class_name" property="className" />
+        <result column="method" property="method" />
+        <result column="succeed" property="succeed" />
+        <result column="message" property="message" />
+        <result column="create_date" property="createDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        log_type, log_name, user_id, class_name, method, succeed, message, create_date
+    </sql>
+
+    <select id="queryOperationLog" resultMap="BaseResultMap">
+        select * from sys_operation_log t where t.user_id = #{userId}
+    </select>
+</mapper>

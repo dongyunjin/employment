@@ -1,7 +1,7 @@
 package com.cn.employment.usersRole.service;
 
 import com.cn.employment.usersRole.entity.UsersRole;
-import com.cn.employment.base.service.IBaseService;
+import com.cn.employment.framework.base.service.IBaseService;
 
 /**
  * <p>

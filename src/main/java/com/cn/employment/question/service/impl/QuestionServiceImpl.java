@@ -3,7 +3,7 @@ package com.cn.employment.question.service.impl;
 import com.cn.employment.question.entity.Question;
 import com.cn.employment.question.dao.QuestionMapper;
 import com.cn.employment.question.service.IQuestionService;
-import com.cn.employment.base.service.impl.BaseServiceImpl;
+import com.cn.employment.framework.base.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.cn.employment.base;
+package com.cn.employment.framework.base;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

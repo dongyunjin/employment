@@ -1,4 +1,4 @@
-package com.cn.employment.base.controller;
+package com.cn.employment.framework.base.controller;
 
 /**
  * @Description:

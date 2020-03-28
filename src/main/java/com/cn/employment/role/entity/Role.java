@@ -1,7 +1,6 @@
 package com.cn.employment.role.entity;
 
-import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.cn.employment.base.entity.BaseEntity;
+import com.cn.employment.framework.base.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import lombok.Data;

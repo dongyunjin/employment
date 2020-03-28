@@ -3,7 +3,7 @@ package com.cn.employment.course.service.impl;
 import com.cn.employment.course.entity.Course;
 import com.cn.employment.course.dao.CourseMapper;
 import com.cn.employment.course.service.ICourseService;
-import com.cn.employment.base.service.impl.BaseServiceImpl;
+import com.cn.employment.framework.base.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

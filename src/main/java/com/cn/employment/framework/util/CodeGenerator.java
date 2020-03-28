@@ -1,4 +1,4 @@
-package com.cn.employment.util;
+package com.cn.employment.framework.util;
 
 
 import java.util.ArrayList;
@@ -105,12 +105,12 @@ public class CodeGenerator {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-        strategy.setSuperEntityClass("com.cn.employment.base.entity.BaseEntity");
+        strategy.setSuperEntityClass("com.cn.employment.framework.base.entity.BaseEntity");
         strategy.setEntityLombokModel(false);
-        strategy.setSuperControllerClass("com.cn.employment.base.controller.BaseController");
-        strategy.setSuperServiceClass("com.cn.employment.base.service.IBaseService");
-        strategy.setSuperServiceImplClass("com.cn.employment.base.service.impl.BaseServiceImpl");
-        strategy.setSuperMapperClass("com.cn.employment.base.dao.BaseMapper");
+        strategy.setSuperControllerClass("com.cn.employment.framework.base.controller.BaseController");
+        strategy.setSuperServiceClass("com.cn.employment.framework.base.service.IBaseService");
+        strategy.setSuperServiceImplClass("com.cn.employment.framework.base.service.impl.BaseServiceImpl");
+        strategy.setSuperMapperClass("com.cn.employment.framework.base.dao.BaseMapper");
         strategy.setInclude(scanner("表名"));
         strategy.setSuperEntityColumns("id");
         strategy.setControllerMappingHyphenStyle(true);

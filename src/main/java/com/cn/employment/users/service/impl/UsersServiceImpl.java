@@ -3,7 +3,7 @@ package com.cn.employment.users.service.impl;
 import com.cn.employment.users.entity.UsersEntity;
 import com.cn.employment.users.dao.UsersMapper;
 import com.cn.employment.users.service.IUsersService;
-import com.cn.employment.base.service.impl.BaseServiceImpl;
+import com.cn.employment.framework.base.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

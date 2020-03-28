@@ -1,6 +1,6 @@
 package com.cn.employment.train.service;
 
-import com.cn.employment.base.service.IBaseService;
+import com.cn.employment.framework.base.service.IBaseService;
 import com.cn.employment.train.entity.TrainEntity;
 
 import java.util.List;

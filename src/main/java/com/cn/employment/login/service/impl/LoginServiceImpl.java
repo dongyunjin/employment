@@ -1,6 +1,6 @@
 package com.cn.employment.login.service.impl;
 
-import com.cn.employment.base.service.impl.BaseServiceImpl;
+import com.cn.employment.framework.base.service.impl.BaseServiceImpl;
 import com.cn.employment.login.dao.LoginMapper;
 import com.cn.employment.login.entity.Login;
 import com.cn.employment.login.service.ILoginService;

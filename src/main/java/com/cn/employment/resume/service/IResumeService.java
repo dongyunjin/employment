@@ -1,7 +1,7 @@
 package com.cn.employment.resume.service;
 
 import com.cn.employment.resume.entity.ResumeEntity;
-import com.cn.employment.base.service.IBaseService;
+import com.cn.employment.framework.base.service.IBaseService;
 
 import java.util.Map;
 

@@ -1,8 +1,7 @@
 package com.cn.employment.resume.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.cn.employment.base.entity.BaseEntity;
+import com.cn.employment.framework.base.entity.BaseEntity;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

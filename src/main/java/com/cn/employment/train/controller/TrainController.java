@@ -1,16 +1,17 @@
 package com.cn.employment.train.controller;
 
 
+import com.cn.employment.framework.annotion.BussinessLog;
 import com.cn.employment.train.entity.TrainEntity;
 import com.cn.employment.train.service.ITrainService;
-import com.cn.employment.util.TreeNode;
+import com.cn.employment.framework.util.TreeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
-import com.cn.employment.base.controller.BaseController;
+import com.cn.employment.framework.base.controller.BaseController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -39,6 +40,7 @@ public class TrainController extends BaseController {
      * @Date: 2020/2/20 21:14
      */
     @GetMapping("trainUI")
+    @BussinessLog("课程页面")
     public String trainUI(Model model) {
         model.addAttribute("g", "eee");
         return "front/course";
@@ -47,6 +49,7 @@ public class TrainController extends BaseController {
 
     @RequestMapping("trainTreeList")
     @ResponseBody
+    @BussinessLog("课程列表")
     public Object treeList(Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("data", this.getTreeNode(0, trainService.selectAllCourse()));
@@ -107,6 +110,7 @@ public class TrainController extends BaseController {
 
     @PostMapping("train/sList")
     @ResponseBody
+    @BussinessLog("课程列表")
     public Map<String, Object> sList() {
         Map<String, Object> map = new HashMap<>();
         map.put("data", trainService.selectSonCourse());
@@ -124,6 +128,7 @@ public class TrainController extends BaseController {
 
     @PostMapping("train/pAdd")
     @ResponseBody
+    @BussinessLog("增加课程")
     public Map<String, Object> pAdd(TrainEntity train) {
         Map<String, Object> map = new HashMap<>();
         trainService.pAdd(train);
@@ -133,6 +138,7 @@ public class TrainController extends BaseController {
 
     @PostMapping("train/sAdd")
     @ResponseBody
+    @BussinessLog("增加课程")
     public Map<String, Object> sAdd(@RequestParam(value = "file", required = false) MultipartFile file,
                                     @RequestParam("name") String name, @RequestParam("description") String description,
                                     @RequestParam("pid") int pid) {
@@ -180,6 +186,7 @@ public class TrainController extends BaseController {
 
     @PostMapping("train/pEdit")
     @ResponseBody
+    @BussinessLog("修改课程")
     public Map<String, Object> pEdit(TrainEntity train) {
         Map<String, Object> map = new HashMap<>();
         trainService.pEdit(train);
@@ -189,6 +196,7 @@ public class TrainController extends BaseController {
 
     @PostMapping("train/sEdit")
     @ResponseBody
+    @BussinessLog("修改课程")
     public Map<String, Object> sEdit(@RequestParam(value = "file", required = false) MultipartFile file,
                                      @RequestParam("name") String name, @RequestParam("description") String description,
                                      @RequestParam("id") long id, @RequestParam("pid") int pid, @RequestParam("url") String url) {
@@ -242,6 +250,7 @@ public class TrainController extends BaseController {
 
     @PostMapping("train/pDel/{id}")
     @ResponseBody
+    @BussinessLog("删除课程")
     public Map<String, Object> pDel(@PathVariable Long id) {
         Map<String, Object> map = new HashMap<>();
         List<TrainEntity> list = trainService.selectSonCourseByPid(id);
@@ -259,6 +268,7 @@ public class TrainController extends BaseController {
 
     @PostMapping("train/sDel/{id}")
     @ResponseBody
+    @BussinessLog("删除课程")
     public Map<String, Object> sDel(@PathVariable Long id, @RequestParam("url") String url) {
         Map<String, Object> map = new HashMap<>();
 

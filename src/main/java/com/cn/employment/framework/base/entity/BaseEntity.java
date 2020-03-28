@@ -1,4 +1,4 @@
-package com.cn.employment.base.entity;
+package com.cn.employment.framework.base.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

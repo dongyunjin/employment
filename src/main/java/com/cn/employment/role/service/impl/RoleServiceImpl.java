@@ -3,7 +3,7 @@ package com.cn.employment.role.service.impl;
 import com.cn.employment.role.entity.Role;
 import com.cn.employment.role.dao.RoleMapper;
 import com.cn.employment.role.service.IRoleService;
-import com.cn.employment.base.service.impl.BaseServiceImpl;
+import com.cn.employment.framework.base.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

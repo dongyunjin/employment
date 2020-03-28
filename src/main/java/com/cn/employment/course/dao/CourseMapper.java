@@ -1,7 +1,7 @@
 package com.cn.employment.course.dao;
 
 import com.cn.employment.course.entity.Course;
-import com.cn.employment.base.dao.BaseMapper;
+import com.cn.employment.framework.base.dao.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

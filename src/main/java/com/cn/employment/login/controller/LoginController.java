@@ -1,5 +1,6 @@
 package com.cn.employment.login.controller;
 
+import com.cn.employment.framework.annotion.BussinessLog;
 import com.cn.employment.login.entity.Login;
 import com.cn.employment.login.service.ILoginService;
 import com.cn.employment.resume.entity.ResumeEntity;
@@ -25,6 +26,7 @@ public class LoginController {
      * @Date: 2020/2/20 21:13
      */
     @GetMapping("")
+    @BussinessLog("登录")
     public String login() {
         return "login/login";
     }
@@ -50,6 +52,7 @@ public class LoginController {
      * @Date: 2020/2/20 21:13
      */
     @GetMapping("main")
+    @BussinessLog("登录成功跳转到主页")
     public String main(Long userId) {
         Integer roleId = this.usersService.queryRoleId(userId);
         if (roleId != null) {
@@ -64,6 +67,7 @@ public class LoginController {
      * @Date: 2020/2/20 21:14
      */
     @GetMapping("index")
+    @BussinessLog("后台索引页")
     public String index(Model model) {
         model.addAttribute("d", "aaa");
         return "/backend/index";
@@ -103,6 +107,7 @@ public class LoginController {
      * @Date: 2020/2/20 21:17
      */
     @GetMapping("registerUI")
+    @BussinessLog("注册页面")
     public String registerUI() {
         return "login/register";
     }
@@ -131,6 +136,7 @@ public class LoginController {
      */
     @ResponseBody
     @PostMapping("register")
+    @BussinessLog("注册")
     public Map<String, Object> register(Login users) {
         //key :email  username   pwd    phonenum
         Map<String, Object> result = new HashMap<>();

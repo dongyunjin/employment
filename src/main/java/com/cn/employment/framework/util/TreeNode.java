@@ -1,4 +1,4 @@
-package com.cn.employment.util;
+package com.cn.employment.framework.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

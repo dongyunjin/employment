@@ -1,16 +1,17 @@
 package com.cn.employment.station.controller;
 
 
+import com.cn.employment.framework.annotion.BussinessLog;
 import com.cn.employment.station.entity.StationEntity;
 import com.cn.employment.station.service.IStationService;
-import com.cn.employment.util.TreeNode;
+import com.cn.employment.framework.util.TreeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
-import com.cn.employment.base.controller.BaseController;
+import com.cn.employment.framework.base.controller.BaseController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -40,6 +41,7 @@ public class StationController extends BaseController {
      * @Date: 2020/2/20 21:14
      */
     @GetMapping("stationUI")
+    @BussinessLog("岗位列表页面")
     public String courseUI(Model model) {
         model.addAttribute("g", "eee");
         return "backend/station";
@@ -48,6 +50,7 @@ public class StationController extends BaseController {
 
     @PostMapping("station/pList")
     @ResponseBody
+    @BussinessLog("岗位分类")
     public Map<String,Object> pList() {
         Map<String,Object> map = new HashMap<>();
         map.put("data", stationService.selectParentStation());
@@ -57,6 +60,7 @@ public class StationController extends BaseController {
 
     @PostMapping("station/sList")
     @ResponseBody
+    @BussinessLog("岗位列表")
     public Map<String,Object> sList() {
         Map<String,Object> map = new HashMap<>();
         map.put("data", stationService.selectSonStation());
@@ -66,6 +70,7 @@ public class StationController extends BaseController {
 
     @PostMapping("station/sList/{id}")
     @ResponseBody
+    @BussinessLog("获取岗位")
     public Map<String,Object> sList(@PathVariable Long id) {
         Map<String,Object> map = new HashMap<>();
         map.put("data", stationService.selectSonStationByPid(id));
@@ -74,6 +79,7 @@ public class StationController extends BaseController {
 
     @PostMapping("station/pAdd")
     @ResponseBody
+    @BussinessLog("增加岗位分类")
     public Map<String,Object> pAdd(StationEntity station) {
         Map<String,Object> map = new HashMap<>();
         stationService.pAdd(station);
@@ -83,6 +89,7 @@ public class StationController extends BaseController {
 
     @PostMapping("station/sAdd")
     @ResponseBody
+    @BussinessLog("增加岗位列表")
     public Map<String, Object> sAdd(@RequestParam(value = "file", required=false) MultipartFile file,
                                     @RequestParam("name") String name, @RequestParam("description") String description,
                                     @RequestParam("pid") int pid) {
@@ -130,6 +137,7 @@ public class StationController extends BaseController {
 
     @PostMapping("station/pEdit")
     @ResponseBody
+    @BussinessLog("修改岗位分类")
     public Map<String,Object> pEdit(StationEntity station) {
         Map<String,Object> map = new HashMap<>();
         stationService.pEdit(station);
@@ -139,6 +147,7 @@ public class StationController extends BaseController {
 
     @PostMapping("station/sEdit")
     @ResponseBody
+    @BussinessLog("修改岗位列表")
     public Map<String, Object> sEdit(@RequestParam(value = "file", required=false) MultipartFile file,
                                      @RequestParam("name") String name, @RequestParam("description") String description,
                                      @RequestParam("id") long id,@RequestParam("pid") int pid,@RequestParam("url") String url) {
@@ -192,6 +201,7 @@ public class StationController extends BaseController {
 
     @PostMapping("station/pDel/{id}")
     @ResponseBody
+    @BussinessLog("删除岗位分类")
     public Map<String,Object> pDel(@PathVariable Long id) {
         Map<String,Object> map = new HashMap<>();
         List<StationEntity> list = stationService.selectSonStationByPid(id);
@@ -209,6 +219,7 @@ public class StationController extends BaseController {
 
     @PostMapping("station/sDel/{id}")
     @ResponseBody
+    @BussinessLog("删除岗位列表")
     public Map<String,Object> sDel(@PathVariable Long id, @RequestParam("url") String url) {
         Map<String,Object> map = new HashMap<>();
 

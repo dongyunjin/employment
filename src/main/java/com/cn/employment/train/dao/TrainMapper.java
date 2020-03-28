@@ -1,6 +1,6 @@
 package com.cn.employment.train.dao;
 
-import com.cn.employment.base.dao.BaseMapper;
+import com.cn.employment.framework.base.dao.BaseMapper;
 import com.cn.employment.train.entity.TrainEntity;
 import org.apache.ibatis.annotations.Param;
 

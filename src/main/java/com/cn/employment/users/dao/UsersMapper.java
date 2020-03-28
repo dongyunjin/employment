@@ -1,8 +1,7 @@
 package com.cn.employment.users.dao;
 
-import com.cn.employment.recruit.entity.RecruitEntity;
 import com.cn.employment.users.entity.UsersEntity;
-import com.cn.employment.base.dao.BaseMapper;
+import com.cn.employment.framework.base.dao.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

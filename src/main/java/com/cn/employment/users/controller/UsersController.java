@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
-import com.cn.employment.base.controller.BaseController;
+import com.cn.employment.framework.base.controller.BaseController;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;

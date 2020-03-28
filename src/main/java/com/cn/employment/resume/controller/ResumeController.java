@@ -1,13 +1,14 @@
 package com.cn.employment.resume.controller;
 
 
+import com.cn.employment.framework.annotion.BussinessLog;
 import com.cn.employment.resume.entity.ResumeEntity;
 import com.cn.employment.resume.service.IResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
-import com.cn.employment.base.controller.BaseController;
+import com.cn.employment.framework.base.controller.BaseController;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +32,7 @@ public class ResumeController extends BaseController {
     private IResumeService resumeService;
     //
     @RequestMapping("personalUI")
+    @BussinessLog("简历信息页面")
     public String resumeUI() {
         return "front/personal";
     }
@@ -38,6 +40,7 @@ public class ResumeController extends BaseController {
     //查询个人简历信息
     @RequestMapping("resume")
     @ResponseBody
+    @BussinessLog("个人简历")
     public Map<String, Object> getResume(HttpServletRequest request) {
         Map<String,Object> map = new HashMap<>();
         HttpSession session = request.getSession();
@@ -49,6 +52,7 @@ public class ResumeController extends BaseController {
     //查询个人简历信息
     @RequestMapping("updateResume")
     @ResponseBody
+    @BussinessLog("更新个人简历")
     public Map<String, Object> updateResume(ResumeEntity resumeEntity) {
         Map<String,Object> map = new HashMap<>();
         this.resumeService.updateResume(resumeEntity);

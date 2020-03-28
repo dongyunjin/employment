@@ -1,4 +1,4 @@
-package com.cn.employment.configurations;
+package com.cn.employment.framework.interceptor;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

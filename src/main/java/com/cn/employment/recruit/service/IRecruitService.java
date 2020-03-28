@@ -1,8 +1,7 @@
 package com.cn.employment.recruit.service;
 
-import com.cn.employment.course.entity.Course;
 import com.cn.employment.recruit.entity.RecruitEntity;
-import com.cn.employment.base.service.IBaseService;
+import com.cn.employment.framework.base.service.IBaseService;
 
 import java.util.List;
 

@@ -65,7 +65,7 @@ CREATE TABLE `question` (
   `bus_id` int(11) DEFAULT NULL COMMENT '关联的岗位，或者课程id',
   `bus_name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='题库';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='题库';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,7 +74,7 @@ CREATE TABLE `question` (
 
 LOCK TABLES `question` WRITE;
 /*!40000 ALTER TABLE `question` DISABLE KEYS */;
-INSERT INTO `question` VALUES (1,'今天周几','周二','周三','周四','周五','A',1,8,NULL),(2,'问题','a','b','c','d','C',1,8,'111');
+INSERT INTO `question` VALUES (1,'今天周几','周二','周三','周四','周五','A',1,10,'2'),(2,'问题','a','b','c','d','C',1,8,'111'),(3,'问题1','1','2','3','4','D',2,2,'java历史');
 /*!40000 ALTER TABLE `question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -252,6 +252,37 @@ LOCK TABLES `study_style` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `sys_operation_log`
+--
+
+DROP TABLE IF EXISTS `sys_operation_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sys_operation_log` (
+  `id` bigint(20) NOT NULL,
+  `log_type` varchar(255) DEFAULT NULL,
+  `log_name` varchar(255) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `class_name` varchar(255) DEFAULT NULL,
+  `method` varchar(255) DEFAULT NULL,
+  `succeed` varchar(255) DEFAULT NULL,
+  `message` varchar(255) DEFAULT NULL,
+  `create_date` datetime(6) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统操作日志';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sys_operation_log`
+--
+
+LOCK TABLES `sys_operation_log` WRITE;
+/*!40000 ALTER TABLE `sys_operation_log` DISABLE KEYS */;
+INSERT INTO `sys_operation_log` VALUES (1243846163286654978,'业务日志','登录',1,'com.cn.employment.login.controller.LoginController','main','成功','[类名]:com.cn.employment.login.controller.LoginController <br/>[方法]:main <br>[参数]:null <br/>',NULL),(1243847276790480897,'业务日志','登录',1,'com.cn.employment.login.controller.LoginController','main','成功','[类名]:com.cn.employment.login.controller.LoginController <br/>[方法]:main <br>[参数]:null <br/>',NULL),(1243847500300746753,'业务日志','登录',1,'com.cn.employment.login.controller.LoginController','main','成功','[类名]:com.cn.employment.login.controller.LoginController <br/>[方法]:main <br>[参数]:null <br/>',NULL),(1243847910944079873,'业务日志','登录',1,'com.cn.employment.login.controller.LoginController','main','成功','[类名]:com.cn.employment.login.controller.LoginController <br/>[方法]:main <br>[参数]:null <br/>','2020-03-28 18:30:26.202063'),(1243848303224750082,'业务日志','登录',1,'com.cn.employment.login.controller.LoginController','main','成功','[类名]:com.cn.employment.login.controller.LoginController <br/>[方法]:main <br>[参数]:null <br/>','2020-03-28 18:31:59.728220'),(1243850278079229953,'业务日志','登录',1,'com.cn.employment.login.controller.LoginController','main','成功','[类名]:com.cn.employment.login.controller.LoginController <br/>[方法]:main <br>[参数]:null <br/>','2020-03-28 18:39:50.552127'),(1243850440969220098,'业务日志','登录',1,'com.cn.employment.login.controller.LoginController','main','成功','[类名]:com.cn.employment.login.controller.LoginController <br/>[方法]:main <br>[参数]:null <br/>','2020-03-28 18:40:29.408525'),(1243850693285965825,'业务日志','登录',1,'com.cn.employment.login.controller.LoginController','main','成功','[类名]:com.cn.employment.login.controller.LoginController <br/>[方法]:main <br>[参数]:null <br/>','2020-03-28 18:41:29.561914'),(1243856100238712834,'业务日志','登录',NULL,'com.cn.employment.login.controller.LoginController','login','成功','[类名]:com.cn.employment.login.controller.LoginController <br/>[方法]:login <br>[参数]: <br/>','2020-03-28 19:02:58.640859'),(1243856117926092801,'业务日志','登录成功跳转到主页',1,'com.cn.employment.login.controller.LoginController','main','成功','[类名]:com.cn.employment.login.controller.LoginController <br/>[方法]:main <br>[参数]:null <br/>','2020-03-28 19:03:02.899863'),(1243856120019050497,'业务日志','后台索引页',1,'com.cn.employment.login.controller.LoginController','index','成功','[类名]:com.cn.employment.login.controller.LoginController <br/>[方法]:index <br>[参数]:null <br/>','2020-03-28 19:03:03.398528'),(1243856802730188802,'业务日志','登录',NULL,'com.cn.employment.login.controller.LoginController','login','成功','[类名]:com.cn.employment.login.controller.LoginController <br/>[方法]:login <br>[参数]: <br/>','2020-03-28 19:05:46.131000'),(1243856811903131649,'业务日志','登录成功跳转到主页',1,'com.cn.employment.login.controller.LoginController','main','成功','[类名]:com.cn.employment.login.controller.LoginController <br/>[方法]:main <br>[参数]:null <br/>','2020-03-28 19:05:48.369000'),(1243856813777985538,'业务日志','后台索引页',1,'com.cn.employment.login.controller.LoginController','index','成功','[类名]:com.cn.employment.login.controller.LoginController <br/>[方法]:index <br>[参数]:null <br/>','2020-03-28 19:05:48.803000');
+/*!40000 ALTER TABLE `sys_operation_log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -317,4 +348,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-22 17:59:22
+-- Dump completed on 2020-03-28 19:06:55
