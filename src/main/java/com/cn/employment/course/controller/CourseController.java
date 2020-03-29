@@ -234,5 +234,6 @@ public class CourseController extends BaseController {
         map.put("success", 1);
         return map;
     }
+    
 
 }

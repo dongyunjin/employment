@@ -3,10 +3,13 @@ package com.cn.employment.sysOperationLog.controller;
 
 import com.cn.employment.sysOperationLog.service.ISysOperationLogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
+
+import com.cn.employment.framework.annotion.BussinessLog;
 import com.cn.employment.framework.base.controller.BaseController;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -40,4 +43,15 @@ public class SysOperationLogController extends BaseController {
         map.put("success", 1);
         return map;
     }
+
+
+/**
+ * @Description: learnning_process
+ * @Date: 2020/2/20 21:13
+ */
+@GetMapping("learnning_process")
+@BussinessLog("登录")
+public String login() {
+    return "front/learnning_process";
+}
 }

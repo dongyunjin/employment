@@ -56,10 +56,19 @@ public class LoginController {
     public String main(Long userId) {
         Integer roleId = this.usersService.queryRoleId(userId);
         if (roleId != null) {
-            return "front/solomonTest";
+            return "front/main";
         } else {
-            return "backend/main";
+            return "front/solomonTest";
         }
+    }
+    
+    /**
+     * @Description: 前端主页
+     * @Date: 2020/3/29 12:17
+     */
+    @GetMapping("MgmtPage")
+    public String frontmain() {
+        return "front/main";
     }
 
     /**
@@ -102,6 +111,16 @@ public class LoginController {
         return "login/forgot-password";
     }
 
+    /**
+     * @Description: learnning_process
+     * @Date: 2020/2/20 21:13
+     */
+    @GetMapping("learnning_process")
+    @BussinessLog("学习历程")
+    public String learnning() {
+        return "front/learnning_process";
+    }
+    
     /**
      * @Description: 注册页面
      * @Date: 2020/2/20 21:17
@@ -161,5 +180,60 @@ public class LoginController {
 
         return result;
     }
+    
+    /**
+     * @Description: 课程培训
+     * @Date: 2020/3/29 12:17
+     */
+    @GetMapping("course")
+    public String frontcourse() {
+        return "front/course";
+    }
+    
+    /**
+     * @Description: 面试
+     * @Date: 2020/2/20 21:17
+     */
+    @GetMapping("jobinterview")
+    public String job() {
+        return "front/jobinterview";
+    }
+    
+    /**
+     * @Description: 简历
+     * @Date: 2020/2/20 21:17
+     */
+    @GetMapping("cv")
+    public String cv() {
+        return "front/cv";
+    }
+    
+    /**
+     * @Description: 摸底测试
+     * @Date: 2020/2/20 21:17
+     */
+    @GetMapping("thoroughtest")
+    public String thoroughtest() {
+        return "front/thorough_test";
+    }
+    
+    /**
+     * @Description: 个人信息管理
+     * @Date: 2020/2/20 21:17
+     */
+    @GetMapping("personal")
+    public String personal() {
+        return "front/personal";
+    }
+    
+    /**
+     * @Description: 意见反馈
+     * @Date: 2020/2/20 21:17
+     */
+    @GetMapping("questionnaire")
+    public String questionnaire() {
+        return "front/questionnaire";
+    }
+
 
 }

@@ -37,7 +37,7 @@
             overflow: auto;
             float: left;
 
-        "}
+        }
         #loading {
             display: none;
             position: absolute;
@@ -201,7 +201,8 @@
                 data:{type:2},
                 success: function (data) {
                 	var data=data.data;
-                	
+                	console.log(data)
+                	console.log(treeNode.id)
                     for(var i=0;i<data.length;i++){
                     	if(treeNode.id==data[i].busId){
                     		answer=data[i].answer;
