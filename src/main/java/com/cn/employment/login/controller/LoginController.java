@@ -53,15 +53,17 @@ public class LoginController {
      */
     @GetMapping("main")
     @BussinessLog("登录成功跳转到主页")
-    public String main(Long userId) {
-        Integer roleId = this.usersService.queryRoleId(userId);
-        if (roleId != null) {
+    public String main(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Integer userId = (Integer) session.getAttribute("userId");
+        Integer roleId = this.usersService.queryRoleId(userId.longValue());
+        if (roleId == 2) {
             return "front/main";
         } else {
-            return "front/solomonTest";
+            return "backend/main";
         }
     }
-    
+
     /**
      * @Description: 前端主页
      * @Date: 2020/3/29 12:17
@@ -91,7 +93,7 @@ public class LoginController {
         model.addAttribute("i", "ggg");
         return "/backend/admin_pwd";
     }
-    
+
     /**
      * @Description: admin操作记录页
      * @Date: 2020/2/20 21:14
@@ -101,7 +103,7 @@ public class LoginController {
         model.addAttribute("j", "hhh");
         return "/backend/admin_log";
     }
-    
+
     /**
      * @Description: 忘记密码页面
      * @Date: 2020/2/20 21:17
@@ -120,7 +122,7 @@ public class LoginController {
     public String learnning() {
         return "front/learnning_process";
     }
-    
+
     /**
      * @Description: 注册页面
      * @Date: 2020/2/20 21:17
@@ -132,9 +134,9 @@ public class LoginController {
     }
 
     /**
-    * @Description: 验证用户名是否存在
-    * @Date: 2020/2/20 21:48
-    */
+     * @Description: 验证用户名是否存在
+     * @Date: 2020/2/20 21:48
+     */
     @ResponseBody
     @PostMapping("isExistUserName")
     public Map<String, Object> isExistUserName(@RequestParam String userName) {
@@ -157,13 +159,12 @@ public class LoginController {
     @PostMapping("register")
     @BussinessLog("注册")
     public Map<String, Object> register(Login users) {
-        //key :email  username   pwd    phonenum
         Map<String, Object> result = new HashMap<>();
-        users.insert();
+        Integer uid = this.usersService.queryUserName(users.getUsername());
 
-        Integer id = this.usersService.queryUserName(users.getUsername());
-
-        if (id == null) {
+        if (uid == null) {
+            users.insert();
+            Integer id = this.usersService.queryUserName(users.getUsername());
             UsersRole usersRole = new UsersRole();
             usersRole.setUserId(id);
             usersRole.setRoleId(2);
@@ -180,7 +181,7 @@ public class LoginController {
 
         return result;
     }
-    
+
     /**
      * @Description: 课程培训
      * @Date: 2020/3/29 12:17
@@ -189,7 +190,7 @@ public class LoginController {
     public String frontcourse() {
         return "front/course";
     }
-    
+
     /**
      * @Description: 面试
      * @Date: 2020/2/20 21:17
@@ -198,7 +199,7 @@ public class LoginController {
     public String job() {
         return "front/jobinterview";
     }
-    
+
     /**
      * @Description: 简历
      * @Date: 2020/2/20 21:17
@@ -207,7 +208,7 @@ public class LoginController {
     public String cv() {
         return "front/cv";
     }
-    
+
     /**
      * @Description: 摸底测试
      * @Date: 2020/2/20 21:17
@@ -216,7 +217,7 @@ public class LoginController {
     public String thoroughtest() {
         return "front/thorough_test";
     }
-    
+
     /**
      * @Description: 个人信息管理
      * @Date: 2020/2/20 21:17
@@ -225,7 +226,7 @@ public class LoginController {
     public String personal() {
         return "front/personal";
     }
-    
+
     /**
      * @Description: 意见反馈
      * @Date: 2020/2/20 21:17
