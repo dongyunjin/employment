@@ -57,6 +57,9 @@ public class LoginController {
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("userId");
         Integer roleId = this.usersService.queryRoleId(userId.longValue());
+        if (roleId == null) {
+            roleId = 1;
+        }
         if (roleId == 2) {
             return "front/main";
         } else {
