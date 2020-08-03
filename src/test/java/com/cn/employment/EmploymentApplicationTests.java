@@ -17,6 +17,7 @@ class EmploymentApplicationTests {
         users.setUsername("aaa");
         users.insert();
         System.err.println(users.getId());
+        System.err.println(users.getId());
     }
 
 }
